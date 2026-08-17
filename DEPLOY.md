@@ -57,8 +57,14 @@ O widget que confirma que quem submete é uma pessoa.
 ## 4. Formulário — envio de email
 
 1. Cria conta em [resend.com](https://resend.com) (3.000 emails/mês grátis).
-2. **Domains** → adiciona `tecnomicer.pt` → mete os registos DKIM/SPF que ele
-   dá na zona DNS da Cloudflare → **Verify**.
+2. **Domains** → adiciona **`send.tecnomicer.pt`**, não o domínio raiz → mete
+   os registos DKIM/SPF que ele dá na zona DNS da Cloudflare → **Verify**.
+
+   > **Porquê um subdomínio.** O Email Routing do passo 5 põe um registo SPF na
+   > raiz do domínio. Um domínio só pode ter **um** registo SPF, e se o Resend
+   > puser lá outro, os dois anulam-se e o email começa a cair no spam — dias
+   > depois, sem aviso. Isolar o envio em `send.` evita a colisão por completo,
+   > e é também o que o próprio Resend recomenda.
 3. **API Keys** → cria uma com permissão de envio.
 4. Cloudflare Pages → o teu projeto → **Settings** → **Environment variables**
    → **Production**:
@@ -68,24 +74,41 @@ O widget que confirma que quem submete é uma pessoa.
    | `TURNSTILE_SECRET` | secret key do passo 3 | ✅ |
    | `RESEND_API_KEY` | chave do Resend | ✅ |
    | `EMAIL_PARA` | `geral@tecnomicer.pt` | — |
-   | `EMAIL_DE` | `site@tecnomicer.pt` | — |
+   | `EMAIL_DE` | `site@send.tecnomicer.pt` | — |
 
 5. Faz um novo deploy para as variáveis entrarem em vigor.
 
-`EMAIL_DE` tem de estar no domínio verificado no Resend. `EMAIL_PARA` é onde
-os pedidos aterram, e pode ser qualquer caixa.
+`EMAIL_DE` tem de estar no domínio verificado no Resend, e por isso leva o
+`send.`. `EMAIL_PARA` é onde os pedidos aterram: usa o endereço da empresa, que
+o passo 5 reencaminha para a caixa que eles já têm.
 
-## 5. Email da empresa
+## 5. Email da empresa — Cloudflare Email Routing
 
-**Grátis, para começar:** Cloudflare → **Email** → **Email Routing** → verifica
-o domínio (mete os MX que ele indica) → cria `geral@tecnomicer.pt` a
-reencaminhar para uma caixa que já uses. Para *responder* com o endereço da
-empresa, no Gmail: Definições → Contas → *Enviar email como* → adiciona o
-endereço com o SMTP que a Cloudflare documenta.
+**Decidido:** Email Routing. Eles mantêm a caixa que já usam e ganham um
+endereço com o domínio da empresa por cima, sem migrar nada e sem custo.
 
-**Quando quiserem caixas verdadeiras** (calendário, contactos partilhados,
-vários utilizadores): Google Workspace, ~6 €/utilizador/mês. Substitui os
-registos MX; o resto do site não muda.
+1. Cloudflare → **Email** → **Email Routing** → **Get started**.
+2. Aceita os registos MX que ele propõe (adiciona-os na zona automaticamente).
+3. **Destination addresses** → adiciona a caixa atual deles e confirma pelo
+   link que a Cloudflare envia para lá.
+4. **Routes** → cria `geral@tecnomicer.pt` → destino: essa caixa.
+   Vale a pena criar também um *catch-all* para não se perder correio
+   enviado para endereços que ainda não existem.
+
+Para **responder** com o endereço da empresa em vez do pessoal, no Gmail:
+Definições → Contas e importação → *Enviar email como* → adiciona
+`geral@tecnomicer.pt` com o SMTP que a Cloudflare documenta. Sem este passo, o
+cliente recebe a resposta a partir do endereço pessoal.
+
+> **Atenção ao SPF.** Este passo escreve um registo SPF na raiz do domínio. Se
+> o Resend do passo 4 estiver no domínio raiz em vez de `send.`, os dois
+> registos entram em conflito e a entrega degrada-se sem dar erro. Com o
+> `send.` não há problema.
+
+**Limitação a saber desde já:** o Email Routing só *reencaminha* correio que
+chega. Não guarda nada, não tem webmail e não dá caixas com calendário
+partilhado. Quando isso fizer falta, muda-se para Google Workspace
+(~6 €/utilizador/mês): trocam-se os registos MX e o site não muda uma linha.
 
 ## 6. Depois de publicar
 
