@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Tecnomicer — pichelaria e eletricidade em Cervães, Vila Verde.">
+  <title>Tecnomicer — Pichelaria e Eletricidade em Vila Verde</title>
+  <defs>
+    <linearGradient id="tmO" x1="0" y1="0" x2=".62" y2="1">
+      <stop offset="0" stop-color="#F8AB60"/>
+      <stop offset=".43" stop-color="#F39038"/>
+      <stop offset=".47" stop-color="#EE7E13"/>
+      <stop offset="1" stop-color="#E46E08"/>
+    </linearGradient>
+    <linearGradient id="tmA" x1="0" y1="0" x2=".62" y2="1">
+      <stop offset="0" stop-color="#868A8E"/>
+      <stop offset=".43" stop-color="#4B4E51"/>
+      <stop offset=".47" stop-color="#2B2D30"/>
+      <stop offset="1" stop-color="#17181A"/>
+    </linearGradient>
+    <linearGradient id="tmB" x1="0" y1="0" x2=".62" y2="1">
+      <stop offset="0" stop-color="#9EA4A8"/>
+      <stop offset=".43" stop-color="#5D6165"/>
+      <stop offset=".47" stop-color="#36383B"/>
+      <stop offset="1" stop-color="#1F2123"/>
+    </linearGradient>
+    <linearGradient id="tmC" x1="0" y1="0" x2=".62" y2="1">
+      <stop offset="0" stop-color="#D0D4D7"/>
+      <stop offset=".43" stop-color="#8E9297"/>
+      <stop offset=".47" stop-color="#4F5256"/>
+      <stop offset="1" stop-color="#2E3134"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#041216"/>
+      <stop offset=".46" stop-color="#08222A"/>
+      <stop offset=".86" stop-color="#0C3B47"/>
+      <stop offset="1" stop-color="#125767"/>
+    </linearGradient>
+    <linearGradient id="surface" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6FCBD9" stop-opacity="0"/>
+      <stop offset=".55" stop-color="#6FCBD9" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#6FCBD9" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#ground)"/>
+
+  <path d="M0 300 L160 244 L300 286 L470 220 L620 266 L790 208 L950 266 L1090 228 L1200 280 L1200 372 L0 372Z" fill="#041216" opacity=".55"/>
+  <path d="M0 350 L180 308 L360 344 L570 298 L790 342 L1000 306 L1200 346 L1200 430 L0 430Z" fill="#041216" opacity=".82"/>
+
+  <g stroke="#9DACAF" stroke-width="1.4" fill="none" opacity=".55">
+    <path d="M150 292 L150 240 M132 252 h36 M137 266 h26"/>
+    <path d="M420 276 L420 224 M402 236 h36 M407 250 h26"/>
+    <path d="M720 262 L720 210 M702 222 h36 M707 236 h26"/>
+    <path d="M1020 268 L1020 216 M1002 228 h36 M1007 242 h26"/>
+    <path d="M150 250 Q285 272 420 234 Q570 268 720 220 Q870 262 1020 226 Q1120 250 1200 236"/>
+  </g>
+  <g fill="#EE7E13"><circle cx="420" cy="234" r="3.4"/><circle cx="720" cy="220" r="3.4"/><circle cx="1020" cy="226" r="3.4"/></g>
+
+  <rect x="0" y="360" width="1200" height="86" fill="url(#surface)"/>
+  <g stroke="#6FCBD9" fill="none" stroke-linecap="round" opacity=".4">
+    <path d="M-20 386 q80 -7 160 0 t160 0 t160 0 t160 0 t160 0 t160 0 t160 0" stroke-width="1.4"/>
+    <path d="M-20 412 q110 8 220 0 t220 0 t220 0 t220 0 t220 0" stroke-width="1.1" opacity=".7"/>
+  </g>
+
+  <path d="M0 446 L1200 446 L1200 630 L0 630Z" fill="#041216" opacity=".68"/>
+  <g stroke="#9DACAF" stroke-width="1" opacity=".18">
+    <path d="M0 458 H1200"/>
+    <path d="M0 512 q300 22 600 0 t600 0"/>
+    <path d="M0 566 q300 24 600 0 t600 0"/>
+  </g>
+
+  <g transform="translate(79.4 70.1) scale(0.3312)">
+    <path fill="url(#tmC)" d="M267.8 83.8Q264.5 72.3 276 75.6L477.9 133.5Q489.4 136.8 492.7 148.3L504.3 188.7Q507.6 200.2 496.1 196.9L294.2 139Q282.7 135.7 279.3 124.2Z"/>
+    <path fill="url(#tmB)" d="M190.3 133Q186.4 119.6 199.9 123.4L407.5 183Q420.9 186.8 424.8 200.3L439.1 250.3Q443 263.7 429.5 259.9L221.9 200.3Q208.5 196.5 204.6 183Z"/>
+    <path fill="url(#tmA)" d="M109.5 193.6Q105.1 178.3 120.5 182.7L331.9 243.3Q347.3 247.7 351.7 263.1L369.4 324.6Q373.8 340 358.4 335.6L146.9 274.9Q131.5 270.5 127.1 255.2Z"/>
+    <path fill="url(#tmO)" d="M27.2 275Q20 250 45 257.2L192.1 299.3Q217.1 306.5 224.2 331.5L269.2 488.2Q276.3 513.2 251.3 506L104.3 463.8Q79.3 456.7 72.1 431.7Z"/>
+  </g>
+
+  <g font-family="Archivo, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="84" y="316" font-size="52" font-weight="600" letter-spacing="-2.2">
+      <tspan fill="#EE7E13">tecno</tspan><tspan fill="#FAFDFC">micer</tspan>
+    </text>
+    <text x="84" y="410" fill="#FAFDFC" font-size="72" font-weight="800" letter-spacing="-3">Pichelaria</text>
+    <text x="84" y="486" fill="#EE7E13" font-size="72" font-weight="800" letter-spacing="-3">e eletricidade</text>
+    <text x="88" y="540" fill="#9DACAF" font-size="26" font-weight="600" letter-spacing="-.4">Cervães · Vila Verde · e concelhos vizinhos</text>
+    <text x="88" y="586" fill="#E9F5F3" font-size="23" font-weight="500" letter-spacing="-.3" opacity=".85">No Minho é a água que faz a luz. Tratamos das duas.</text>
+  </g>
+</svg>

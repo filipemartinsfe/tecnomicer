@@ -1,0 +1,19 @@
+{
+  "name": "Tecnomicer — Pichelaria e Eletricidade",
+  "short_name": "Tecnomicer",
+  "description": "Pichelaria e eletricidade em Cervães, Vila Verde e concelhos vizinhos.",
+  "lang": "pt-PT",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#041216",
+  "theme_color": "#041216",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    }
+  ]
+}

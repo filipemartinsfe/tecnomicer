@@ -1,0 +1,15 @@
+# Build output for the shareable preview (regenerate with tools/build-preview.mjs)
+preview.artifact.html
+
+# Reference artwork used while vectorising the logo — not ours to redistribute
+_ref/
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node — only ever used by optional local tooling, never by the site itself
+node_modules/
+npm-debug.log*
