@@ -12,6 +12,13 @@ telefone, o email, a morada e o horário ainda são valores de exemplo.
 Regista `tecnomicer.pt` num registrar acreditado pelo DNS.PT. Ordem de
 grandeza 15–20 €/ano, mas confirma no momento.
 
+> **O titular do domínio deve ser a empresa, com o NIF dela** — não quem faz o
+> registo. A conta da Cloudflare pode perfeitamente ficar em nome de quem gere
+> o site (é o caso aqui), porque um dia troca-se o email da conta em dois
+> minutos. Já o titular de um `.pt` é o dono legal do domínio, e mudá-lo mais
+> tarde é um processo formal com documentos. Preenche esse campo com os dados
+> da empresa logo na compra.
+
 A seguir, no painel da Cloudflare: **Add a site** → `tecnomicer.pt` → plano
 **Free**. A Cloudflare dá-te dois nameservers; mete-os no registrar. Propaga
 em minutos a poucas horas.
