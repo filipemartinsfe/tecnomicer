@@ -120,6 +120,21 @@ são melhores que stock perfeito.
 
 ---
 
+## 10. Chaves e configuração
+
+Estas não são texto do site, mas sem elas o formulário não envia nada. Passo a
+passo em [DEPLOY.md](DEPLOY.md).
+
+| Onde | O que falta |
+|---|---|
+| `index.html` → `CHAVE_TURNSTILE` | site key do Turnstile (pública) |
+| Cloudflare Pages → variáveis | `TURNSTILE_SECRET`, `RESEND_API_KEY`, `EMAIL_PARA`, `EMAIL_DE` |
+| `privacidade.html` | nome legal, NIF, morada e data de publicação |
+
+Enquanto o Turnstile e o Resend não estiverem configurados, o formulário
+valida, tenta enviar, falha e oferece WhatsApp e email já preenchidos. Ninguém
+fica sem caminho, mas nada chega à caixa de correio sozinho.
+
 ## Depois de preencher
 
 1. `node tools/build-preview.mjs` — refaz a pré-visualização partilhável.

@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Política de Privacidade — Tecnomicer</title>
+<meta name="description" content="Que dados a Tecnomicer recolhe através do site, para que servem, quanto tempo ficam guardados e como pode pedir para os apagar.">
+<link rel="canonical" href="https://tecnomicer.pt/privacidade/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#041216">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tecnomicer">
+<meta property="og:locale" content="pt_PT">
+<meta property="og:url" content="https://tecnomicer.pt/privacidade/">
+<meta property="og:title" content="Política de Privacidade — Tecnomicer">
+<meta property="og:description" content="Que dados recolhemos, para que servem e como os pode apagar.">
+<meta property="og:image" content="https://tecnomicer.pt/og-image.png">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/assets/fonts/archivo-wght.woff2" as="font" type="font/woff2" crossorigin>
+
+<style>
+/* Subconjunto do sistema em index.html: uma página de texto não precisa da
+   barragem, do medidor nem dos diagramas. Os tokens são os mesmos. */
+@font-face{
+  font-family:"Archivo";
+  src:url("/assets/fonts/archivo-wght.woff2") format("woff2");
+  font-weight:100 900; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Martian";
+  src:url("/assets/fonts/martianmono-wght.woff2") format("woff2");
+  font-weight:100 800; font-style:normal; font-display:optional;
+}
+:root{
+  --agua-abisso:#041216;
+  --agua-funda:#08222A;
+  --espuma:#E9F5F3;
+  --espuma-forte:#FAFDFC;
+  --granito:#9DACAF;
+  --corrente:#EE7E13;
+  --linha:color-mix(in oklab,var(--espuma) 14%,transparent);
+  --linha-forte:color-mix(in oklab,var(--espuma) 26%,transparent);
+  --gutter:clamp(1.25rem,4vw,3.5rem);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --r:9px;
+  color-scheme:dark;
+}
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; scroll-padding-top:5.5rem; }
+body{
+  margin:0; background:var(--agua-funda); color:var(--espuma);
+  font-family:"Archivo",ui-sans-serif,system-ui,"Segoe UI",sans-serif;
+  font-size:clamp(1rem,.96rem + .18vw,1.06rem);
+  line-height:1.68; letter-spacing:-.005em;
+  -webkit-font-smoothing:antialiased; font-synthesis-weight:none;
+}
+a{ color:var(--corrente); text-underline-offset:3px; }
+:focus-visible{ outline:2px solid var(--corrente); outline-offset:3px; border-radius:2px; }
+.wrap{ width:100%; max-width:46rem; margin-inline:auto; padding-inline:var(--gutter); }
+.skip{
+  position:absolute; left:.75rem; top:-4rem; z-index:100;
+  background:var(--corrente); color:var(--agua-abisso);
+  padding:.7rem 1.1rem; font-weight:700; border-radius:var(--r);
+  transition:top .18s var(--ease);
+}
+.skip:focus{ top:.75rem; }
+
+.top{ position:sticky; top:0; z-index:60; background:#061A20; border-bottom:1px solid var(--linha); }
+.top__in{ display:flex; align-items:center; gap:1rem; min-height:4.25rem; max-width:78rem; }
+.brand{ display:inline-flex; align-items:center; text-decoration:none; margin-inline-end:auto; }
+.brand__name{
+  font-weight:600; font-size:clamp(1.28rem,1.1rem + .8vw,1.6rem);
+  letter-spacing:-.045em; line-height:1; color:var(--espuma-forte); white-space:nowrap;
+}
+.brand__name b{ font-weight:600; color:var(--corrente); }
+.voltar{
+  font-size:.92rem; font-weight:600; text-decoration:none; color:var(--granito);
+  border:1.5px solid var(--linha-forte); border-radius:var(--r);
+  padding:.5rem .9rem; transition:color .2s,border-color .2s;
+}
+.voltar:hover{ color:var(--espuma-forte); border-color:var(--espuma); }
+
+main{ padding-block:clamp(2.5rem,7vh,4.5rem) clamp(4rem,10vh,7rem); }
+.rot{
+  font-family:"Martian",ui-monospace,monospace; font-size:.7rem; font-weight:500;
+  letter-spacing:.15em; text-transform:uppercase; color:var(--granito);
+  display:block; margin-bottom:1rem;
+}
+h1{
+  font-weight:800; font-size:clamp(2.1rem,1.5rem + 2.4vw,3.1rem);
+  line-height:1; letter-spacing:-.035em; text-wrap:balance; margin:0 0 1rem;
+}
+h2{
+  font-weight:800; font-size:clamp(1.3rem,1.15rem + .7vw,1.6rem);
+  line-height:1.15; letter-spacing:-.03em; text-wrap:balance;
+  margin:2.75rem 0 .85rem; color:var(--espuma-forte);
+}
+p,li{ margin:0 0 1rem; text-wrap:pretty; color:color-mix(in oklab,var(--espuma) 84%,transparent); }
+ul{ padding-inline-start:1.1rem; margin:0 0 1rem; }
+li{ margin-bottom:.5rem; }
+li::marker{ color:var(--corrente); }
+strong{ color:var(--espuma-forte); }
+.lead{
+  font-size:clamp(1.06rem,1rem + .4vw,1.2rem);
+  color:color-mix(in oklab,var(--espuma) 92%,transparent);
+  margin-bottom:2rem;
+}
+.data{
+  font-family:"Martian",ui-monospace,monospace; font-size:.7rem;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--granito);
+  padding-top:1.25rem; margin-top:2.5rem; border-top:1px solid var(--linha);
+}
+.tbc{
+  display:inline-flex; align-items:center; gap:.4em;
+  font-family:"Martian",ui-monospace,monospace;
+  font-size:.64rem; font-weight:500; letter-spacing:.11em; text-transform:uppercase;
+  padding:.22em .5em .2em; border:1px solid color-mix(in oklab,var(--corrente) 55%,transparent);
+  color:var(--corrente); border-radius:2px; vertical-align:.12em; white-space:nowrap;
+}
+.tbc::before{ content:""; width:.4em; height:.4em; flex:none; background:currentColor; transform:rotate(45deg); }
+.caixa{
+  border:1px solid var(--linha); border-radius:var(--r);
+  padding:1.15rem 1.35rem; margin:1.5rem 0;
+  background:color-mix(in oklab,var(--agua-abisso) 45%,transparent);
+}
+.caixa p:last-child{ margin-bottom:0; }
+.pe{
+  background:var(--agua-abisso); border-top:1px solid var(--linha);
+  padding-block:2rem; font-size:.88rem; color:var(--granito);
+}
+.pe a{ color:color-mix(in oklab,var(--espuma) 80%,transparent); text-decoration:none; }
+.pe a:hover{ color:var(--corrente); text-decoration:underline; }
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{ transition-duration:.001ms !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Saltar para o conteúdo</a>
+
+<header class="top">
+  <div class="wrap top__in">
+    <a class="brand" href="/" aria-label="Tecnomicer — início">
+      <span class="brand__name"><b>tecno</b>micer</span>
+    </a>
+    <a class="voltar" href="/">Voltar ao site</a>
+  </div>
+</header>
+
+<main id="conteudo">
+  <div class="wrap">
+    <span class="rot">Documento legal</span>
+    <h1>Política de privacidade</h1>
+    <p class="lead">
+      Este site recolhe o mínimo para conseguir responder-lhe: o que escrever no
+      formulário de orçamento, e nada mais. Não há publicidade, não há
+      rastreadores, e os seus dados não são vendidos nem partilhados com
+      ninguém para fins comerciais.
+    </p>
+
+    <div class="caixa">
+      <p>
+        <span class="tbc">a confirmar</span> Os dados de identificação do
+        responsável (nome legal completo, NIF e morada) têm de ser preenchidos
+        antes de o site ir para o ar. Sem eles este documento está incompleto
+        à luz do RGPD.
+      </p>
+    </div>
+
+    <h2>Quem é o responsável pelos dados</h2>
+    <p>
+      <strong>Tecnomicer</strong> (Tecnologias Minho Cervães), com sede em
+      Cervães, Vila Verde <span class="tbc">morada a confirmar</span>,
+      NIF <span class="tbc">a confirmar</span>.
+    </p>
+    <p>
+      Para qualquer assunto relacionado com os seus dados, escreva para
+      <a href="mailto:geral@tecnomicer.pt">geral@tecnomicer.pt</a> ou ligue
+      para <a href="tel:+351900000000">+351 900 000 000</a>.
+    </p>
+
+    <h2>Que dados recolhemos</h2>
+    <p>Só os que escrever no formulário de pedido de orçamento:</p>
+    <ul>
+      <li><strong>Nome:</strong> para saber como o tratar.</li>
+      <li><strong>Telefone:</strong>é por aqui que respondemos.</li>
+      <li><strong>Localidade:</strong> para saber se conseguimos lá chegar.</li>
+      <li><strong>Tipo de trabalho e descrição:</strong> para levarmos o material certo.</li>
+    </ul>
+    <p>
+      Nenhum destes campos é obrigatório no sentido de o obrigar a usar o
+      formulário: pode simplesmente ligar, e nesse caso não fica registado nada
+      neste site.
+    </p>
+    <p>
+      Ao submeter o formulário, o seu endereço IP e o país são processados pela
+      Cloudflare para bloquear robôs de spam. Não guardamos essa informação nem
+      a usamos para o identificar.
+    </p>
+
+    <h2>Para que servem</h2>
+    <p>
+      Exclusivamente para responder ao seu pedido e, se avançarmos com o
+      trabalho, para o executar e faturar. Não os usamos para marketing, não
+      lhe enviamos newsletters e não construímos perfis sobre si.
+    </p>
+    <p>
+      A base legal é o seu <strong>consentimento</strong> ao enviar o formulário
+      e, se houver trabalho, a <strong>execução do contrato</strong> entre as
+      partes. Os dados de faturação são conservados por
+      <strong>obrigação legal</strong>.
+    </p>
+
+    <h2>Quanto tempo ficam guardados</h2>
+    <ul>
+      <li><strong>Pedidos sem seguimento:</strong> apagados ao fim de 12 meses.</li>
+      <li><strong>Pedidos que deram origem a trabalho:</strong> mantidos enquanto durar a relação e depois pelo prazo legal de conservação de documentos de faturação (10 anos).</li>
+    </ul>
+
+    <h2>Com quem são partilhados</h2>
+    <p>
+      Com ninguém para fins comerciais. Há apenas fornecedores técnicos que
+      processam os dados por nossa conta:
+    </p>
+    <ul>
+      <li><strong>Cloudflare:</strong> alojamento do site, entrega das páginas e proteção contra robôs.</li>
+      <li><strong>Resend:</strong> entrega do email com o seu pedido à nossa caixa de correio.</li>
+    </ul>
+    <p>
+      Ambos podem processar dados fora da União Europeia. Ambos aderem a
+      cláusulas contratuais-tipo aprovadas pela Comissão Europeia para essas
+      transferências.
+    </p>
+
+    <h2>Cookies</h2>
+    <p>
+      <strong>Este site não usa cookies.</strong> Não há analytics, não há
+      píxeis de redes sociais e não há nada que o siga entre sites. É também
+      por isso que não verá aqui nenhuma janela a pedir consentimento.
+    </p>
+    <p>
+      A única exceção possível é um cookie técnico temporário criado pela
+      Cloudflare durante a verificação anti-robô no formulário. Existe apenas
+      para essa verificação, é estritamente necessário e não o identifica.
+    </p>
+
+    <h2>Os seus direitos</h2>
+    <p>Sobre os dados que nos deu, tem direito a:</p>
+    <ul>
+      <li>Saber que dados temos e obter uma cópia.</li>
+      <li>Corrigir o que estiver errado.</li>
+      <li>Pedir que sejam apagados.</li>
+      <li>Limitar ou opor-se ao tratamento.</li>
+      <li>Retirar o consentimento a qualquer momento.</li>
+    </ul>
+    <p>
+      Basta escrever para <a href="mailto:geral@tecnomicer.pt">geral@tecnomicer.pt</a>.
+      Respondemos no prazo máximo de um mês. Se achar que não tratámos o assunto
+      como devíamos, pode apresentar reclamação à
+      <a href="https://www.cnpd.pt" rel="noopener">Comissão Nacional de Proteção de Dados</a>.
+    </p>
+
+    <h2>Alterações</h2>
+    <p>
+      Se esta política mudar, a data em baixo muda com ela. Alterações
+      significativas serão assinaladas na página inicial.
+    </p>
+
+    <p class="data">
+      Última atualização <span class="tbc">data de publicação a definir</span>
+    </p>
+  </div>
+</main>
+
+<footer class="pe">
+  <div class="wrap">
+    © <span id="ano">2026</span> Tecnomicer · <a href="/">Voltar ao site</a>
+  </div>
+</footer>
+
+<script type="module">
+  document.getElementById("ano").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

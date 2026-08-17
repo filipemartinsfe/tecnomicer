@@ -660,6 +660,11 @@ input[aria-invalid="true"],textarea[aria-invalid="true"]{ border-color:#FF8A7A; 
   min-height:2.7em;
 }
 .f__hint{ font-size:.85rem; color:var(--granito); }
+.f__hint a{ color:var(--corrente); text-underline-offset:3px; }
+/* fora do ecrã, não display:none — alguns robôs ignoram o que está escondido */
+.isca{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+.f__ts:not(:empty){ margin-block:.35rem .2rem; min-height:65px; }
+.btn[aria-busy="true"]{ opacity:.72; cursor:progress; }
 .f__out{
   padding:1rem 1.15rem; border-radius:var(--r);
   border:1px solid color-mix(in oklab,var(--agua-clara) 45%,transparent);
@@ -667,6 +672,14 @@ input[aria-invalid="true"],textarea[aria-invalid="true"]{ border-color:#FF8A7A; 
   font-size:.95rem;
 }
 .f__out:not(.on){ display:none; }
+.f__out[data-estado="ok"]{
+  border-color:color-mix(in oklab,#5FD08A 55%,transparent);
+  background:color-mix(in oklab,#5FD08A 11%,transparent);
+}
+.f__out[data-estado="erro"]{
+  border-color:color-mix(in oklab,#FF8A7A 55%,transparent);
+  background:color-mix(in oklab,#FF8A7A 10%,transparent);
+}
 /* :not(.btn) matters — this selector outranks .btn, so without it the amber
    button inside the panel gets amber text on an amber ground. */
 .f__out a:not(.btn){ color:var(--corrente); font-weight:700; }
@@ -1492,13 +1505,21 @@ input[aria-invalid="true"],textarea[aria-invalid="true"]{ border-color:#FF8A7A; 
           <textarea id="desc" name="descricao" required aria-describedby="e-desc" placeholder="Ex.: mancha no teto da cozinha há três dias e o disjuntor da cozinha dispara à noite."></textarea>
           <p class="err" id="e-desc"></p>
         </div>
+        <!-- Campo-armadilha: fora do ecrã e fora da ordem de tabulação, por
+             isso ninguém o vê nem lhe chega; um robô que preenche tudo
+             denuncia-se aqui. -->
+        <div class="isca" aria-hidden="true">
+          <label for="empresa">Empresa</label>
+          <input id="empresa" name="empresa" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="f__ts" id="ts" aria-live="polite"></div>
         <div class="acts">
-          <button class="btn" type="submit">Enviar pedido</button>
+          <button class="btn" type="submit" id="enviar">Enviar pedido</button>
           <a class="btn btn--ghost" href="tel:+351900000000">Prefiro ligar</a>
         </div>
         <p class="f__hint">
-          Usamos os seus dados só para responder a este pedido.
-          <span class="tbc">política de privacidade a redigir</span>
+          Usamos os seus dados só para responder a este pedido — nada de
+          publicidade. <a href="/privacidade/">Política de privacidade</a>.
         </p>
         <div class="f__out" id="saida" role="status" aria-live="polite" tabindex="-1"></div>
       </form>
@@ -1537,6 +1558,7 @@ input[aria-invalid="true"],textarea[aria-invalid="true"]{ border-color:#FF8A7A; 
           <li><a href="#zona">Zona de trabalho</a></li>
           <li><a href="#processo">Como funciona</a></li>
           <li><a href="#perguntas">Perguntas frequentes</a></li>
+          <li><a href="/privacidade/">Política de privacidade</a></li>
         </ul>
       </div>
     </div>
@@ -1873,17 +1895,38 @@ for (const c of checks) {
   c.el.addEventListener("input", () => { if (c.touched) verify(c); });
 }
 
-form.addEventListener("submit", (ev) => {
-  ev.preventDefault();
+/* ── Turnstile ──
+   O único terceiro que esta página carrega, e só quando alguém toca no
+   formulário. Quem lê a página e liga em vez de escrever nunca o descarrega,
+   por isso o primeiro carregamento continua a ser o documento e duas fontes. */
+const CHAVE_TURNSTILE = "0x4AAAAAAA_CHAVE_DO_SITE"; // ver PLACEHOLDERS.md
+const caixaTs = document.getElementById("ts");
+let tsWidget = null;
+let tsPedido = null;
 
-  let first = null;
-  for (const c of checks) {
-    c.touched = true;
-    if (!verify(c) && !first) first = c.el;
-  }
-  if (first) { first.focus(); return; }
+function carregarTurnstile() {
+  if (tsPedido) return tsPedido;
+  tsPedido = new Promise((resolve, reject) => {
+    window.aoCarregarTurnstile = () => {
+      tsWidget = turnstile.render(caixaTs, { sitekey: CHAVE_TURNSTILE, theme: "dark" });
+      resolve();
+    };
+    const s = document.createElement("script");
+    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=aoCarregarTurnstile";
+    s.async = true;
+    s.onerror = () => reject(new Error("turnstile"));
+    document.head.append(s);
+  });
+  return tsPedido;
+}
+form.addEventListener("focusin", carregarTurnstile, { once: true });
+form.addEventListener("pointerdown", carregarTurnstile, { once: true });
 
-  const body = [
+/* ── envio ── */
+const botao = document.getElementById("enviar");
+
+const alternativas = () => {
+  const corpo = [
     "Pedido de orçamento — Tecnomicer",
     `Nome: ${form.nome.value.trim()}`,
     `Telefone: ${form.telefone.value.trim()}`,
@@ -1892,19 +1935,82 @@ form.addEventListener("submit", (ev) => {
     "",
     form.descricao.value.trim()
   ].join("\n");
-
-  const wa = `https://wa.me/${WA}?text=${encodeURIComponent(body)}`;
+  const wa = `https://wa.me/${WA}?text=${encodeURIComponent(corpo)}`;
   const mail = `mailto:${MAIL}?subject=${encodeURIComponent(
     `Pedido de orçamento — ${form.nome.value.trim()}`
-  )}&body=${encodeURIComponent(body)}`;
+  )}&body=${encodeURIComponent(corpo)}`;
+  return `<div class="acts"><a class="btn btn--sm" href="${wa}" rel="noopener">Enviar por WhatsApp</a>`
+       + `<a class="btn btn--sm btn--ghost" href="${mail}">Enviar por email</a></div>`;
+};
 
-  out.innerHTML =
-    "<strong>Pedido pronto.</strong> Escolha por onde o quer enviar — " +
-    "abre já preenchido." +
-    `<div class="acts"><a class="btn btn--sm" href="${wa}" rel="noopener">Enviar por WhatsApp</a>` +
-    `<a class="btn btn--sm btn--ghost" href="${mail}">Enviar por email</a></div>`;
+const mostrar = (html, estado) => {
+  out.innerHTML = html;
+  out.dataset.estado = estado;
   out.classList.add("on");
   out.focus();
+};
+
+form.addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+
+  let primeiro = null;
+  for (const c of checks) {
+    c.touched = true;
+    if (!verify(c) && !primeiro) primeiro = c.el;
+  }
+  if (primeiro) { primeiro.focus(); return; }
+
+  botao.disabled = true;
+  botao.setAttribute("aria-busy", "true");
+  const rotulo = botao.textContent;
+  botao.textContent = "A enviar…";
+
+  try {
+    await carregarTurnstile();
+    const token = tsWidget ? turnstile.getResponse(tsWidget) : "";
+
+    const r = await fetch("/api/pedido", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        nome: form.nome.value,
+        telefone: form.telefone.value,
+        localidade: form.localidade.value,
+        tipo: form.tipo.value,
+        descricao: form.descricao.value,
+        empresa: form.empresa.value,
+        turnstile: token
+      })
+    });
+
+    if (!r.ok) {
+      const d = await r.json().catch(() => ({}));
+      throw new Error(d.erro || "Não foi possível enviar.");
+    }
+
+    mostrar(
+      "<strong>Pedido enviado.</strong> Respondemos assim que possível. " +
+      "Se for urgente, ligue — é sempre mais rápido.",
+      "ok"
+    );
+    form.reset();
+    if (tsWidget) turnstile.reset(tsWidget);
+  } catch (e) {
+    // Nunca deixar alguém sem caminho: o pedido continua a poder seguir por
+    // WhatsApp ou email, já preenchido.
+    mostrar(
+      `<strong>Não conseguimos enviar.</strong> ${
+        e.message === "turnstile"
+          ? "A verificação de segurança não carregou."
+          : e.message
+      } Pode enviar o mesmo pedido por aqui:` + alternativas(),
+      "erro"
+    );
+  } finally {
+    botao.disabled = false;
+    botao.removeAttribute("aria-busy");
+    botao.textContent = rotulo;
+  }
 });
 </script>
 </body>

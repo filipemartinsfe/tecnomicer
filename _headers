@@ -1,0 +1,27 @@
+# Cloudflare Pages — cabeçalhos por caminho.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
+  # Nada é carregado de terceiros a não ser o Turnstile, e esse só quando
+  # alguém toca no formulário. A política diz exatamente isso.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src https://challenges.cloudflare.com; form-action 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'self'
+
+# As fontes têm o conteúdo no nome e nunca mudam sem mudar de nome.
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# O documento tem de poder ser atualizado no minuto seguinte a uma correção.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+/privacidade/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/favicon.svg
+  Cache-Control: public, max-age=604800
+/og-image.png
+  Cache-Control: public, max-age=604800

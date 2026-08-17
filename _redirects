@@ -1,0 +1,8 @@
+# Cloudflare Pages — redirecionamentos.
+# Uma só forma canónica do endereço, que é o que o <link rel="canonical"> diz.
+
+https://www.tecnomicer.pt/*  https://tecnomicer.pt/:splat  301!
+
+# URL limpo para a página legal, sem expor a extensão.
+/privacidade      /privacidade.html   200
+/privacidade/     /privacidade.html   200
