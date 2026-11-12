@@ -13,3 +13,5 @@ Thumbs.db
 # Node — only ever used by optional local tooling, never by the site itself
 node_modules/
 npm-debug.log*
+pacote/
+pacote.tgz

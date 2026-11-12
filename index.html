@@ -4,1510 +4,864 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Tecnomicer — Pichelaria e Eletricidade em Vila Verde</title>
-<meta name="description" content="Pichelaria e eletricidade em Cervães, Vila Verde e concelhos vizinhos. Fugas de água, desentupimentos, esquentadores, quadros elétricos e avarias. Peça orçamento.">
+<title>Tecnomicer | Pichelaria e Eletricidade em Vila Verde</title>
+<meta name="description" content="Pichelaria e eletricidade em Cervães, Vila Verde e concelhos vizinhos. Fugas de água, desentupimentos, esquentadores, quadros elétricos e avarias. Ligue ou peça orçamento.">
 <link rel="canonical" href="https://tecnomicer.pt/">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#041216">
-<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tecnomicer">
 <meta property="og:locale" content="pt_PT">
 <meta property="og:url" content="https://tecnomicer.pt/">
-<meta property="og:title" content="Tecnomicer — Pichelaria e Eletricidade em Vila Verde">
-<meta property="og:description" content="No Minho é a água que faz a luz. Tratamos das duas — em Cervães, Vila Verde e concelhos vizinhos.">
+<meta property="og:title" content="Tecnomicer | Pichelaria e Eletricidade em Vila Verde">
+<meta property="og:description" content="Um número para a água e para a luz, em Cervães, Vila Verde e concelhos vizinhos. Ligue ou peça orçamento.">
 <meta property="og:image" content="https://tecnomicer.pt/og-image.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Tecnomicer — pichelaria e eletricidade em Vila Verde.">
+<meta property="og:image:alt" content="Tecnomicer, pichelaria e eletricidade em Vila Verde.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Tecnomicer — Pichelaria e Eletricidade em Vila Verde">
-<meta name="twitter:description" content="No Minho é a água que faz a luz. Tratamos das duas — em Cervães, Vila Verde e concelhos vizinhos.">
+<meta name="twitter:title" content="Tecnomicer | Pichelaria e Eletricidade em Vila Verde">
+<meta name="twitter:description" content="Um número para a água e para a luz, em Cervães, Vila Verde e concelhos vizinhos. Ligue ou peça orçamento.">
 <meta name="twitter:image" content="https://tecnomicer.pt/og-image.png">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/manifest.webmanifest">
 
-<!-- Both faces are same-origin and preloaded, so they land inside the
-     font-block period and never cause a swap reflow. No CDN, no third
-     party, no runtime request beyond this document and these two files. -->
-<link rel="preload" href="/assets/fonts/archivo-wght.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/martianmono-wght.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Two faces, same-origin and preloaded. No CDN and no third party on load. -->
+<link rel="preload" href="/assets/fonts/bricolage-wght.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/figtree-wght.woff2" as="font" type="font/woff2" crossorigin>
 
 <style>
 /* ───────────────────────────────────────────────────────────────
-   FACES · self-hosted variable woff2, 58 KB for the whole page.
-   Archivo — signage grotesque, the register of infrastructure plaques.
-     display: swap. It carries the LCP text, is preloaded and same-origin.
-   Martian Mono — used only on labels and measurements, never as decoration.
-     display: optional. It is never allowed to shift the layout: if it is
-     not ready at first paint the system mono is kept for this navigation.
+   FACES · Bricolage Grotesque for display, Figtree for reading.
    ─────────────────────────────────────────────────────────────── */
 @font-face{
-  font-family:"Archivo";
-  src:url("/assets/fonts/archivo-wght.woff2") format("woff2");
-  font-weight:100 900; font-style:normal; font-display:swap;
+  font-family:"Bricolage";
+  src:url("/assets/fonts/bricolage-wght.woff2") format("woff2");
+  font-weight:200 800; font-style:normal; font-display:swap;
 }
 @font-face{
-  font-family:"Martian";
-  src:url("/assets/fonts/martianmono-wght.woff2") format("woff2");
-  font-weight:100 800; font-style:normal; font-display:optional;
+  font-family:"Figtree";
+  src:url("/assets/fonts/figtree-wght.woff2") format("woff2");
+  font-weight:300 900; font-style:normal; font-display:swap;
 }
 
 /* ───────────────────────────────────────────────────────────────
-   TOKENS · the hydroelectric Minho.
-   agua*    the reservoir, surface down to abyss
-   corrente the current the water makes — sodium and tungsten, not neon
-   espuma   spillway foam, this page's light
-   granito  Minho granite, secondary voice, tinted from the water hue
-   cal      whitewash on a village house — the one daylight passage
-   --fio    the live accent. Declared statically per band so it walks from
-            water to current down the page with zero runtime cost.
+   TOKENS · the logo's orange and graphite on white. Water blue is
+   semantic: it only ever means the water network.
+   Shape rule: buttons and tabs are pills, panels are 28px, inputs 12px.
    ─────────────────────────────────────────────────────────────── */
 :root{
-  --agua-abisso:#041216;
-  --agua-funda:#08222A;
-  --agua:#0C3B47;
-  --agua-media:#125767;
-  --agua-clara:#2E93A6;
-  --agua-luz:#6FCBD9;
-
-  --espuma:#E9F5F3;
-  --espuma-forte:#FAFDFC;
-  --granito:#9DACAF;
-  --granito-fundo:#5A6C70;
-
-  /* Straight off the logo. The mark's orange replaced the amber this page
-     started with: the brand outranks my palette. */
-  --corrente:#EE7E13;
-  --corrente-clara:#F8AB60;
-  --corrente-quente:#E46E08;
-  /* the logo's graphite, for anywhere the mark's own neutrals belong */
+  --branco:#FFFFFF;
+  --fundo:#F2F4F6;
+  --tinta:#1C1E21;
   --grafite:#3F4145;
-  --grafite-claro:#9EA4A8;
+  --cinza:#5C6268;
+  --linha:#DDE1E5;
+  --linha-forte:#BFC5CA;
 
-  /* the mark's corners are generously rounded; the UI follows it */
-  --r:9px;
-  --r-lg:14px;
+  --laranja:#EE7E13;        /* the logo: stage, marks, big numerals */
+  --laranja-clara:#F8AB60;  /* on dark grounds */
+  --acao:#D4660A;           /* button ground: white passes as large bold text */
+  --acao-hover:#BC5905;
+  --laranja-texto:#A85605;  /* orange that passes as small text on white */
+  --laranja-tinta:#FDEFE0;
 
-  --cal:#EBEBE2;
-  --cal-sombra:#D6D7CB;
-  --pedra:#333C3F;
+  --agua:#1B78D0;
+  --agua-viva:#3C9BF0;
+  --agua-funda:#0E3F70;
+  --agua-tinta:#E4F0FB;
 
-  --linha:color-mix(in oklab,var(--espuma) 14%,transparent);
-  --linha-forte:color-mix(in oklab,var(--espuma) 26%,transparent);
+  --r:28px;
+  --r-m:18px;
+  --r-s:12px;
+  --sombra:0 30px 60px -30px rgb(28 30 33 / .45), 0 4px 14px -6px rgb(28 30 33 / .14);
 
-  --fio:var(--agua-clara);
-
-  --gutter:clamp(1.25rem,4vw,3.5rem);
-  --measure:68ch;
+  --gutter:clamp(1rem,3.4vw,2.5rem);
   --ease:cubic-bezier(.16,1,.3,1);
   --ease-io:cubic-bezier(.65,0,.35,1);
 
-  color-scheme:dark;
+  --display:"Bricolage",ui-sans-serif,system-ui,"Segoe UI",sans-serif;
+  --texto:"Figtree",ui-sans-serif,system-ui,"Segoe UI",sans-serif;
+
+  color-scheme:light;
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
-html{
-  -webkit-text-size-adjust:100%;
-  scroll-behavior:smooth;
-  scroll-padding-top:5.5rem;
-}
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:5.5rem; }
 body{
-  margin:0;
-  background:var(--agua-funda);
-  color:var(--espuma);
-  font-family:"Archivo",ui-sans-serif,system-ui,"Segoe UI",sans-serif;
-  font-size:clamp(1rem,.96rem + .18vw,1.1rem);
-  line-height:1.62;
-  letter-spacing:-.005em;
-  overflow-x:clip;
-  font-synthesis-weight:none;
-  -webkit-font-smoothing:antialiased;
+  margin:0; background:var(--branco); color:var(--tinta);
+  font-family:var(--texto); font-size:clamp(1rem,.97rem + .15vw,1.0625rem); line-height:1.55;
+  -webkit-font-smoothing:antialiased; font-synthesis-weight:none; overflow-x:clip;
 }
-img,svg{ max-width:100%; }
-svg{ display:block; }
-h1,h2,h3{ font-weight:800; line-height:.98; letter-spacing:-.035em; text-wrap:balance; margin:0; }
+@media (max-width:63.99rem){ body{ padding-bottom:5.25rem; } }
+
+svg{ display:block; max-width:100%; }
+h1,h2,h3,h4{ margin:0; font-family:var(--display); font-weight:700; line-height:1.04; letter-spacing:-.025em; text-wrap:balance; }
 p{ margin:0; text-wrap:pretty; }
+ul,ol{ margin:0; padding:0; list-style:none; }
 a{ color:inherit; }
-:focus-visible{ outline:2px solid var(--corrente); outline-offset:3px; border-radius:2px; }
+button{ font:inherit; color:inherit; }
+::selection{ background:var(--laranja); color:#fff; }
+:focus-visible{ outline:3px solid var(--tinta); outline-offset:3px; border-radius:6px; }
 
-/* label register — real labels and measurements, never tech costume */
-.rot{
-  font-family:"Martian",ui-monospace,"Cascadia Mono",monospace;
-  font-size:.7rem; font-weight:500; letter-spacing:.15em;
-  text-transform:uppercase; line-height:1.45;
-  color:var(--granito); font-variant-numeric:tabular-nums;
-}
+h2{ font-size:clamp(2rem,1.3rem + 3vw,3.75rem); }
 
-/* "a confirmar" — honest marker on every value the firm has not supplied */
-.tbc{
-  display:inline-flex; align-items:center; gap:.4em;
-  font-family:"Martian",ui-monospace,monospace;
-  font-size:.64rem; font-weight:500; letter-spacing:.11em; text-transform:uppercase;
-  padding:.22em .5em .2em;
-  border:1px solid color-mix(in oklab,var(--corrente) 55%,transparent);
-  color:var(--corrente); border-radius:2px; vertical-align:.12em; white-space:nowrap;
-}
-.tbc::before{
-  content:""; width:.4em; height:.4em; flex:none;
-  background:currentColor; transform:rotate(45deg);
-}
-.band-luz .tbc{ border-color:color-mix(in oklab,var(--pedra) 45%,transparent); color:var(--pedra); }
-.band-corrente .tbc{ border-color:color-mix(in oklab,#FFFFFF 58%,transparent); color:#FFFFFF; }
-
-.skip{
-  position:absolute; left:.75rem; top:-4rem; z-index:100;
-  background:var(--corrente); color:var(--agua-abisso);
-  padding:.7rem 1.1rem; font-weight:700; border-radius:var(--r);
-  transition:top .18s var(--ease);
-}
+.wrap{ width:100%; max-width:84rem; margin-inline:auto; padding-inline:var(--gutter); }
+.band{ padding-block:clamp(4.5rem,9vw,8rem); }
+.skip{ position:absolute; left:.75rem; top:-4rem; z-index:100; background:var(--tinta); color:#fff; padding:.7rem 1.1rem; font-weight:700; border-radius:999px; transition:top .18s var(--ease); }
 .skip:focus{ top:.75rem; }
-.wrap{ width:100%; max-width:78rem; margin-inline:auto; padding-inline:var(--gutter); }
+.defs{ position:absolute; width:0; height:0; overflow:hidden; }
 
-/* ═══════════════════════════════════════════════════ HEADER ═══ */
-.top{
-  position:sticky; top:0; z-index:60;
-  background:#061A20;
-  border-bottom:1px solid var(--linha);
+/* "to confirm" label, for anything the company has not supplied yet */
+.tbc{
+  display:inline-block; font-family:var(--texto); font-size:.72rem; font-weight:700; letter-spacing:.03em;
+  padding:.2em .6em; border-radius:999px; background:var(--laranja-tinta); color:var(--laranja-texto);
+  white-space:nowrap; vertical-align:.1em; line-height:1.3;
 }
-/* backdrop-filter costs a GPU pass on every scrolled frame, so it is
-   spent only where there is headroom for it. */
-@media (min-width:64rem){
-  .top{ background:color-mix(in oklab,var(--agua-abisso) 86%,transparent); backdrop-filter:blur(14px) saturate(1.3); }
+.pp--2 .tbc{ background:var(--branco); }
+.sobre-escuro .tbc{ background:rgb(248 171 96 / .16); color:var(--laranja-clara); }
+
+/* entrances: visible by default, hidden only when the script can bring them back */
+.rvj .rv{ opacity:0; transform:translateY(26px); }
+.rvj .rv.on{ opacity:1; transform:none; transition:opacity .8s var(--ease) calc(var(--i,0) * 70ms), transform .8s var(--ease) calc(var(--i,0) * 70ms); }
+
+/* ── buttons ── white on orange is large bold only (3.7:1); small ones are graphite ── */
+.btn{
+  --bg:var(--acao); --fg:#fff; --bgh:var(--acao-hover);
+  position:relative; display:inline-flex; align-items:center; justify-content:center; gap:.6rem;
+  min-height:3.5rem; padding:.8rem 1.6rem; border:0; border-radius:999px; cursor:pointer;
+  background:var(--bg); color:var(--fg); font-family:var(--texto); font-weight:700; font-size:1.17rem; line-height:1.1;
+  text-decoration:none; white-space:nowrap;
+  transition:background .2s, transform .35s var(--ease), box-shadow .35s var(--ease);
 }
-.top__in{ display:flex; align-items:center; gap:1rem; min-height:4.25rem; }
-.brand{ display:inline-flex; align-items:center; text-decoration:none; margin-inline-end:auto; min-width:0; }
-/* The wordmark is live text, not an image: selectable, scalable, and it costs
-   no request. logo-texto.svg exists for everywhere that is not this page.
-   "micer" is light rather than the logo's graphite, which would disappear
-   against a dark ground. */
-.brand__name{
-  font-weight:600; font-size:clamp(1.28rem,1.1rem + .8vw,1.6rem);
-  letter-spacing:-.045em; line-height:1; white-space:nowrap;
-  color:var(--espuma-forte);
-}
-.brand__name b{ font-weight:600; color:var(--corrente); }
-.top__nav{ display:none; gap:1.4rem; }
-.top__nav a{
-  text-decoration:none; font-size:.9rem; font-weight:600; color:var(--granito);
-  padding-block:.4rem; border-bottom:1.5px solid transparent;
-  transition:color .2s,border-color .2s;
-}
-.top__nav a:hover{ color:var(--espuma); border-bottom-color:var(--corrente); }
+.btn:hover{ background:var(--bgh); transform:translateY(-2px); box-shadow:0 14px 26px -14px rgb(28 30 33 / .55); }
+.btn:active{ transform:translateY(1px); box-shadow:none; }
+.btn svg{ width:1.25rem; height:1.25rem; flex:none; transition:transform .35s var(--ease); }
+.btn:hover svg{ transform:rotate(-10deg) scale(1.1); }
+.btn--2{ --bg:var(--branco); --fg:var(--tinta); --bgh:var(--branco); box-shadow:inset 0 0 0 1.5px var(--linha-forte); }
+.btn--2:hover{ box-shadow:inset 0 0 0 1.5px var(--tinta), 0 14px 26px -14px rgb(28 30 33 / .4); }
+.btn--esc{ --bg:var(--tinta); --bgh:#000; }
+.btn--sm{ --bg:var(--tinta); --bgh:#000; min-height:2.9rem; padding:.5rem 1.15rem; font-size:1rem; }
+.btn--sm.btn--2{ --bg:var(--branco); --bgh:var(--branco); }
+.btn[disabled]{ opacity:.6; cursor:progress; }
+.acts{ display:flex; flex-wrap:wrap; gap:.65rem; }
+
+/* ── header ── */
+.top{ position:sticky; top:0; z-index:60; background:var(--branco); }
+.top__in{ display:flex; align-items:center; gap:1.25rem; min-height:4.75rem; }
+.brand{ display:inline-flex; align-items:center; gap:.6rem; margin-inline-end:auto; color:var(--grafite); text-decoration:none; }
+.brand__mark{ width:2.1rem; height:auto; flex:none; }
+.brand__wm{ width:clamp(8.4rem,6.5rem + 5vw,11rem); height:auto; }
+.top__nav{ display:none; gap:.2rem; }
+.top__nav a{ padding:.55rem .9rem; border-radius:999px; font-weight:600; font-size:1rem; color:var(--grafite); text-decoration:none; transition:background .2s, color .2s; }
+.top__nav a:hover{ background:var(--fundo); color:var(--tinta); }
 @media (min-width:64rem){ .top__nav{ display:flex; } }
-
-/* the descent read as a bar under the header — scaleX only, composited */
-.top__flow{
-  position:absolute; left:0; bottom:-1px; height:2px; width:100%;
-  transform:scaleX(0); transform-origin:left center;
-  background:linear-gradient(90deg,var(--agua-clara),var(--corrente));
-  will-change:transform;
-}
-@media (min-width:64rem){ .top__flow{ display:none; } }
-
-/* ══════════════════════════════════════════ BURGER + OFF-CANVAS ═ */
-.burger{
-  display:inline-grid; place-items:center; flex:none;
-  width:2.9rem; height:2.9rem; padding:0;
-  background:transparent; color:var(--espuma);
-  border:1.5px solid var(--linha-forte); border-radius:var(--r);
-  cursor:pointer;
-  transition:background .2s, border-color .2s, color .2s;
-}
-.burger:hover{ background:color-mix(in oklab,var(--espuma) 9%,transparent); border-color:var(--espuma); }
-.burger svg{ width:1.3rem; height:1.3rem; }
+.btn--top{ display:none; }
+@media (min-width:30rem){ .btn--top{ display:inline-flex; } }
+.burger,.menu__x{ display:inline-grid; place-items:center; width:3rem; height:3rem; border-radius:50%; border:0; background:var(--fundo); color:var(--tinta); cursor:pointer; transition:background .2s; }
+.burger:hover,.menu__x:hover{ background:var(--linha); }
+.burger svg,.menu__x svg{ width:1.3rem; height:1.3rem; }
 @media (min-width:64rem){ .burger{ display:none; } }
 
-/* A <dialog> rather than a hand-rolled panel: focus trapping, Escape, inert
-   background and the backdrop are the platform's job, not mine. */
-/* Full width. A narrow drawer had to carry its own copy of the wordmark, and
-   that copy never sat on the same line as the one in the header behind it.
-   Full width means the panel's top row IS the header row. */
 .menu{
-  margin:0; padding:0; border:0;
-  width:100%; max-width:none;
-  height:100dvh; max-height:none;
-  background:var(--agua-abisso); color:var(--espuma);
-  translate:100% 0;
-  transition:translate .38s var(--ease),
-             overlay .38s allow-discrete,
-             display .38s allow-discrete;
+  position:fixed; inset:0 0 0 auto; width:min(23rem,100%); height:100dvh; max-height:none; margin:0; padding:0; border:0;
+  background:var(--branco); color:var(--tinta); box-shadow:var(--sombra);
+  translate:100% 0; transition:translate .4s var(--ease), display .4s allow-discrete, overlay .4s allow-discrete;
 }
 .menu[open]{ translate:0 0; }
 @starting-style{ .menu[open]{ translate:100% 0; } }
-.menu::backdrop{
-  background:color-mix(in oklab,#020A0D 74%,transparent);
-  opacity:0;
-  transition:opacity .38s var(--ease),
-             overlay .38s allow-discrete,
-             display .38s allow-discrete;
-}
+.menu::backdrop{ background:rgb(28 30 33 / .5); opacity:0; transition:opacity .4s var(--ease); }
 .menu[open]::backdrop{ opacity:1; }
 @starting-style{ .menu[open]::backdrop{ opacity:0; } }
-/* the page must not scroll behind an open panel */
 html:has(.menu[open]){ overflow:hidden; }
+.menu__in{ display:flex; flex-direction:column; height:100%; overflow-y:auto; padding:1rem 1.25rem 1.5rem; }
+.menu__top{ display:flex; justify-content:flex-end; }
+.menu__nav{ display:grid; margin-top:.5rem; }
+.menu__nav a{ font-family:var(--display); font-weight:700; font-size:1.7rem; letter-spacing:-.02em; padding:.5rem 0; text-decoration:none; }
+.menu__nav a:hover{ color:var(--laranja-texto); }
+.menu__acts{ display:grid; gap:.6rem; margin-top:auto; padding-top:1.5rem; }
+.menu__pe{ font-size:.95rem; color:var(--cinza); }
 
-.menu__in{ display:flex; flex-direction:column; height:100%; overflow-y:auto; }
-/* min-height matches .top__in exactly — that is what keeps the two wordmarks
-   on the same baseline as the panel opens */
-.menu__top{
-  display:flex; align-items:center; justify-content:space-between; gap:1rem;
-  min-height:4.25rem; flex:none;
-  border-bottom:1px solid var(--linha);
-}
-.menu__corpo{
-  display:flex; flex-direction:column; gap:1.75rem;
-  flex:1; padding-block:1.6rem 1.8rem;
-}
-.menu__x{
-  display:grid; place-items:center; flex:none;
-  width:2.6rem; height:2.6rem; padding:0;
-  background:transparent; color:var(--granito);
-  border:1.5px solid var(--linha); border-radius:var(--r);
-  cursor:pointer; transition:color .2s, border-color .2s;
-}
-.menu__x:hover{ color:var(--espuma); border-color:var(--espuma); }
-.menu__x svg{ width:1.15rem; height:1.15rem; }
-.menu__nav{ display:grid; }
-.menu__nav a{
-  display:block; padding:.95rem .1rem; text-decoration:none;
-  font-size:1.25rem; font-weight:700; letter-spacing:-.03em;
-  color:var(--espuma-forte);
-  border-bottom:1px solid var(--linha);
-  transition:color .2s, translate .2s var(--ease);
-}
-.menu__nav a:hover{ color:var(--corrente); translate:.45rem 0; }
-.menu__acts{ display:grid; gap:.65rem; margin-top:auto; }
-.menu__pe{ margin-top:.5rem; }
+/* ── hero: the sentence, then the stage ── */
+/* hero: the sentence. The problem rolls, the number stays, the five problems sit
+   in an orange row at the bottom of the first screen. */
+.hero{ display:flex; flex-direction:column; min-height:calc(100svh - 4.75rem); }
+/* sized to the container: the widest phrase, "Sem água quente?", is 8.36em wide */
+.hero__cor > .wrap{ container-type:inline-size; }
+.hero__cor{ flex:1; display:flex; align-items:center; padding-block:clamp(1.5rem,4vw,3.5rem) clamp(1.5rem,3vw,2.75rem); }
+h1{ font-family:var(--texto); font-size:clamp(1.05rem,.95rem + .4vw,1.25rem); font-weight:600; letter-spacing:0; line-height:1.3; color:var(--grafite); max-width:40rem; }
+.gr{ font-family:var(--display); font-weight:800; letter-spacing:-.04em; line-height:1; margin-top:.65rem; }
+/* the rolling phrase: a reel. The line is a mask exactly one phrase tall; the
+   leaving phrase and the arriving one move together, one full line, on the same
+   curve, so they never overlap and the reel never jolts. */
+.rolo{ --passo:1.12em; display:grid; height:var(--passo); overflow:hidden; font-size:clamp(2.1rem,9.4vw,8.8rem); font-size:min(8.8rem,11.6cqi); color:var(--acao); }
+.rolo > span{ grid-area:1 / 1; display:block; height:var(--passo); white-space:nowrap; line-height:1.06; }
+.rolo .vem{ animation:vem .85s cubic-bezier(.76,0,.24,1) both; }
+.rolo .sai{ animation:sai .85s cubic-bezier(.76,0,.24,1) forwards; }
+@keyframes vem{ from{ transform:translateY(var(--passo)); } }
+@keyframes sai{ to{ transform:translateY(calc(var(--passo) * -1)); } }
+.lig{ display:block; font-size:clamp(1.9rem,7vw,6rem); font-size:min(6rem,8.6cqi); color:var(--tinta); margin-top:.04em; }
+.hero__baixo{ display:grid; gap:1.1rem 3rem; align-items:center; margin-top:clamp(1.1rem,2.4vw,2rem); }
+@media (min-width:60rem){ .hero__baixo{ grid-template-columns:minmax(0,1fr) auto; } }
+.paineis{ display:grid; }
+.painel{ grid-area:1 / 1; }
+.painel__t{ font-size:1.25rem; margin-bottom:.3rem; }
+.js .painel__t{ position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+html:not(.js) .paineis{ gap:1.25rem; }
+html:not(.js) .painel{ grid-area:auto; }
+.js .painel{ transition:opacity .35s, transform .5s var(--ease); }
+.js .painel:not(.on){ visibility:hidden; opacity:0; transform:translateY(10px); }
+.ag{ font-size:clamp(1.08rem,1rem + .45vw,1.3rem); line-height:1.4; max-width:42rem; }
+.ag b{ font-weight:700; }
+.hero__acts{ display:grid; gap:.6rem; justify-items:start; }
+@media (min-width:60rem){ .hero__acts{ justify-items:end; } }
+.hero__pe{ display:flex; flex-wrap:wrap; align-items:center; gap:.3rem .9rem; font-size:.88rem; color:var(--cinza); }
+@media (max-width:29.99rem){ .hero__acts > .acts{ display:grid; width:100%; } }
+.parar{ display:none; align-items:center; gap:.35rem; padding:.25rem .75rem .25rem .45rem; border:0; border-radius:999px; background:var(--fundo); color:var(--tinta); font-weight:600; font-size:.86rem; cursor:pointer; }
+.parar svg{ width:1rem; height:1rem; fill:currentColor; }
+.parar .so-play{ display:none; }
+.pausa .parar .so-pausa{ display:none; }
+.pausa .parar .so-play{ display:block; }
+.auto-tinha .parar{ display:inline-flex; }
 
-/* ═══════════════════════════════════════════════════ BUTTONS ══ */
-.btn{
-  --bg:var(--corrente); --fg:var(--agua-abisso);
-  display:inline-flex; align-items:center; justify-content:center; gap:.55rem;
-  min-height:3.25rem; padding:.85rem 1.45rem;
-  background:var(--bg); color:var(--fg);
-  font-family:inherit; font-size:1.02rem; font-weight:700; letter-spacing:-.015em;
-  text-decoration:none; border:0; border-radius:var(--r); cursor:pointer;
-  /* Real elevation: a top highlight where the light lands and a dark cast
-     shadow underneath. A coloured halo would read as decoration on this
-     ground, not as depth. */
-  box-shadow:0 1px 0 rgba(255,255,255,.28) inset,
-             0 9px 20px -10px rgba(0,0,0,.62);
-  transition:transform .18s var(--ease), box-shadow .25s var(--ease), background .2s, color .2s;
+/* the five problems: an orange row, white bold text set large enough to pass */
+.fila{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); background:var(--acao); }
+@media (min-width:44rem){ .fila{ grid-template-columns:repeat(5,minmax(0,1fr)); } }
+html:not(.js) .fila{ display:none; }
+.tab{
+  position:relative; overflow:hidden; display:flex; align-items:center; gap:.7rem; min-height:4.75rem;
+  padding:.75rem clamp(.85rem,1.6vw,1.6rem); border:0; background:transparent; color:#fff; cursor:pointer; text-align:left;
+  font-family:var(--texto); font-weight:700; font-size:1.17rem; line-height:1.15;
+  box-shadow:inset 1px 0 0 rgb(255 255 255 / .3), inset 0 1px 0 rgb(255 255 255 / .3); transition:background .25s, color .25s;
 }
-.btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 1px 0 rgba(255,255,255,.36) inset,
-             0 17px 30px -12px rgba(0,0,0,.7);
-}
-.btn:active{ transform:translateY(0); }
-.btn svg{ width:1.15rem; height:1.15rem; flex:none; }
-.btn--ghost{ --bg:transparent; --fg:var(--espuma); border:1.5px solid var(--linha-forte); box-shadow:none; }
-.btn--ghost:hover{ --fg:var(--agua-abisso); background:var(--espuma); border-color:var(--espuma); box-shadow:none; }
-.btn--sm{ min-height:2.6rem; padding:.55rem 1rem; font-size:.92rem; }
-.btn--top{ display:none; }
-@media (min-width:32rem){ .btn--top{ display:inline-flex; } }
-.acts{ display:flex; flex-wrap:wrap; gap:.75rem; }
+.tab:last-child{ grid-column:1 / -1; }
+@media (min-width:44rem){ .tab:last-child{ grid-column:auto; } }
+.tab:hover{ background:var(--acao-hover); }
+.tab[aria-selected="true"]{ background:var(--branco); color:var(--tinta); }
+.tab:focus-visible{ outline:3px solid var(--tinta); outline-offset:-5px; }
+.tab svg{ flex:none; width:1.5rem; height:1.5rem; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:transform .4s var(--ease); }
+.tab:hover svg{ transform:scale(1.15) rotate(-6deg); }
+.tab__b{ position:absolute; left:0; right:0; bottom:0; height:4px; background:var(--acao); transform:scaleX(0); transform-origin:left; }
+.auto .tab[aria-selected="true"] .tab__b{ animation:enche 5.5s linear forwards; }
+.pausa .tab__b,.fora .tab__b{ animation-play-state:paused !important; }
+@keyframes enche{ to{ transform:scaleX(1); } }
 
-/* ═══════════════════════════════════════════════════ HERO ═════ */
-/* No entrance animation anywhere in here: the h1 is the LCP element and
-   is painted at full opacity on the first frame. */
-.hero{
-  position:relative; isolation:isolate;
-  /* Shorter on phones: the crop shows only the middle of the dam there, so a
-     tall hero buys empty sky rather than atmosphere. */
-  min-height:min(82svh,44rem);
-  display:grid; align-content:end;
-  padding-block:clamp(3rem,10vh,9rem) clamp(2.5rem,7vh,6rem);
-  background:linear-gradient(178deg,var(--agua-abisso) 0%,var(--agua-funda) 34%,var(--agua) 78%,var(--agua-media) 100%);
-  overflow:hidden;
-}
-.hero__art{ position:absolute; inset:0; z-index:-2; width:100%; height:100%; pointer-events:none; }
-/* Readability scrim. The dam sits behind the copy, so the copy needs its own
-   ground — otherwise the spillway strokes run through the paragraph and the
-   crest line cuts the headline. Weighted to the lower-left, where the text is,
-   and left clear at the top so the reservoir and the pylon line still read. */
-.hero::after{
-  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
-  background:
-    radial-gradient(115% 78% at 6% 92%,
-      color-mix(in oklab,var(--agua-abisso) 80%,transparent) 0%,
-      color-mix(in oklab,var(--agua-abisso) 34%,transparent) 46%,
-      transparent 68%),
-    linear-gradient(to top,
-      color-mix(in oklab,var(--agua-abisso) 62%,transparent) 0%,
-      color-mix(in oklab,var(--agua-funda) 34%,transparent) 30%,
-      transparent 62%);
-}
-/* Once there is a text column rather than a full-width block, the spillway
-   moves out from behind it into the clear right half, and the scrim pulls back
-   to the lower-left so the falling water stays fully visible. Masking happens
-   in the group's own user space, so the mask travels with the translate. */
-@media (min-width:52rem){
-  .hero{ min-height:min(92svh,54rem); padding-block:clamp(4rem,14vh,9rem) clamp(3rem,9vh,6rem); }
-}
-@media (min-width:64rem){
-  .spill{ transform:translateX(290px); }
-  .hero::after{
-    background:
-      radial-gradient(74% 72% at 1% 95%,
-        color-mix(in oklab,var(--agua-abisso) 82%,transparent) 0%,
-        color-mix(in oklab,var(--agua-abisso) 30%,transparent) 44%,
-        transparent 66%),
-      linear-gradient(to top,
-        color-mix(in oklab,var(--agua-abisso) 44%,transparent) 0%,
-        transparent 44%);
-  }
-}
-.hero__in{ position:relative; z-index:1; }
-h1{ font-size:clamp(2.7rem,11.5vw,5.6rem); max-width:22ch; }
-h1 .l{ display:block; }
-h1 .l--2{ color:var(--corrente); }
-h1 .l--3{
-  display:block; font-size:clamp(1.05rem,3.4vw,1.6rem);
-  font-weight:600; letter-spacing:-.02em; line-height:1.2;
-  margin-top:clamp(.7rem,2vw,1.1rem);
-}
-.hero__lead{
-  max-width:44ch; margin-top:clamp(1.3rem,3.5vw,1.9rem);
-  font-size:clamp(1.05rem,.98rem + .5vw,1.28rem);
-  color:color-mix(in oklab,var(--espuma) 84%,var(--agua-luz));
-}
-.hero__lead b{ color:var(--espuma-forte); }
-/* Three buttons wrapping into a ragged 2 + 1 read as a mistake. On narrow
-   screens they become a deliberate grid: the call spans the full width because
-   it is the primary action, the other two share the row beneath it. */
-.hero__acts{
-  margin-top:clamp(1.6rem,4vw,2.4rem);
-  display:grid; grid-template-columns:1fr 1fr; gap:.65rem;
-}
-.hero__acts > :first-child{ grid-column:1 / -1; }
-.hero__acts .btn{ padding-inline:.9rem; font-size:.97rem; }
-@media (min-width:34rem){
-  .hero__acts{ display:flex; flex-wrap:wrap; gap:.75rem; }
-  .hero__acts > :first-child{ grid-column:auto; }
-  .hero__acts .btn{ padding-inline:1.45rem; font-size:1.02rem; }
-}
-/* On narrow screens the buttons sit over the spillway, and a fully
-   transparent ghost lets the water run through its label. */
-.hero .btn--ghost{ background:color-mix(in oklab,var(--agua-abisso) 46%,transparent); }
-.hero .btn--ghost:hover{ background:var(--espuma); }
-.hero__note{ margin-top:1.15rem; display:flex; flex-wrap:wrap; align-items:center; gap:.5rem .8rem; }
+/* ── words that move only when you scroll ── */
+.palavras{ overflow:clip; padding-block:clamp(2.5rem,6vw,5rem) clamp(.5rem,2vw,1.5rem); }
+.palavras__l{ display:flex; gap:.45em; width:max-content; font-family:var(--display); font-weight:800; font-size:clamp(2.6rem,1.2rem + 6.5vw,7.5rem); line-height:1.05; letter-spacing:-.035em; color:var(--tinta); }
+.palavras__l i{ font-style:normal; }
+.palavras__l i:nth-child(even){ color:var(--laranja); }
+.palavras__l--b{ margin-left:-18%; }
 
-/* ═════════════════════════════════════════════ SECTION SHELL ══ */
-.band{ position:relative; padding-block:clamp(4.5rem,12vh,8.5rem); }
-.band--tight{ padding-block:clamp(3.5rem,9vh,6rem); }
-.band-abisso{ background:var(--agua-abisso); }
-.band-luz{
-  background:var(--cal); color:var(--pedra);
-  --linha:color-mix(in oklab,var(--pedra) 22%,transparent);
-  --linha-forte:color-mix(in oklab,var(--pedra) 40%,transparent);
-  --granito:var(--pedra);
-  --fio:var(--corrente-quente);
-}
-.band-luz h2,.band-luz h3{ color:#12181A; }
-/* White reads lighter than near-black here, which is what this band wants —
-   but white on the brand orange (#EE7E13) measures 2.7:1, far under the 4.5:1
-   floor. The field is deepened until white clears it: 4.8:1 at the lightest
-   end of this gradient, 5.6:1 at the darkest. Still unmistakably orange. */
-.band-corrente{
-  background:linear-gradient(172deg,#BC5406 0%,#9E4304 100%);
-  color:var(--espuma-forte);
-  --granito:color-mix(in oklab,#FFFFFF 76%,transparent);
-  --fio:var(--espuma-forte);
-  --linha:color-mix(in oklab,#FFFFFF 24%,transparent);
-  --linha-forte:color-mix(in oklab,#FFFFFF 46%,transparent);
-}
-.band-corrente h2,.band-corrente h3{ color:var(--espuma-forte); }
-/* the accent walks from water to current as the page descends */
-#servicos{ --fio:color-mix(in oklab,var(--agua-clara),var(--corrente) 45%); }
-#processo,#perguntas,#contacto{ --fio:var(--corrente); }
-
-.head{ max-width:34rem; }
-.head--wide{ max-width:48rem; }
-h2{ font-size:clamp(2rem,1.4rem + 2.6vw,3.35rem); margin-bottom:clamp(.9rem,2.2vw,1.25rem); }
-.head .rot{ margin-bottom:clamp(1.1rem,2.6vw,1.5rem); display:block; }
-.head p{ max-width:var(--measure); color:color-mix(in oklab,currentColor 80%,transparent); font-size:clamp(1rem,.97rem + .3vw,1.15rem); }
-
-/* ══════════════════════════════════════════ TWO CHANNELS ══════ */
-.canais{ display:grid; gap:clamp(1.5rem,4vw,2.5rem); margin-top:clamp(2.5rem,6vw,4rem); }
-@media (min-width:52rem){ .canais{ grid-template-columns:1fr 1fr; } }
-.canal{
-  position:relative; padding:clamp(1.5rem,3.5vw,2.25rem);
-  border:1px solid var(--linha); border-top:2px solid var(--tint);
-  background:linear-gradient(180deg,color-mix(in oklab,var(--tint) 9%,transparent),transparent 55%),
-             color-mix(in oklab,var(--agua-abisso) 45%,transparent);
-  border-radius:var(--r); overflow:hidden;
-  transition:border-color .3s var(--ease);
-}
-.canal:hover{ border-color:color-mix(in oklab,var(--tint) 45%,transparent); }
-.canal--agua{ --tint:var(--agua-clara); }
-.canal--luz{ --tint:var(--corrente); }
-.canal__rot{ color:var(--tint); }
-.canal h3{ font-size:clamp(1.5rem,1.2rem + 1.3vw,2.1rem); margin:.5rem 0 .7rem; }
-.canal p{ color:color-mix(in oklab,var(--espuma) 76%,transparent); max-width:38ch; }
-.canal__art{ margin-top:clamp(1.5rem,4vw,2.25rem); }
-.canal__art svg{ width:100%; height:auto; }
-.canal__art .ln{
-  fill:none; stroke:var(--tint); stroke-width:2;
-  stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke;
-}
-.canal__art .ln--soft{ opacity:.4; }
-.canal__art .dot{ fill:var(--tint); }
-.canal__art .glass{ fill:color-mix(in oklab,var(--tint) 16%,transparent); }
-
-.casa{ margin-top:clamp(2.5rem,6vw,4rem); display:grid; gap:clamp(1.5rem,4vw,2.5rem); align-items:center; }
-@media (min-width:52rem){ .casa{ grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); } }
-.casa__art svg{ width:100%; height:auto; }
-.casa__art .wall{ fill:none; stroke:var(--granito-fundo); stroke-width:1.5; }
-.casa__art .fill{ fill:color-mix(in oklab,var(--espuma) 4%,transparent); }
-.casa__art .pipe{ fill:none; stroke:var(--agua-clara); stroke-width:2.25; stroke-linecap:round; stroke-linejoin:round; }
-.casa__art .wire{ fill:none; stroke:var(--corrente); stroke-width:2.25; stroke-linecap:round; stroke-linejoin:round; }
-.casa__art .node{ fill:var(--agua-abisso); stroke-width:2; }
-.casa__copy p+p{ margin-top:1rem; }
-.casa__copy .big{
-  font-size:clamp(1.3rem,1.1rem + 1vw,1.75rem);
-  font-weight:700; letter-spacing:-.025em; line-height:1.22;
-  color:var(--espuma-forte);
-}
-.casa__copy p:not(.big){ color:color-mix(in oklab,var(--espuma) 76%,transparent); }
-
-/* ══════════════════════════════════════════ SERVICES MANIFOLD ═ */
-.manifold{ display:grid; gap:clamp(2.5rem,6vw,4.5rem); margin-top:clamp(2.5rem,6vw,3.5rem); }
-@media (min-width:56rem){ .manifold{ grid-template-columns:1fr 1fr; gap:clamp(2rem,5vw,4rem); } }
-.group__head{ display:flex; align-items:baseline; gap:.9rem; padding-bottom:.85rem; border-bottom:2px solid var(--tint); }
-.group__head .rot{ color:var(--tint); }
-.group__head h3{ font-size:clamp(1.35rem,1.15rem + .8vw,1.7rem); margin-inline-end:auto; }
-.group--agua{ --tint:var(--agua-clara); }
-.group--luz{ --tint:var(--corrente); }
-.svcs{ list-style:none; margin:0; padding:0; }
+/* ── services: two networks, two panels ── */
+.head{ max-width:47rem; margin-bottom:clamp(1.75rem,3.5vw,3rem); }
+.head p{ margin-top:.9rem; font-size:clamp(1.08rem,1rem + .35vw,1.25rem); line-height:1.45; color:var(--cinza); }
+.redes{ display:grid; gap:clamp(.75rem,1.4vw,1.1rem); }
+@media (min-width:60rem){ .redes{ grid-template-columns:1fr 1fr; } }
+.rd{ position:relative; overflow:hidden; isolation:isolate; border-radius:var(--r); padding:clamp(1.35rem,3vw,2.5rem); color:#fff; }
+.rd--agua{ background:var(--agua-funda); }
+.rd--luz{ background:var(--tinta); }
+.rd__fundo{ position:absolute; z-index:-1; right:-6%; top:-5%; width:min(62%,20rem); height:auto; opacity:.13; fill:currentColor; }
+.rd h3{ font-size:clamp(2rem,1.5rem + 2vw,3.2rem); }
+.rd > p{ margin-top:.6rem; max-width:27rem; font-size:1.08rem; line-height:1.4; color:rgb(255 255 255 / .82); }
+.svcs{ display:grid; margin-top:clamp(1.25rem,2.5vw,2rem); border-top:1px solid rgb(255 255 255 / .2); }
 .svc{
-  display:grid; grid-template-columns:2.5rem 1fr; gap:.25rem 1rem; align-items:start;
-  padding:1.05rem .75rem 1.05rem .5rem;
-  border-bottom:1px solid var(--linha);
-  margin-inline:-.5rem; border-radius:var(--r);
-  transition:background .25s var(--ease);
+  position:relative; display:grid; grid-template-columns:2.4rem 1fr 1.5rem; gap:.1rem .9rem; align-items:center;
+  padding:.9rem .25rem; border-bottom:1px solid rgb(255 255 255 / .2); text-decoration:none; color:#fff;
+  transition:background .25s;
 }
-.svc:hover{ background:color-mix(in oklab,var(--espuma) 5%,transparent); }
-.svc__ico{ grid-row:span 2; width:2.5rem; height:2.5rem; margin-top:.05rem; }
-.svc__ico .g{
-  fill:none; stroke:var(--granito); stroke-width:1.6;
-  stroke-linecap:round; stroke-linejoin:round; transition:stroke .3s var(--ease);
-}
-.svc__ico .gf{ fill:var(--granito); transition:fill .3s var(--ease); }
-.svc:hover .svc__ico .g{ stroke:var(--tint); }
-.svc:hover .svc__ico .gf{ fill:var(--tint); }
-.svc__t{ font-weight:700; font-size:1.06rem; letter-spacing:-.02em; line-height:1.3; color:var(--espuma-forte); }
-.svc__d{ font-size:.94rem; line-height:1.5; color:color-mix(in oklab,var(--espuma) 72%,transparent); }
+.svc > *{ transition:transform .4s var(--ease), opacity .25s; }
+.svc:hover{ background:rgb(255 255 255 / .07); }
+.svc:hover > :not(.svc__s){ transform:translateX(.6rem); }
+.svc:focus-visible{ outline-color:#fff; outline-offset:-3px; }
+.svc__i{ grid-row:1 / 3; width:2.4rem; height:2.4rem; }
+.svc__i svg{ width:100%; height:100%; }
+.svc .g{ fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+.svc .gf{ fill:var(--laranja-clara); }
+.svc h4{ font-size:1.17rem; font-weight:700; letter-spacing:-.015em; line-height:1.2; }
+.svc p{ grid-column:2; font-size:.96rem; line-height:1.4; color:rgb(255 255 255 / .75); }
+.svc__s{ grid-column:3; grid-row:1 / 3; width:1.3rem; height:1.3rem; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; opacity:.45; }
+.svc:hover .svc__s{ opacity:1; transform:translate(3px,-3px); }
+.redes__nota{ margin-top:1.25rem; color:var(--cinza); }
+.redes__nota a{ color:var(--tinta); font-weight:700; text-underline-offset:3px; }
 
-/* ══════════════════════════════════════════ EMERGENCY BAND ════ */
-.urg{ display:grid; gap:clamp(1.75rem,4vw,3rem); align-items:center; }
-@media (min-width:54rem){ .urg{ grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); } }
-.urg h2{ font-size:clamp(2.1rem,1.3rem + 3.4vw,3.9rem); }
-.urg__lead{
-  margin-top:1.1rem; max-width:40ch;
-  font-size:clamp(1.05rem,1rem + .45vw,1.25rem);
-  color:color-mix(in oklab,#FFFFFF 88%,transparent);
+/* ── how it works: cards that stack as you scroll ── */
+.proc{ background:var(--fundo); }
+.pilha{ display:grid; gap:clamp(.75rem,1.4vw,1.1rem); }
+.pp{
+  display:grid; gap:1.5rem; align-items:center; border-radius:var(--r); padding:clamp(1.35rem,3.2vw,3rem);
+  background:var(--branco); box-shadow:0 -10px 34px -24px rgb(28 30 33 / .4);
 }
-.urg__lead b{ color:#FFFFFF; }
-.urg__acts{ margin-top:1.6rem; }
-/* a white button on the deep orange: 7.8:1, and the strongest thing on the
-   band, which is what the primary action should be */
-.band-corrente .btn{
-  --bg:var(--espuma-forte); --fg:#8A3A03;
-  box-shadow:0 9px 22px -12px rgba(0,0,0,.5);
+.pp--2{ background:var(--laranja-tinta); }
+.pp--3{ background:var(--tinta); color:#fff; }
+@media (min-width:52rem){ .pp{ grid-template-columns:1.1fr .9fr; gap:3rem; } }
+@media (min-width:52rem) and (min-height:44rem){
+  .pp{ position:sticky; top:calc(6rem + var(--n) * 1.1rem); }
+  .pilha{ gap:clamp(2.5rem,12vh,6rem); padding-bottom:1rem; }
 }
-.band-corrente .btn:hover{ box-shadow:0 17px 32px -14px rgba(0,0,0,.58); }
-.band-corrente .btn--ghost{
-  --bg:transparent; --fg:#FFFFFF;
-  border-color:color-mix(in oklab,#FFFFFF 52%,transparent); box-shadow:none;
-}
-.band-corrente .btn--ghost:hover{ background:#FFFFFF; --fg:#8A3A03; border-color:#FFFFFF; }
-.urg__list{ list-style:none; margin:0; padding:0; }
-.urg__list li{
-  display:grid; grid-template-columns:1.6rem 1fr; gap:.8rem; padding:.85rem 0;
-  border-top:1px solid color-mix(in oklab,#FFFFFF 26%,transparent);
-  font-weight:600; letter-spacing:-.01em;
-}
-.urg__list li:last-child{ border-bottom:1px solid color-mix(in oklab,#FFFFFF 26%,transparent); }
-.urg__list svg{ width:1.6rem; height:1.6rem; }
-.urg__list .g{ fill:none; stroke:#FFFFFF; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.pp__n{ display:block; font-family:var(--display); font-weight:800; font-size:clamp(3.5rem,2.5rem + 4vw,6rem); line-height:.9; letter-spacing:-.04em; color:var(--laranja); }
+.pp h3{ font-size:clamp(1.7rem,1.3rem + 1.6vw,2.6rem); margin-top:.7rem; }
+.pp p{ margin-top:.7rem; max-width:32rem; font-size:1.08rem; line-height:1.45; color:var(--grafite); }
+.pp--3 p{ color:rgb(255 255 255 / .8); }
+.pp__ex{ font-size:.82rem; color:var(--cinza); margin-top:.5rem; }
+.chat{ display:grid; gap:.5rem; background:var(--fundo); border-radius:var(--r-m); padding:1rem; }
+.bolha{ max-width:86%; padding:.6rem .85rem; border-radius:16px; font-size:.98rem; line-height:1.3; }
+.bolha--eu{ justify-self:end; background:var(--laranja-tinta); border-bottom-right-radius:4px; }
+.bolha--nos{ background:var(--branco); border-bottom-left-radius:4px; }
+.bolha--foto{ justify-self:end; padding:.3rem; background:var(--laranja-tinta); border-bottom-right-radius:4px; width:9rem; }
+.bolha--foto svg{ width:100%; height:auto; border-radius:12px; }
+.notinha{ background:var(--branco); border-radius:var(--r-m); padding:1.1rem 1.25rem 1.25rem; display:grid; gap:.65rem; box-shadow:var(--sombra); rotate:-1.2deg; }
+.notinha h4{ font-size:1.2rem; }
+.notinha li{ display:flex; justify-content:space-between; gap:1rem; padding-block:.45rem; border-bottom:1px dashed var(--linha-forte); font-size:.98rem; }
+.notinha li:last-child{ border-bottom:0; font-weight:700; }
+.lista-ok{ display:grid; gap:.55rem; }
+.lista-ok li{ display:flex; align-items:center; gap:.8rem; font-family:var(--display); font-weight:700; font-size:clamp(1.2rem,1rem + .8vw,1.55rem); letter-spacing:-.02em; }
+.ok{ flex:none; display:grid; place-items:center; width:2.4rem; height:2.4rem; border-radius:50%; background:var(--laranja); }
+.ok svg{ width:1.3rem; height:1.3rem; fill:none; stroke:#fff; stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
+.rvj .lista-ok path{ stroke-dasharray:26; stroke-dashoffset:26; }
+.rvj .lista-ok.on path{ stroke-dashoffset:0; transition:stroke-dashoffset .6s var(--ease) calc(.3s + var(--i,0) * 200ms); }
 
-/* ══════════════════════════════════════════ SERVICE AREA ══════ */
-.zona{ display:grid; gap:clamp(2rem,5vw,3.5rem); }
-@media (min-width:58rem){ .zona{ grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); align-items:center; } }
-.rede svg{ width:100%; height:auto; }
-/* below this width the labels cannot stay legible, and the chip list
-   underneath already carries the same information and the same keywords */
-@media (max-width:32rem){ .rede{ display:none; } }
-.rede .link{ fill:none; stroke:var(--pedra); stroke-width:1.4; opacity:.45; stroke-linecap:round; }
-.rede .link--live{ stroke:var(--corrente-quente); stroke-width:2.4; opacity:1; }
-.rede .pin{ fill:var(--cal); stroke:var(--pedra); stroke-width:1.6; }
-.rede .pin--hub{ fill:var(--corrente); stroke:#12181A; stroke-width:2; }
-.rede text{ font-family:"Archivo",system-ui,sans-serif; font-weight:700; letter-spacing:-.01em; fill:var(--pedra); font-size:19px; }
-.rede .lbl--hub{ fill:#12181A; font-size:23px; font-weight:800; letter-spacing:.02em; }
-.locais{ margin-top:clamp(1.5rem,3.5vw,2rem); }
-.locais h3{ font-size:1.05rem; letter-spacing:-.02em; margin-bottom:.85rem; }
-.chips{ display:flex; flex-wrap:wrap; gap:.45rem; list-style:none; margin:0 0 1.4rem; padding:0; }
-.chips li{
-  font-size:.9rem; font-weight:600; letter-spacing:-.01em; padding:.32rem .7rem;
-  border:1px solid var(--linha-forte); border-radius:99px;
-  background:color-mix(in oklab,var(--cal-sombra) 45%,transparent);
-}
-.chips--hub li:first-child{ background:var(--corrente); border-color:var(--corrente); color:#12181A; font-weight:800; }
+/* ── who ── */
+.manif{ font-family:var(--display); font-weight:700; font-size:clamp(1.8rem,1.1rem + 3.1vw,3.9rem); line-height:1.1; letter-spacing:-.03em; max-width:22em; view-timeline-name:--manif; }
+.manif b{ color:var(--laranja); font-weight:700; }
+.prom{ margin-top:clamp(2.5rem,5vw,4.5rem); border-top:2px solid var(--tinta); }
+.prom li{ display:grid; gap:.25rem 3rem; padding-block:1.25rem; border-bottom:1px solid var(--linha); }
+.prom li > *{ transition:transform .4s var(--ease); }
+.prom li:hover > *{ transform:translateX(.6rem); }
+@media (min-width:52rem){ .prom li{ grid-template-columns:1fr 1.1fr; align-items:baseline; } }
+.prom h3{ font-size:clamp(1.35rem,1.15rem + .8vw,1.85rem); }
+.prom p{ color:var(--cinza); font-size:1.05rem; line-height:1.45; }
 
-/* ══════════════════════════════════════════ PROCESS PENSTOCK ══ */
-.penstock{ margin-top:clamp(2.5rem,6vw,4rem); display:grid; }
-@media (min-width:50rem){ .penstock{ grid-template-columns:repeat(3,1fr); } }
-.passo{ position:relative; padding:clamp(1.4rem,3vw,2rem) clamp(1.2rem,2.5vw,1.9rem); border:1px solid var(--linha); }
-@media (max-width:49.99rem){ .passo+.passo{ border-top:0; } }
-@media (min-width:50rem){ .passo+.passo{ border-inline-start:0; } }
-.passo__n{
-  display:block; margin-bottom:.9rem;
-  font-family:"Martian",ui-monospace,monospace; font-size:.7rem; font-weight:600;
-  letter-spacing:.15em; color:var(--fio);
-}
-.passo h3{ font-size:clamp(1.15rem,1rem + .6vw,1.4rem); margin-bottom:.6rem; }
-.passo p{ font-size:.98rem; color:color-mix(in oklab,var(--espuma) 74%,transparent); }
-/* water running the penstock: scaleX on a real element, composited */
-.passo__fio{
-  position:absolute; inset-block-start:-1px; inset-inline-start:0;
-  height:2px; width:100%; background:var(--fio);
-  transform:scaleX(0); transform-origin:left center;
-}
-.js .passo__fio{ transition:transform .9s var(--ease) calc(var(--i,0) * .12s); }
-.passo.on .passo__fio,html:not(.js) .passo__fio{ transform:scaleX(1); }
+/* ── area ── */
+.zona{ background:var(--tinta); color:#fff; border-radius:var(--r); padding:clamp(1.35rem,3.5vw,3.5rem); display:grid; gap:2rem; align-items:center; overflow:hidden; }
+@media (min-width:60rem){ .zona{ grid-template-columns:1fr 1fr; gap:3rem; } }
+.zona > div{ min-width:0; }
+.zona__p{ margin-top:.9rem; font-size:1.1rem; line-height:1.45; color:rgb(255 255 255 / .8); }
+.locais{ margin-top:1.75rem; display:grid; gap:1.5rem; }
+.locais h3{ font-family:var(--texto); font-size:.95rem; font-weight:700; letter-spacing:0; color:var(--laranja-clara); margin-bottom:.5rem; }
+.chips{ display:flex; flex-wrap:wrap; gap:.4rem; }
+.chips li{ padding:.35rem .8rem; border-radius:999px; background:rgb(255 255 255 / .09); font-weight:600; font-size:.98rem; transition:background .2s, color .2s; }
+.chips--c li{ cursor:default; }
+.chips--c li:hover,.chips--c li.on{ background:var(--laranja-clara); color:var(--tinta); }
+.mapa svg{ width:100%; height:auto; }
+.mapa__onda{ transform-box:fill-box; transform-origin:center; animation:onda 4.5s var(--ease) infinite; fill:none; stroke:var(--laranja-clara); }
+.mapa__onda.b{ animation-delay:1.5s; } .mapa__onda.c{ animation-delay:3s; }
+@keyframes onda{ from{ transform:scale(.12); opacity:.9; } to{ transform:scale(1); opacity:0; } }
+.mapa__l{ stroke:rgb(255 255 255 / .28); stroke-width:1.5; stroke-dasharray:3 7; transition:stroke .25s; }
+.mapa__n circle{ fill:#fff; transition:fill .25s, r .35s var(--ease); }
+.mapa__n text{ fill:#fff; font-family:var(--texto); font-weight:700; font-size:19px; }
+.mapa__n.on circle{ fill:var(--laranja-clara); r:10px; }
+.mapa__n.on text{ fill:var(--laranja-clara); }
+.mapa__c{ font-family:var(--display); font-weight:800; font-size:26px; fill:var(--tinta); }
+.mapa__leg{ margin-top:.5rem; font-size:.86rem; color:rgb(255 255 255 / .66); text-align:center; }
 
-/* ══════════════════════════════════════════ FAQ ═══════════════ */
-.faq{ margin-top:clamp(2rem,5vw,3rem); max-width:52rem; }
-.faq details{ border-bottom:1px solid var(--linha); }
-.faq summary{
-  display:flex; align-items:flex-start; gap:1rem;
-  padding:1.25rem .25rem; cursor:pointer; list-style:none;
-  font-size:clamp(1.02rem,.98rem + .3vw,1.18rem); font-weight:700;
-  letter-spacing:-.02em; line-height:1.35; color:var(--espuma-forte);
-  transition:color .2s;
-}
+/* ── questions ── */
+.perg{ display:grid; gap:1.5rem 4rem; align-items:start; }
+@media (min-width:60rem){ .perg{ grid-template-columns:.8fr 1.2fr; } .perg__h{ position:sticky; top:6.5rem; } }
+.perg__h p{ margin-top:.9rem; font-size:1.15rem; color:var(--cinza); max-width:24rem; }
+.perg__h .acts{ margin-top:1.25rem; }
+.faq details{ border-bottom:1px solid var(--linha); interpolate-size:allow-keywords; }
+.faq details:first-child{ border-top:2px solid var(--tinta); }
+.faq summary{ list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:1.25rem; padding:1.1rem .1rem; font-family:var(--display); font-weight:600; font-size:clamp(1.15rem,1.05rem + .4vw,1.4rem); letter-spacing:-.015em; line-height:1.15; transition:color .2s; }
 .faq summary::-webkit-details-marker{ display:none; }
-.faq summary:hover{ color:var(--corrente); }
-.faq summary .mk{ flex:none; width:1.15rem; height:1.15rem; margin-top:.3rem; position:relative; }
-.faq summary .mk::before,.faq summary .mk::after{
-  content:""; position:absolute; inset-inline:0; top:50%;
-  height:2px; margin-top:-1px; background:var(--fio);
-  transition:transform .3s var(--ease);
-}
-.faq summary .mk::after{ transform:rotate(90deg); }
-.faq details[open] summary .mk::after{ transform:rotate(0deg); }
-.faq__a{ padding:0 .25rem 1.4rem 2.15rem; max-width:var(--measure); color:color-mix(in oklab,var(--espuma) 78%,transparent); }
-.faq__a p+p{ margin-top:.8rem; }
+.faq summary:hover{ color:var(--laranja-texto); }
+.mk{ position:relative; flex:none; width:2.3rem; height:2.3rem; border-radius:50%; background:var(--fundo); transition:background .25s, color .25s; color:var(--tinta); }
+.mk::before,.mk::after{ content:""; position:absolute; inset:0; margin:auto; background:currentColor; border-radius:2px; transition:transform .35s var(--ease); }
+.mk::before{ width:.95rem; height:2px; } .mk::after{ width:2px; height:.95rem; }
+details[open] .mk{ background:var(--acao); color:#fff; }
+details[open] .mk::after{ transform:rotate(90deg); }
+.faq details::details-content{ height:0; overflow:clip; transition:height .4s var(--ease), content-visibility .4s allow-discrete; }
+.faq details[open]::details-content{ height:auto; }
+.faq__a{ padding:0 3.5rem 1.35rem .1rem; color:var(--grafite); max-width:44rem; }
 
-/* ══════════════════════════════════════════ CONTACT ═══════════ */
-.contacto{ display:grid; gap:clamp(2.25rem,5vw,4rem); }
-@media (min-width:58rem){ .contacto{ grid-template-columns:minmax(0,.85fr) minmax(0,1fr); } }
-.contacto__lead{ max-width:36ch; color:color-mix(in oklab,var(--espuma) 78%,transparent); margin-bottom:1.75rem; }
-.vias{ display:grid; gap:1rem; align-content:start; }
-.via{
-  display:flex; align-items:center; gap:1rem; padding:1.15rem 1.25rem;
-  border:1px solid var(--linha); border-radius:var(--r); text-decoration:none;
-  transition:border-color .25s,background .25s,transform .25s var(--ease);
-}
-.via:hover{ border-color:var(--corrente); background:color-mix(in oklab,var(--corrente) 8%,transparent); transform:translateX(3px); }
-.via svg{ width:1.5rem; height:1.5rem; flex:none; }
-.via .g{ fill:none; stroke:var(--corrente); stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
-.via__t .rot{ display:block; margin-bottom:.15rem; }
-.via__t strong{ font-size:1.08rem; letter-spacing:-.02em; color:var(--espuma-forte); }
+/* ── contact ── */
+.cont{ display:grid; border-radius:var(--r); overflow:hidden; background:var(--tinta); }
+@media (min-width:60rem){ .cont{ grid-template-columns:.85fr 1.15fr; } }
+.cont__e{ color:#fff; padding:clamp(1.35rem,3.5vw,3.25rem); display:flex; flex-direction:column; gap:1.1rem; min-width:0; }
+.cont__e > p{ font-size:1.1rem; line-height:1.45; color:rgb(255 255 255 / .8); }
+.cont__tel{ display:block; font-family:var(--display); font-weight:800; font-size:clamp(2.1rem,1.2rem + 3.1vw,3.6rem); line-height:1; letter-spacing:-.035em; color:var(--laranja-clara); text-decoration:none; }
+.cont__tel:hover{ text-decoration:underline; text-underline-offset:.12em; text-decoration-thickness:3px; }
+.vias{ display:grid; margin-top:auto; border-top:1px solid rgb(255 255 255 / .2); }
+.via{ display:grid; grid-template-columns:1.4rem 1fr; gap:.8rem; align-items:center; padding:.75rem 0; border-bottom:1px solid rgb(255 255 255 / .2); text-decoration:none; font-weight:600; overflow-wrap:anywhere; }
+.via svg{ width:1.4rem; height:1.4rem; color:var(--laranja-clara); fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+a.via:hover span{ text-decoration:underline; text-underline-offset:3px; }
 
-form{ display:grid; gap:.4rem; }
-.f{ display:grid; gap:.45rem; align-content:start; }
-/* start, not stretch: otherwise a two-line error in one column makes the
-   select in the other column grow to match it */
-.f--2{ display:grid; gap:0 1.1rem; align-items:start; }
-@media (min-width:34rem){ .f--2{ grid-template-columns:1fr 1fr; } }
-label{
-  font-family:"Martian",ui-monospace,monospace; font-size:.7rem; font-weight:500;
-  letter-spacing:.13em; text-transform:uppercase; color:var(--granito);
-}
-label .req{ color:var(--corrente); }
-input,select,textarea{
-  font-family:inherit; font-size:1rem; color:var(--espuma-forte);
-  background:color-mix(in oklab,var(--agua-abisso) 60%,transparent);
-  border:1px solid var(--linha-forte); border-radius:var(--r);
-  padding:.85rem .9rem; min-height:3.1rem; width:100%;
-  transition:border-color .2s,background .2s,box-shadow .2s;
-}
-textarea{ min-height:7.5rem; resize:vertical; line-height:1.55; }
-select{
-  appearance:none; cursor:pointer; padding-inline-end:2.5rem;
-  background-image:linear-gradient(45deg,transparent 50%,var(--granito) 50%),
-                   linear-gradient(135deg,var(--granito) 50%,transparent 50%);
-  background-position:calc(100% - 1.15rem) 1.35rem,calc(100% - .8rem) 1.35rem;
-  background-size:.35rem .35rem,.35rem .35rem; background-repeat:no-repeat;
-}
-input::placeholder,textarea::placeholder{ color:var(--granito); opacity:1; }
-input:focus,select:focus,textarea:focus{
-  outline:none; border-color:var(--corrente);
-  background:color-mix(in oklab,var(--agua-abisso) 80%,transparent);
-  box-shadow:0 0 0 3px color-mix(in oklab,var(--corrente) 22%,transparent);
-}
-input[aria-invalid="true"],textarea[aria-invalid="true"]{ border-color:#FF8A7A; background:color-mix(in oklab,#FF8A7A 9%,transparent); }
-/* Height is reserved whether or not there is a message. An error that appears
-   on submit must not push the button the visitor is about to press. */
-.err{
-  font-size:.85rem; font-weight:600; line-height:1.35; color:#FFB3A6;
-  min-height:2.7em;
-}
-.f__hint{ font-size:.85rem; color:var(--granito); }
-.f__hint a{ color:var(--corrente); text-underline-offset:3px; }
-/* fora do ecrã, não display:none — alguns robôs ignoram o que está escondido */
+form{ background:var(--branco); padding:clamp(1.35rem,3.5vw,3.25rem); border:2px solid var(--tinta); border-radius:var(--r); min-width:0; }
+.fg{ display:grid; gap:.35rem; margin-bottom:.35rem; }
+.fg--2{ display:grid; gap:0 1rem; }
+@media (min-width:36rem){ .fg--2{ grid-template-columns:1fr 1fr; } }
+label{ font-weight:700; font-size:.98rem; }
+.req{ color:var(--laranja-texto); }
+input,select,textarea{ font:inherit; color:var(--tinta); background:var(--fundo); border:1.5px solid transparent; border-radius:var(--r-s); padding:.8rem .95rem; min-height:3.25rem; width:100%; transition:border-color .2s, background .2s, box-shadow .2s; }
+input:hover,select:hover,textarea:hover{ border-color:var(--linha-forte); }
+textarea{ min-height:7.5rem; resize:vertical; }
+::placeholder{ color:#6B7176; opacity:1; }
+input:focus-visible,select:focus-visible,textarea:focus-visible{ outline:none; background:var(--branco); border-color:var(--acao); box-shadow:0 0 0 3px rgb(238 126 19 / .25); }
+[aria-invalid="true"]{ border-color:#B42318; background:#FEF3F2; }
+.err{ min-height:1.35rem; font-size:.88rem; font-weight:600; color:#B42318; }
 .isca{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
-.f__ts:not(:empty){ margin-block:.35rem .2rem; min-height:65px; }
-.btn[aria-busy="true"]{ opacity:.72; cursor:progress; }
-.f__out{
-  padding:1rem 1.15rem; border-radius:var(--r);
-  border:1px solid color-mix(in oklab,var(--agua-clara) 45%,transparent);
-  background:color-mix(in oklab,var(--agua-clara) 10%,transparent);
-  font-size:.95rem;
-}
-.f__out:not(.on){ display:none; }
-.f__out[data-estado="ok"]{
-  border-color:color-mix(in oklab,#5FD08A 55%,transparent);
-  background:color-mix(in oklab,#5FD08A 11%,transparent);
-}
-.f__out[data-estado="erro"]{
-  border-color:color-mix(in oklab,#FF8A7A 55%,transparent);
-  background:color-mix(in oklab,#FF8A7A 10%,transparent);
-}
-/* :not(.btn) matters — this selector outranks .btn, so without it the amber
-   button inside the panel gets amber text on an amber ground. */
-.f__out a:not(.btn){ color:var(--corrente); font-weight:700; }
+.f__ts:not(:empty){ margin-bottom:1rem; }
+.f__hint{ margin-top:1rem; font-size:.9rem; color:var(--cinza); }
+.f__hint a{ color:var(--tinta); }
+.f__out{ display:none; margin-top:1.1rem; padding:1rem 1.1rem; border-radius:var(--r-s); font-size:.98rem; }
+.f__out.on{ display:block; }
+.f__out[data-estado="ok"]{ background:#E7F6EC; color:#14532D; }
+.f__out[data-estado="erro"]{ background:#FDECEA; color:#7F1D1D; }
 .f__out .acts{ margin-top:.8rem; }
 
-/* ══════════════════════════════════════════ FOOTER ════════════ */
-.pe{ background:var(--agua-abisso); border-top:1px solid var(--linha); padding-block:clamp(2.5rem,6vw,4rem) 2rem; font-size:.94rem; }
-.pe__grid{ display:grid; gap:2rem; }
-@media (min-width:44rem){ .pe__grid{ grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr)); } }
-.pe h2,.pe h3{
-  font-size:.7rem; font-family:"Martian",ui-monospace,monospace; font-weight:600;
-  letter-spacing:.15em; text-transform:uppercase; color:var(--granito);
-  margin-bottom:1rem; line-height:1.45;
-}
-.pe ul{ list-style:none; margin:0; padding:0; display:grid; gap:.6rem; }
-.pe a{ text-decoration:none; color:color-mix(in oklab,var(--espuma) 80%,transparent); }
-.pe a:hover{ color:var(--corrente); text-decoration:underline; text-underline-offset:3px; }
-.pe address{ font-style:normal; color:color-mix(in oklab,var(--espuma) 80%,transparent); }
-.pe__sig{ max-width:34ch; margin-top:1rem; color:color-mix(in oklab,var(--espuma) 70%,transparent); }
-.pe__sig b{ color:var(--espuma-forte); }
-.pe__base{
-  margin-top:clamp(2rem,5vw,3rem); padding-top:1.5rem; border-top:1px solid var(--linha);
-  display:flex; flex-wrap:wrap; gap:.75rem 1.5rem; align-items:center;
-  color:var(--granito); font-size:.85rem;
-}
+/* ── footer ── */
+.pe{ padding-block:clamp(3rem,6vw,4.5rem) 1.5rem; color:var(--cinza); overflow:clip; }
+.pe__g{ display:grid; gap:2rem; }
+@media (min-width:52rem){ .pe__g{ grid-template-columns:1.4fr 1fr 1fr; gap:3rem; } }
+.pe h2{ font-size:1.5rem; color:var(--tinta); }
+.pe h3{ font-family:var(--texto); font-size:.95rem; font-weight:700; letter-spacing:0; color:var(--tinta); margin-bottom:.7rem; }
+.pe__sig{ margin-top:.7rem; max-width:28rem; }
+.pe__sig b{ color:var(--tinta); }
+.pe ul{ display:grid; gap:.45rem; }
+.pe a{ text-decoration:none; color:var(--grafite); }
+.pe a:hover{ color:var(--laranja-texto); text-decoration:underline; text-underline-offset:3px; }
+.pe address{ font-style:normal; }
+.pe__base{ margin-top:2.25rem; display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; font-size:.9rem; }
+.pe__wm{ margin-top:2rem; width:100%; height:auto; color:var(--grafite); }
 
-/* ══════════════════════════════════════════ STAFF GAUGE RAIL ══ */
-/* Only from 1480px up — below that it sat on top of the content. */
-.gauge{ position:fixed; z-index:55; inset-inline-end:1.4rem; top:50%; transform:translateY(-50%); display:none; }
-@media (min-width:92.5rem){ .gauge{ display:block; } }
-.gauge ol{ list-style:none; margin:0; padding:0; display:grid; gap:.1rem; position:relative; }
-/* The rail runs behind the dots, and every dot is opaque, so the line shows
-   only in the gaps between them. Centred with a translate instead of the
-   hand-tuned offset that left it off-axis. */
-.gauge__track,.gauge__fill{
-  position:absolute; z-index:0;
-  inset-block:.63rem; inset-inline-start:.35rem;
-  width:2px; translate:-50% 0; border-radius:2px;
-}
-.gauge li{ position:relative; z-index:1; }
-.gauge__track{ background:var(--linha-forte); }
-.gauge__fill{
-  background:linear-gradient(180deg,var(--agua-clara),var(--corrente));
-  transform:scaleY(0); transform-origin:top center; will-change:transform;
-}
-.gauge a{
-  display:flex; align-items:center; gap:.7rem; padding:.28rem 0; text-decoration:none;
-  color:transparent;
-  font-family:"Martian",ui-monospace,monospace; font-size:.64rem; font-weight:600;
-  letter-spacing:.12em; text-transform:uppercase;
-  transition:color .25s var(--ease);
-}
-.gauge a::before{
-  content:""; flex:none; width:.7rem; height:.7rem; border-radius:50%;
-  border:1.5px solid var(--granito-fundo); background:var(--agua-funda);
-  transition:border-color .25s,background .25s,transform .25s var(--ease);
-}
-.gauge:hover a{ color:var(--granito); }
-.gauge a:hover{ color:var(--espuma); }
-.gauge a:hover::before{ border-color:var(--espuma); transform:scale(1.15); }
-.gauge a[aria-current="true"]{ color:var(--espuma-forte); }
-.gauge a[aria-current="true"]::before{ border-color:var(--corrente); background:var(--corrente); transform:scale(1.2); }
-
-/* Over the orange and whitewash bands the rail inverts — an orange dot on an
-   orange ground is not a marker. A fixed element cannot inherit from the
-   section it floats over, so the band is read in script and published here. */
-.gauge[data-banda="luz"] a::before{
-  background:var(--cal); border-color:color-mix(in oklab,#12181A 42%,transparent);
-}
-.gauge[data-banda="luz"] a[aria-current="true"]::before{
-  background:#12181A; border-color:#12181A;
-}
-.gauge[data-banda="luz"] .gauge__track{ background:color-mix(in oklab,#12181A 28%,transparent); }
-.gauge[data-banda="luz"] .gauge__fill{ background:#12181A; }
-.gauge[data-banda="luz"]:hover a{ color:color-mix(in oklab,#12181A 62%,transparent); }
-.gauge[data-banda="luz"] a:hover,
-.gauge[data-banda="luz"] a[aria-current="true"]{ color:#12181A; }
-
-/* Over the orange band the marker goes white. Orange on orange was the
-   original complaint and a deeper orange underneath does not fix it. */
-.gauge[data-banda="corrente"] a::before{
-  background:color-mix(in oklab,#5E2703 70%,transparent);
-  border-color:color-mix(in oklab,#FFFFFF 55%,transparent);
-}
-.gauge[data-banda="corrente"] a[aria-current="true"]::before{
-  background:#FFFFFF; border-color:#FFFFFF;
-}
-.gauge[data-banda="corrente"] .gauge__track{ background:color-mix(in oklab,#FFFFFF 34%,transparent); }
-.gauge[data-banda="corrente"] .gauge__fill{ background:#FFFFFF; }
-.gauge[data-banda="corrente"]:hover a{ color:color-mix(in oklab,#FFFFFF 72%,transparent); }
-.gauge[data-banda="corrente"] a:hover,
-.gauge[data-banda="corrente"] a[aria-current="true"]{ color:#FFFFFF; }
-
-/* sticky mobile call bar — the urgent scene's floor */
+/* ── call bar ── */
 .chamar{
-  position:fixed; z-index:58; inset-inline:.7rem; inset-block-end:.7rem;
-  display:grid; grid-template-columns:1fr auto; gap:.5rem;
-  transform:translateY(150%); transition:transform .45s var(--ease);
+  position:fixed; inset:auto 0 0; z-index:50; display:grid; grid-template-columns:1fr auto; gap:.5rem;
+  padding:.6rem var(--gutter) max(.6rem,env(safe-area-inset-bottom));
+  background:rgb(255 255 255 / .96); box-shadow:0 -12px 30px -20px rgb(28 30 33 / .5);
+  translate:0 110%; transition:translate .4s var(--ease);
 }
-.chamar.on{ transform:translateY(0); }
+.chamar.on{ translate:0 0; }
+.chamar .btn--2{ width:3.5rem; padding:0; }
 @media (min-width:64rem){ .chamar{ display:none; } }
-.chamar .btn{ box-shadow:0 8px 30px -8px rgba(0,0,0,.6); }
-.chamar .btn--ghost{ background:#061A20; border-color:var(--linha-forte); }
 
-/* ══════════════════════════════════════════ HERO WATER ════════ */
-/* Two sheets, one surface line, three sparks. Transform and opacity only,
-   promoted to their own layers, and paused the moment the hero leaves
-   the viewport so the rest of the page scrolls against an idle main thread. */
-.sheet,.surf{ will-change:transform; }
-.spark{ will-change:opacity; }
-.hero--idle .sheet,.hero--idle .surf,.hero--idle .spark{ animation-play-state:paused; }
-.sheet{ animation:sheet 3.6s linear infinite; }
-.sheet--b{ animation-duration:4.9s; animation-delay:-1.4s; }
-@keyframes sheet{
-  from{ transform:translate3d(0,-44px,0); opacity:0; }
-  18%{ opacity:.75; }
-  76%{ opacity:.42; }
-  to{ transform:translate3d(0,48px,0); opacity:0; }
+/* ── scroll-driven extras: off main thread, and simply absent where unsupported ── */
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:view()){
+    .palavras__l{ animation:desliza linear both; animation-timeline:view(); }
+    .palavras__l--b{ animation-name:desliza-b; }
+    @keyframes desliza{ from{ transform:translateX(0); } to{ transform:translateX(-28%); } }
+    @keyframes desliza-b{ from{ transform:translateX(-14%); } to{ transform:translateX(12%); } }
+    .rd__fundo{ animation:sobe linear both; animation-timeline:view(); }
+    @keyframes sobe{ from{ transform:translateY(22%) rotate(-5deg); } to{ transform:translateY(-14%) rotate(5deg); } }
+    .manif .w{ animation:acende linear both; animation-timeline:--manif; animation-range:cover calc(14% + var(--i) * 1%) cover calc(18% + var(--i) * 1%); }
+    @keyframes acende{ from{ opacity:.18; } to{ opacity:1; } }
+  }
 }
-.surf{ animation:surf 11s ease-in-out infinite alternate; }
-@keyframes surf{
-  from{ transform:translate3d(-16px,0,0); }
-  to{ transform:translate3d(16px,0,0); }
-}
-.spark{ animation:spark 4.4s var(--ease-io) infinite; }
-.spark--b{ animation-delay:-1.8s; }
-.spark--c{ animation-delay:-3.1s; }
-@keyframes spark{
-  0%,62%,100%{ opacity:.2; }
-  70%{ opacity:1; }
-  78%{ opacity:.35; }
-  86%{ opacity:.9; }
-}
-
-/* ══════════════════════════════════════════ ENTRANCES ═════════ */
-/* The .js class is set in <head> only when IntersectionObserver exists and
-   the visitor has not asked for reduced motion, so the page is never left
-   hidden by a script that failed and there is no first-paint flash.
-   Transform and opacity only: an entrance must never repaint or reflow. */
-.js .rv{
-  opacity:0; transform:translate3d(0,22px,0);
-  transition:opacity .75s var(--ease) calc(var(--i,0) * .07s),
-             transform .85s var(--ease) calc(var(--i,0) * .07s);
-}
-.js .rv.on{ opacity:1; transform:none; }
-/* Drawn diagrams. pathLength="1" normalises every path, so the dash length is
-   authored in the markup and nothing is measured at runtime.
-
-   A keyframe animation, not a transition: transitioning stroke-dashoffset here
-   froze at its start value and left the pipes and cables permanently invisible
-   while their junction dots showed — a diagram of nothing.
-
-   The resting state is drawn, not blank, so if the animation never runs the
-   lines are simply there. A flourish that fails should cost the flourish, not
-   the content. Hiding before the reveal is the container's .rv, not this. */
-.js .draw [pathLength]{ stroke-dasharray:1; }
-.js .draw.on [pathLength]{
-  animation:rv-traco 1.4s var(--ease) both;
-  animation-delay:calc(var(--i,0) * .1s);
-}
-@keyframes rv-traco{ from{ stroke-dashoffset:1; } to{ stroke-dashoffset:0; } }
-
-/* A view timeline was tried here and rejected: with this page's scroll
-   container Chrome resolved the subject's progress against the wrong
-   scrollport, so an element scrolled well above the viewport still reported a
-   negative range position and stayed hidden. The observer below is driven by
-   real crossings and paired with a sweep, which is verifiable. */
-
 @media (prefers-reduced-motion:reduce){
   html{ scroll-behavior:auto; }
-  *,*::before,*::after{
-    animation-duration:.001ms !important; animation-iteration-count:1 !important;
-    transition-duration:.001ms !important;
-  }
-  .chamar{ transform:none; }
-  .gauge__fill,.top__flow{ display:none; }
-}
-@media print{
-  .gauge,.chamar,.top,.hero__art{ display:none !important; }
-  body{ background:#fff; color:#000; }
+  *,*::before,*::after{ animation:none !important; transition-duration:.001ms !important; }
+  .palavras__l--b{ margin-left:0; }
 }
 </style>
+
 <script>
-  /* Arm entrances before first paint. Two conditions, no DOM work. */
-  if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches)
-    document.documentElement.className = "js";
+/* Set before first paint. The entrance class only goes on when the script can
+   also take it off, so nothing can stay hidden by a script that failed. */
+(function(){
+  var r=document.documentElement; r.classList.add("js");
+  if("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) r.classList.add("rvj");
+})();
 </script>
 </head>
 <body>
 <!--
-  IMPECCABLE DIRECTION CONTRACT · seed 033ad184
-  THESIS: In the Minho, water makes the electricity — so one firm owning both
-  trades is a physical fact, not a bundle. Refuses the trades template: blue
-  gradient, wrench photo, three identical icon cards, checklist.
-  OWN-WORLD: A hydroelectric reservoir. Ground descends abyss→water→spillway;
-  roles are agua, corrente (sodium, never neon), espuma, granito, cal. Archivo
-  signage grotesque, Martian Mono only on real measurements. Drawn line
-  systems: pipe runs and single-line electrical schematics.
-  STORY: This firm is from here, covers water and current, and is one tap away.
-  FIRST VIEWPORT: Dam wall spanning the base, water sheeting over the spillway,
-  headline at lower-left naming both trades and Vila Verde, amber call button
-  directly beneath it, staff-gauge rail at the right edge.
-  FORM: Hydroelectric Minho — candidate 4 of 7, assigned by seed 033ad184.
-  FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+  DIRECTION CONTRACT · seed 4feedf5a
+  THESIS: the site answers "what do I do now?" before it says anything about the
+  firm. Refuses the split hero with a dark contact card, and the dam metaphor.
+  HERO (2026-11-04, chosen by the user from three working options): the sentence.
+  The problem rolls in giant type, the number stays under it, the five problems
+  sit in an orange row at the bottom of the first screen.
+  OWN-WORLD: brand-orange stage on white, the logo's real wordmark, a cut-away
+  house, water blue only for water. Bricolage + Figtree. Pills and 28px panels.
+  STORY: pick the problem, the house shows where it is, the card says what to do
+  and offers the call. The planning visitor reads two network panels, the stacked
+  steps, the area and the questions, then sends the form.
+  FIRST VIEWPORT: sentence and call actions on top; below, the full-width orange
+  stage: tabs, reacting house, answer card with Ligar.
+  FORM: the triage stage, chosen with the user after two rejected layouts.
+  FINISH: unreviewed and undocumented is unfinished; this build ends with the
+  finish review, the verdict, and DESIGN.md
 -->
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="lgO" x1="0" y1="0" x2=".62" y2="1"><stop offset="0" stop-color="#F8AB60"/><stop offset=".43" stop-color="#F39038"/><stop offset=".47" stop-color="#EE7E13"/><stop offset="1" stop-color="#E46E08"/></linearGradient>
+    <linearGradient id="lgA" x1="0" y1="0" x2=".62" y2="1"><stop offset="0" stop-color="#868A8E"/><stop offset=".43" stop-color="#4B4E51"/><stop offset=".47" stop-color="#2B2D30"/><stop offset="1" stop-color="#17181A"/></linearGradient>
+    <linearGradient id="lgB" x1="0" y1="0" x2=".62" y2="1"><stop offset="0" stop-color="#9EA4A8"/><stop offset=".43" stop-color="#5D6165"/><stop offset=".47" stop-color="#36383B"/><stop offset="1" stop-color="#1F2123"/></linearGradient>
+    <linearGradient id="lgC" x1="0" y1="0" x2=".62" y2="1"><stop offset="0" stop-color="#D0D4D7"/><stop offset=".43" stop-color="#8E9297"/><stop offset=".47" stop-color="#4F5256"/><stop offset="1" stop-color="#2E3134"/></linearGradient>
+  </defs>
+  <symbol id="marca" viewBox="14 66.3 499.6 452.9">
+    <path fill="url(#lgC)" d="M267.8 83.8Q264.5 72.3 276 75.6L477.9 133.5Q489.4 136.8 492.7 148.3L504.3 188.7Q507.6 200.2 496.1 196.9L294.2 139Q282.7 135.7 279.3 124.2Z"/>
+    <path fill="url(#lgB)" d="M190.3 133Q186.4 119.6 199.9 123.4L407.5 183Q420.9 186.8 424.8 200.3L439.1 250.3Q443 263.7 429.5 259.9L221.9 200.3Q208.5 196.5 204.6 183Z"/>
+    <path fill="url(#lgA)" d="M109.5 193.6Q105.1 178.3 120.5 182.7L331.9 243.3Q347.3 247.7 351.7 263.1L369.4 324.6Q373.8 340 358.4 335.6L146.9 274.9Q131.5 270.5 127.1 255.2Z"/>
+    <path fill="url(#lgO)" d="M27.2 275Q20 250 45 257.2L192.1 299.3Q217.1 306.5 224.2 331.5L269.2 488.2Q276.3 513.2 251.3 506L104.3 463.8Q79.3 456.7 72.1 431.7Z"/>
+  </symbol>
+  <symbol id="wm" viewBox="30 24 1450 250">
+    <path fill="#EE7E13" fill-rule="evenodd" d="M38 38H68V85H117V105H68V233Q68 247 82 247H107V267H72Q38 267 38 233ZM258 267H169Q135 267 135 233V119Q135 85 169 85H238Q272 85 272 119V164Q272 190 246 190H190V170H232Q242 170 242 160V119Q242 105 228 105H179Q165 105 165 119V233Q165 247 179 247H258ZM405 85H329Q295 85 295 119V233Q295 267 329 267H405V247H339Q325 247 325 233V119Q325 105 339 105H405ZM432 267V85H538Q572 85 572 119V267H542V119Q542 105 528 105H462V267ZM634 85H711Q745 85 745 119V233Q745 267 711 267H634Q600 267 600 233V119Q600 85 634 85ZM644 105Q630 105 630 119V233Q630 247 644 247H701Q715 247 715 233V119Q715 105 701 105Z"/>
+    <path fill="currentColor" fill-rule="evenodd" d="M772 267V85H963Q997 85 997 119V267H967V119Q967 105 953 105H898V267H868V105H802V267ZM1028 85H1060V267H1028ZM1028 30H1060V60H1028ZM1205 85H1126Q1092 85 1092 119V233Q1092 267 1126 267H1205V247H1136Q1122 247 1122 233V119Q1122 105 1136 105H1205ZM1352 267H1264Q1230 267 1230 233V119Q1230 85 1264 85H1333Q1367 85 1367 119V164Q1367 190 1341 190H1285V170H1327Q1337 170 1337 160V119Q1337 105 1323 105H1274Q1260 105 1260 119V233Q1260 247 1274 247H1352ZM1392 267V119Q1392 85 1426 85H1472V105H1436Q1422 105 1422 119V267Z"/>
+  </symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6.2 3h3l1.5 4.2-2.1 1.5a12 12 0 0 0 6.7 6.7l1.5-2.1L21 14.8v3a2.2 2.2 0 0 1-2.4 2.2A17.6 17.6 0 0 1 4 9.4 2.2 2.2 0 0 1 6.2 3Z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 0-7.7-4.4L3 21l4.6-1.2A9 9 0 0 0 12 21Z"/><path d="M8.9 8.4c0 3 2.4 5.4 5.4 5.4.5 0 .9-.4.9-.9v-.6l-1.8-.6-.7.8a4.2 4.2 0 0 1-2-2l.8-.7-.6-1.8h-.6c-.5 0-.9.4-.9.9Z"/></g></symbol>
+  <symbol id="i-seta" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+</svg>
+
 <a class="skip" href="#conteudo">Saltar para o conteúdo</a>
 
 <header class="top">
   <div class="wrap top__in">
-    <a class="brand" href="#albufeira" aria-label="Tecnomicer — início">
-      <span class="brand__name"><b>tecno</b>micer</span>
+    <a class="brand" href="#inicio" aria-label="Tecnomicer, início">
+      <svg class="brand__mark" aria-hidden="true" focusable="false" viewBox="0 0 499.6 452.9"><use href="#marca"/></svg>
+      <svg class="brand__wm" aria-hidden="true" focusable="false" viewBox="0 0 1450 250"><use href="#wm"/></svg>
     </a>
     <nav class="top__nav" aria-label="Secções">
-      <a href="#servicos">Serviços</a>
       <a href="#emergencia">Urgências</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#processo">Como funciona</a>
       <a href="#zona">Zona</a>
       <a href="#perguntas">Perguntas</a>
       <a href="#contacto">Contacto</a>
     </nav>
     <a class="btn btn--sm btn--top" href="tel:+351900000000">
-      <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 3h3l1.5 4.2-2.1 1.5a12 12 0 0 0 6.7 6.7l1.5-2.1L21 14.8v3a2.2 2.2 0 0 1-2.4 2.2A17.6 17.6 0 0 1 4 9.4 2.2 2.2 0 0 1 6.2 3Z"/></svg>
-      <span class="btn__t">Ligar</span>
+      <svg aria-hidden="true" focusable="false"><use href="#i-tel"/></svg>
+      900 000 000
     </a>
     <button class="burger" type="button" id="abrir" aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
-      <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <path d="M4 7h16M4 12h16M4 17h16"/>
-      </svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg>
     </button>
   </div>
-  <div class="top__flow" id="topflow" aria-hidden="true"></div>
 </header>
 
 <dialog class="menu" id="menu" aria-label="Menu de navegação">
   <div class="menu__in">
-    <!-- same .wrap and the same row height as the page header, so the wordmark
-         lands on exactly the pixel it already occupied -->
-    <div class="wrap menu__top">
-      <span class="brand__name"><b>tecno</b>micer</span>
+    <div class="menu__top">
       <button class="menu__x" type="button" id="fechar" aria-label="Fechar menu">
-        <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M6 6l12 12M18 6L6 18"/>
-        </svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
     </div>
-    <div class="wrap menu__corpo">
     <nav class="menu__nav" aria-label="Secções">
-      <a href="#duas-correntes">Água e luz</a>
-      <a href="#servicos">Serviços</a>
       <a href="#emergencia">Urgências</a>
-      <a href="#zona">Zona de trabalho</a>
+      <a href="#servicos">Serviços</a>
       <a href="#processo">Como funciona</a>
+      <a href="#porque">Quem somos</a>
+      <a href="#zona">Zona de trabalho</a>
       <a href="#perguntas">Perguntas</a>
       <a href="#contacto">Contacto</a>
     </nav>
     <div class="menu__acts">
-      <a class="btn" href="tel:+351900000000">
-        <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 3h3l1.5 4.2-2.1 1.5a12 12 0 0 0 6.7 6.7l1.5-2.1L21 14.8v3a2.2 2.2 0 0 1-2.4 2.2A17.6 17.6 0 0 1 4 9.4 2.2 2.2 0 0 1 6.2 3Z"/></svg>
-        Ligar agora
-      </a>
-      <a class="btn btn--ghost" href="https://wa.me/351900000000" rel="noopener">
-        <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 0-7.7-4.4L3 21l4.6-1.2A9 9 0 0 0 12 21Z"/><path d="M8.9 8.4c0 3 2.4 5.4 5.4 5.4.5 0 .9-.4.9-.9v-.6l-1.8-.6-.7.8a4.2 4.2 0 0 1-2-2l.8-.7-.6-1.8h-.6c-.5 0-.9.4-.9.9Z"/></svg>
-        WhatsApp
-      </a>
-      <p class="rot menu__pe">Cervães · Vila Verde e concelhos vizinhos</p>
-    </div>
+      <a class="btn" href="tel:+351900000000"><svg aria-hidden="true" focusable="false"><use href="#i-tel"/></svg>Ligar agora</a>
+      <a class="btn btn--2" href="https://wa.me/351900000000" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-wa"/></svg>WhatsApp</a>
+      <p class="menu__pe">Cervães, Vila Verde e concelhos vizinhos</p>
     </div>
   </div>
 </dialog>
 
-<nav class="gauge" aria-label="Progresso e navegação da página">
-  <ol>
-    <span class="gauge__track" aria-hidden="true"></span>
-    <span class="gauge__fill" id="gaugefill" aria-hidden="true"></span>
-    <li><a href="#albufeira">Início</a></li>
-    <li><a href="#duas-correntes">Água e luz</a></li>
-    <li><a href="#servicos">Serviços</a></li>
-    <li><a href="#emergencia">Urgências</a></li>
-    <li><a href="#zona">Zona</a></li>
-    <li><a href="#processo">Como</a></li>
-    <li><a href="#perguntas">Perguntas</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-  </ol>
-</nav>
-
 <main id="conteudo">
 
-<!-- ══════════════════════════════ 1 · A ALBUFEIRA ═════════════ -->
-<section class="hero" id="albufeira" aria-labelledby="t-hero">
-  <svg class="hero__art" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Ilustração de uma barragem no Minho: a água da albufeira cai pelo descarregador e uma linha de postes de eletricidade atravessa os montes.">
-    <defs>
-      <linearGradient id="gAgua" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#6FCBD9" stop-opacity=".5"/>
-        <stop offset="1" stop-color="#6FCBD9" stop-opacity="0"/>
-      </linearGradient>
-      <linearGradient id="gSpill" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#E9F5F3" stop-opacity=".8"/>
-        <stop offset=".7" stop-color="#6FCBD9" stop-opacity=".3"/>
-        <stop offset="1" stop-color="#6FCBD9" stop-opacity="0"/>
-      </linearGradient>
-      <!-- The spillway is bounded by a mask, not a clip: a clip leaves hard
-           vertical edges that read as a rendering bug where they cross the
-           copy. This fades the sheet into the dam wall at both ends. -->
-      <linearGradient id="gFade" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#000"/>
-        <stop offset=".36" stop-color="#fff"/>
-        <stop offset=".64" stop-color="#fff"/>
-        <stop offset="1" stop-color="#000"/>
-      </linearGradient>
-      <mask id="mSpill"><rect x="430" y="560" width="580" height="250" fill="url(#gFade)"/></mask>
-      <!-- The crest is a band of concrete, but a flat fill gives it two hard
-           horizontal edges that cut straight through the copy. Gradient ends
-           let it sit in the water instead of ruling a line across the page. -->
-      <linearGradient id="gCrest" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#5A6C70" stop-opacity="0"/>
-        <stop offset=".45" stop-color="#5A6C70" stop-opacity=".5"/>
-        <stop offset="1" stop-color="#5A6C70" stop-opacity=".1"/>
-      </linearGradient>
-      <linearGradient id="gSurf" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#6FCBD9" stop-opacity="0"/>
-        <stop offset=".55" stop-color="#6FCBD9" stop-opacity=".34"/>
-        <stop offset="1" stop-color="#6FCBD9" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-
-    <path d="M0 380 L180 300 L340 356 L520 268 L700 330 L880 258 L1080 330 L1260 282 L1440 350 L1440 470 L0 470Z" fill="#041216" opacity=".55"/>
-    <path d="M0 452 L200 396 L400 444 L640 382 L900 440 L1140 392 L1440 448 L1440 560 L0 560Z" fill="#041216" opacity=".8"/>
-
-    <g stroke="#9DACAF" stroke-width="1.5" fill="none" opacity=".62">
-      <path d="M96 372 L96 306 M74 322 h44 M80 340 h32"/>
-      <path d="M336 348 L336 282 M314 298 h44 M320 316 h32"/>
-      <path d="M700 322 L700 256 M678 272 h44 M684 290 h32"/>
-      <path d="M1078 322 L1078 256 M1056 272 h44 M1062 290 h32"/>
-      <path d="M1400 344 L1400 278 M1378 294 h44 M1384 312 h32"/>
-      <path d="M96 316 Q216 344 336 292 Q518 336 700 266 Q890 320 1078 266 Q1240 316 1400 288" opacity=".75"/>
-      <path d="M96 334 Q216 362 336 310 Q518 354 700 284 Q890 338 1078 284 Q1240 334 1400 306" opacity=".55"/>
-    </g>
-    <g fill="#FFB627">
-      <circle class="spark" cx="336" cy="292" r="3.2"/>
-      <circle class="spark spark--b" cx="700" cy="266" r="3.2"/>
-      <circle class="spark spark--c" cx="1078" cy="266" r="3.2"/>
-    </g>
-
-    <rect x="0" y="462" width="1440" height="130" fill="url(#gSurf)"/>
-    <g class="surf" stroke="#6FCBD9" fill="none" stroke-linecap="round" opacity=".45">
-      <path d="M-60 498 q90 -9 180 0 t180 0 t180 0 t180 0 t180 0 t180 0 t180 0 t180 0" stroke-width="1.5"/>
-      <path d="M-60 528 q120 10 240 0 t240 0 t240 0 t240 0 t240 0 t240 0" stroke-width="1.25" opacity=".7"/>
-      <path d="M-60 556 q150 -8 300 0 t300 0 t300 0 t300 0 t300 0" stroke-width="1" opacity=".5"/>
-    </g>
-
-    <rect x="0" y="584" width="1440" height="32" fill="url(#gCrest)"/>
-    <path d="M0 612 L1440 612 L1440 900 L0 900Z" fill="#041216" opacity=".72"/>
-    <g stroke="#9DACAF" stroke-width="1" opacity=".22">
-      <path d="M0 600 H1440"/>
-      <path d="M40 588 v24 M140 588 v24 M240 588 v24 M340 588 v24 M440 588 v24 M1000 588 v24 M1100 588 v24 M1200 588 v24 M1300 588 v24 M1400 588 v24"/>
-    </g>
-
-    <g class="spill" mask="url(#mSpill)">
-      <rect x="470" y="580" width="500" height="230" fill="url(#gSpill)" opacity=".34"/>
-      <g stroke="#E9F5F3" fill="none" stroke-width="2" stroke-linecap="round">
-        <g class="sheet" opacity=".7">
-          <path d="M508 566 q10 60 -4 120 M574 566 q-12 66 4 126 M642 566 q9 58 -3 118 M712 566 q-11 64 3 124 M784 566 q10 60 -4 120 M856 566 q-12 66 4 126 M926 566 q9 58 -3 118"/>
-        </g>
-        <g class="sheet sheet--b" opacity=".45">
-          <path d="M540 566 q-9 62 5 122 M608 566 q11 58 -3 118 M676 566 q-10 64 4 124 M748 566 q9 60 -3 120 M820 566 q-11 62 5 122 M892 566 q10 58 -4 118"/>
-        </g>
-      </g>
-    </g>
-
-    <g stroke="#E9F5F3" fill="none" stroke-linecap="round" opacity=".3">
-      <path d="M300 800 q60 -12 120 0 t120 0 t120 0 t120 0 t120 0 t120 0" stroke-width="2"/>
-      <path d="M340 828 q70 12 140 0 t140 0 t140 0 t140 0" stroke-width="1.5"/>
-      <path d="M380 856 q80 -10 160 0 t160 0 t160 0" stroke-width="1.25" opacity=".7"/>
-    </g>
-    <g stroke="#9DACAF" fill="none" stroke-width="1" opacity=".12">
-      <path d="M0 660 q360 26 720 0 t720 0"/>
-      <path d="M0 712 q360 30 720 0 t720 0"/>
-      <path d="M0 766 q360 26 720 0 t720 0"/>
-      <path d="M0 822 q360 30 720 0 t720 0"/>
-    </g>
-  </svg>
-
-  <div class="wrap hero__in">
-    <h1 id="t-hero">
-      <span class="l">Pichelaria</span>
-      <span class="l l--2">e eletricidade</span>
-      <span class="l l--3">em Cervães, Vila Verde e concelhos vizinhos.</span>
-    </h1>
-    <p class="hero__lead">
-      No Minho é a água que faz a luz. Numa casa, as duas andam sempre juntas —
-      e a Tecnomicer trata das duas. <b>Um número, um técnico, o trabalho feito.</b>
-    </p>
-    <div class="acts hero__acts">
-      <a class="btn" href="tel:+351900000000">
-        <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 3h3l1.5 4.2-2.1 1.5a12 12 0 0 0 6.7 6.7l1.5-2.1L21 14.8v3a2.2 2.2 0 0 1-2.4 2.2A17.6 17.6 0 0 1 4 9.4 2.2 2.2 0 0 1 6.2 3Z"/></svg>
-        Ligar agora
-      </a>
-      <a class="btn btn--ghost" href="https://wa.me/351900000000" rel="noopener">
-        <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 0-7.7-4.4L3 21l4.6-1.2A9 9 0 0 0 12 21Z"/><path d="M8.9 8.4c0 3 2.4 5.4 5.4 5.4.5 0 .9-.4.9-.9v-.6l-1.8-.6-.7.8a4.2 4.2 0 0 1-2-2l.8-.7-.6-1.8h-.6c-.5 0-.9.4-.9.9Z"/></svg>
-        WhatsApp
-      </a>
-      <a class="btn btn--ghost" href="#contacto">Pedir orçamento</a>
+<!-- ══════════════════════════════ 1 · INÍCIO + TRIAGEM ════════ -->
+<section class="hero auto" id="inicio" aria-labelledby="t-hero">
+  <div class="hero__cor" id="emergencia">
+    <div class="wrap">
+      <h1 id="t-hero">Pichelaria e eletricidade em Cervães, Vila Verde e concelhos vizinhos.</h1>
+      <p class="gr" aria-hidden="true"><span class="rolo" id="rolo"><span>Fuga de água?</span></span><span class="lig">Ligue 900 000 000.</span></p>
+      <div class="hero__baixo">
+        <div class="paineis">
+          <div class="painel on" role="tabpanel" id="p-fuga" aria-labelledby="tab-fuga" data-wa="https://wa.me/351900000000?text=Bom%20dia.%20Tenho%20uma%20fuga%20de%20%C3%A1gua%20em%20"><h2 class="painel__t">Fuga de água ou inundação</h2><p class="ag"><b>Feche a torneira de segurança</b>, normalmente junto ao contador. Se a água chegou a tomadas ou ao quadro, desligue também o disjuntor geral.</p></div>
+          <div class="painel" role="tabpanel" id="p-luz" aria-labelledby="tab-luz" data-wa="https://wa.me/351900000000?text=Bom%20dia.%20Fiquei%20sem%20luz%20em%20"><h2 class="painel__t">Ficou sem luz ou o quadro dispara</h2><p class="ag"><b>Desligue o disjuntor geral</b> antes de mexer em mais nada. Cheiro a queimado ou tomada quente? Não volte a ligar.</p></div>
+          <div class="painel" role="tabpanel" id="p-entupido" aria-labelledby="tab-entupido" data-wa="https://wa.me/351900000000?text=Bom%20dia.%20Tenho%20um%20entupimento%20em%20"><h2 class="painel__t">Esgoto ou sanita entupida</h2><p class="ag"><b>Deixe de usar esse ponto de água</b>, e as descargas, até vermos o que é. Uma fotografia ajuda-nos a levar o material certo.</p></div>
+          <div class="painel" role="tabpanel" id="p-quente" aria-labelledby="tab-quente" data-wa="https://wa.me/351900000000?text=Bom%20dia.%20Estou%20sem%20%C3%A1gua%20quente%20em%20"><h2 class="painel__t">Sem água quente</h2><p class="ag"><b>Cheiro a gás?</b> Feche a válvula, abra as janelas, não mexa em interruptores e ligue 112. Sem cheiro: anote a marca do aparelho e o que aparece no visor.</p></div>
+          <div class="painel" role="tabpanel" id="p-obra" aria-labelledby="tab-obra" data-wa="https://wa.me/351900000000?text=Bom%20dia.%20Queria%20um%20or%C3%A7amento%20para%20uma%20obra%20em%20"><h2 class="painel__t">Obra ou remodelação</h2><p class="ag"><b>Diga-nos a divisão e o que quer mudar.</b> Fotografias e medidas aproximadas poupam metade da conversa.</p></div>
+        </div>
+        <div class="hero__acts">
+          <div class="acts" id="hero-acts">
+            <a class="btn" href="tel:+351900000000"><svg aria-hidden="true" focusable="false"><use href="#i-tel"/></svg>Ligar agora</a>
+            <a class="btn btn--2" id="hero-wa" href="https://wa.me/351900000000?text=Bom%20dia.%20Tenho%20uma%20fuga%20de%20%C3%A1gua%20em%20" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-wa"/></svg>WhatsApp</a>
+          </div>
+          <p class="hero__pe">
+            <span>900 000 000 <span class="tbc">número a confirmar</span></span>
+            <span>Fora de horas <span class="tbc">a confirmar</span></span>
+            <button class="parar" type="button" id="parar" aria-pressed="false">
+              <svg class="so-pausa" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h3v14H8zM13 5h3v14h-3z"/></svg>
+              <svg class="so-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg>
+              <span id="parar-t">Pausar</span>
+            </button>
+          </p>
+        </div>
+      </div>
     </div>
-    <p class="hero__note rot">
-      <span>Água · Corrente</span>
-      <span aria-hidden="true">—</span>
-      <span>Vila Verde e concelhos vizinhos</span>
-      <span aria-hidden="true">—</span>
-      <span>Horário <span class="tbc">a confirmar</span></span>
-    </p>
+  </div>
+  <div class="fila" role="tablist" aria-label="O que se passa?">
+      <button class="tab" type="button" role="tab" id="tab-fuga" aria-controls="p-fuga" aria-selected="true" data-frase="Fuga de água?"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11Z"/></svg>Fuga de água<span class="tab__b" aria-hidden="true"></span></button>
+      <button class="tab" type="button" role="tab" id="tab-luz" aria-controls="p-luz" aria-selected="false" tabindex="-1" data-frase="Ficou sem luz?"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 2 5 13h6l-1 9 8-11h-6z"/></svg>Sem luz<span class="tab__b" aria-hidden="true"></span></button>
+      <button class="tab" type="button" role="tab" id="tab-entupido" aria-controls="p-entupido" aria-selected="false" tabindex="-1" data-frase="Entupimento?"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M7 6v5a5 5 0 0 0 10 0V6M12 16v5"/></svg>Entupimento<span class="tab__b" aria-hidden="true"></span></button>
+      <button class="tab" type="button" role="tab" id="tab-quente" aria-controls="p-quente" aria-selected="false" tabindex="-1" data-frase="Sem água quente?"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="7" y="3" width="10" height="14" rx="2"/><path d="M10 17v3M14 17v3M10 8c0 2 4 2 4 4"/></svg>Sem água quente<span class="tab__b" aria-hidden="true"></span></button>
+      <button class="tab" type="button" role="tab" id="tab-obra" aria-controls="p-obra" aria-selected="false" tabindex="-1" data-frase="Obra em casa?"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 11.5 12 4l9 7.5M5.5 10v10h13V10M10 20v-5h4v5"/></svg>Obra ou remodelação<span class="tab__b" aria-hidden="true"></span></button>
   </div>
 </section>
 
-<!-- ══════════════════════════════ 2 · AS DUAS CORRENTES ═══════ -->
-<section class="band" id="duas-correntes" aria-labelledby="t-canais">
-  <div class="wrap">
-    <div class="head head--wide rv">
-      <span class="rot">A mesma casa, dois sistemas</span>
-      <h2 id="t-canais">Uma casa tem duas correntes a atravessá-la.</h2>
-      <p>
-        Uma leva água, a outra leva eletricidade. Correm nas mesmas paredes, param
-        nos mesmos sítios e, quando o problema é numa, muitas vezes começou na outra.
-        Tratamos das duas — por isso não precisa de coordenar dois ofícios.
-      </p>
-    </div>
+<!-- the trades in big type, moved only by the visitor's own scrolling -->
+<div class="palavras" aria-hidden="true">
+  <div class="palavras__l"><i>Fugas</i><i>Desentupimentos</i><i>Esquentadores</i><i>Bombas</i><i>Casas de banho</i></div>
+  <div class="palavras__l palavras__l--b"><i>Quadros elétricos</i><i>Avarias</i><i>Tomadas</i><i>Iluminação</i><i>Videoporteiros</i></div>
+</div>
 
-    <div class="canais">
-      <article class="canal canal--agua rv">
-        <span class="rot canal__rot">Canal 01 · Água</span>
+<!-- ══════════════════════════════ 2 · SERVIÇOS ════════════════ -->
+<section class="band" id="servicos" aria-labelledby="t-svc">
+  <div class="wrap">
+    <div class="head rv">
+      <h2 id="t-svc">As duas redes da sua casa, na mesma equipa.</h2>
+      <p>Numa casa, a água e a eletricidade cruzam-se a toda a hora. Assim não precisa de coordenar dois ofícios nem de repetir o diagnóstico.</p>
+    </div>
+    <div class="redes">
+      <article class="rd rd--agua rv">
+        <svg class="rd__fundo" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2s11 12.5 11 19a11 11 0 0 1-22 0C5 14.5 16 2 16 2Z"/></svg>
         <h3>Pichelaria</h3>
-        <p>Redes de água e esgotos, fugas, entupimentos, água quente, casas de banho e cozinhas.</p>
-        <div class="canal__art">
-          <svg viewBox="0 0 400 160" role="img" aria-label="Diagrama de uma rede de água: entrada, válvula de corte, coluna, ponto de pressão e torneira.">
-            <g class="ln">
-              <path d="M12 118 H70"/><path d="M70 118 V52 H150"/><path d="M182 52 H262"/>
-              <path d="M262 52 V96 H320"/><path d="M352 96 H388"/>
-              <path d="M150 40 L182 64 L182 40 L150 64 Z"/><path d="M166 40 V28 M156 28 h20"/>
-              <circle cx="336" cy="96" r="16" fill="none"/><path d="M336 80 V70 M326 70 h20"/>
-            </g>
-            <g class="ln ln--soft"><path d="M118 52 V16 M118 52 V118 H196"/></g>
-            <g class="dot"><circle cx="70" cy="118" r="3.5"/><circle cx="70" cy="52" r="3.5"/><circle cx="262" cy="52" r="3.5"/><circle cx="262" cy="96" r="3.5"/><circle cx="118" cy="52" r="3"/></g>
-            <path class="glass" d="M388 100 q8 12 8 18 a8 8 0 0 1-16 0 q0-6 8-18Z"/>
-          </svg>
-        </div>
+        <p>Da fuga urgente à casa de banho nova.</p>
+        <ul class="svcs">
+          <li><a class="svc" href="#contacto" data-tipo="Água (pichelaria)" data-s="Deteção e reparação de fugas"><span class="svc__i" aria-hidden="true"><svg viewBox="0 0 32 32"><g class="g"><path d="M6 22h10v-8h6"/><path d="M22 11v6"/><circle cx="22" cy="9" r="3"/></g><path class="gf" d="M9 25c0-2 2.5-5 2.5-5S14 23 14 25a2.5 2.5 0 0 1-5 0Z"/></svg></span><h4>Deteção e reparação de fugas</h4><p>Localização do ponto de fuga com o mínimo de quebra e reparação da tubagem.</p><svg class="svc__s" aria-hidden="true"><use href="#i-seta"/></svg></a></li>
+          <li><a class="svc" href="#contacto" data-tipo="Água (pichelaria)" data-s="Desentupimento"><span class="svc__i" aria-hidden="true"><svg viewBox="0 0 32 32"><g class="g"><path d="M8 8h16"/><path d="M11 8v6a5 5 0 0 0 10 0V8"/><path d="M16 19v5"/><path d="M12 26h8"/></g></svg></span><h4>Desentupimentos</h4><p>Lavatórios, sanitas, ralos, tubos de queda e caixas de esgoto.</p><svg class="svc__s" aria-hidden="true"><use href="#i-seta"/></svg></a></li>
+          <li><a class="svc" href="#contacto" data-tipo="Água (pichelaria)" data-s="Redes de água e esgotos"><span class="svc__i" aria-hidden="true"><svg viewBox="0 0 32 32"><g class="g"><path d="M5 12h9v8h9"/><path d="M14 12v8"/><path d="M23 8v16"/><path d="M27 10v12"/></g></svg></span><h4>Redes de água e esgotos</h4><p>Instalação e substituição de tubagem, colunas e ramais.</p><svg class="svc__s" aria-hidden="true"><use href="#i-seta"/></svg></a></li>
+          <li><a class="svc" href="#contacto" data-tipo="Água (pichelaria)" data-s="Esquentador ou termoacumulador"><span class="svc__i" aria-hidden="true"><svg viewBox="0 0 32 32"><g class="g"><rect x="9" y="5" width="14" height="16" rx="2"/><path d="M13 21v4M19 21v4"/><path d="M13 10c0 2 6 2 6 4"/></g><circle class="gf" cx="16" cy="26" r="2"/></svg></span><h4>Esquentadores e termoacumuladores</h4><p>Instalação, substituição e reparação de água quente sanitária.</p><svg class="svc__s" aria-hidden="true"><use href="#i-seta"/></svg></a></li>
+          <li><a class="svc" href="#contacto" data-tipo="Os dois" data-s="Casa de banho ou cozinha"><span class="svc__i" aria-hidden="true"><svg viewBox="0 0 32 32"><g class="g"><path d="M6 26V13a3 3 0 0 1 3-3h6"/><path d="M15 6h4v8h-4z"/><path d="M6 20h9"/><path d="M22 26V10h5v16"/></g></svg></span><h4>Casas de banho e cozinhas</h4><p>Remodelação completa: louças, torneiras, bases de duche e ligações.</p><svg class="svc__s" aria-hidden="true"><use href="#i-seta"/></svg></a></li>
+          <li><a class="svc" href="#contacto" data-tipo="Água (pichelaria)" data-s="Bomba ou falta de pressão"><span class="svc__i" aria-hidden="true"><svg viewBox="0 0 32 32"><g class="g"><circle cx="16" cy="16" r="8"/><path d="M16 8V4M16 28v-4M8 16H4M28 16h-4"/><path d="M16 16l4-4"/></g></svg></span><h4>Bombas e pressurização</h4><p>Falta de pressão, grupos hidropressores, poços e depósitos.</p><svg class="svc__s" aria-hidden="true"><use href="#i-seta"/></svg></a></li>
+        </ul>
       </article>
-
-      <article class="canal canal--luz rv" style="--i:1">
-        <span class="rot canal__rot">Canal 02 · Corrente</span>
+      <article class="rd rd--luz rv" style="--i:1">
+        <svg class="rd__fundo" viewBox="0 0 32 32" aria-hidden="true"><path d="M19 1 6 18h9l-2 13 13-18h-9z"/></svg>
         <h3>Eletricidade</h3>
-        <p>Quadros e disjuntores, tomadas e interruptores, iluminação, avarias e instalações novas.</p>
-        <div class="canal__art">
-          <svg viewBox="0 0 400 160" role="img" aria-label="Esquema unifilar de uma instalação elétrica: entrada, terra, disjuntor, ponto de luz e tomada.">
-            <g class="ln">
-              <path d="M12 118 H62"/><path d="M62 118 V52 H132"/><path d="M164 52 H248"/>
-              <path d="M248 52 V96 H306"/><path d="M338 96 H388"/>
-              <path d="M132 52 L164 34"/>
-              <path d="M306 80 a16 16 0 0 1 32 0 v16 h-32Z" fill="none"/><path d="M316 88 v-4 M328 88 v-4"/>
-              <circle cx="248" cy="24" r="14" fill="none"/><path d="M238 14 L258 34 M258 14 L238 34"/><path d="M248 52 V38"/>
-            </g>
-            <g class="ln ln--soft"><path d="M62 118 V142 M50 142 h24 M55 148 h14 M59 154 h6"/></g>
-            <g class="dot"><circle cx="62" cy="118" r="3.5"/><circle cx="62" cy="52" r="3.5"/><circle cx="132" cy="52" r="3.5"/><circle cx="164" cy="52" r="3.5"/><circle cx="248" cy="52" r="3.5"/><circle cx="248" cy="96" r="3.5"/></g>
-          </svg>
-        </div>
+        <p>Da tomada que deixou de funcionar à instalação nova.</p>
+        <ul class="svcs">
+          <li><a class="svc" href="#contacto" data-tipo="Corrente (eletricidade)" data-s="Quadro elétrico"><span class="svc__i" aria-hidden="true"><svg viewBox="0 0 32 32"><g class="g"><rect x="6" y="6" width="20" height="20" rx="2"/><path d="M6 13h20"/><path d="M11 17v5M16 17v5M21 17v5"/></g></svg></span><h4>Quadros elétricos e disjuntores</h4><p>Substituição de quadros antigos, diferenciais e proteção de circuitos.</p><svg class="svc__s" aria-hidden="true"><use href="#i-seta"/></svg></a></li>
+          <li><a class="svc" href="#contacto" data-tipo="Corrente (eletricidade)" data-s="Avaria elétrica"><span class="svc__i" aria-hidden="true"><svg viewBox="0 0 32 32"><g class="g"><path d="M17 4l-8 13h6l-1 11 8-13h-6z"/><path d="M26 8l2-2M26 24l2 2"/></g></svg></span><h4>Deteção de avarias</h4><p>Curto-circuitos, quedas de disjuntor, circuitos sem tensão.</p><svg class="svc__s" aria-hidden="true"><use href="#i-seta"/></svg></a></li>
+          <li><a class="svc" href="#contacto" data-tipo="Corrente (eletricidade)" data-s="Tomadas ou interruptores"><span class="svc__i" aria-hidden="true"><svg viewBox="0 0 32 32"><g class="g"><rect x="7" y="7" width="18" height="18" rx="9"/><path d="M13 14v-2M19 14v-2"/><path d="M12 20h8"/></g></svg></span><h4>Tomadas e interruptores</h4><p>Novos pontos, substituição, tomadas exteriores e de cozinha.</p><svg class="svc__s" aria-hidden="true"><use href="#i-seta"/></svg></a></li>
+          <li><a class="svc" href="#contacto" data-tipo="Corrente (eletricidade)" data-s="Iluminação"><span class="svc__i" aria-hidden="true"><svg viewBox="0 0 32 32"><g class="g"><path d="M16 5a7 7 0 0 0-4 12.8V21h8v-3.2A7 7 0 0 0 16 5Z"/><path d="M13 24h6M14 27h4"/></g></svg></span><h4>Iluminação interior e exterior</h4><p>Focos, armaduras LED, iluminação de jardim e sensores.</p><svg class="svc__s" aria-hidden="true"><use href="#i-seta"/></svg></a></li>
+          <li><a class="svc" href="#contacto" data-tipo="Corrente (eletricidade)" data-s="Instalação nova ou remodelação elétrica"><span class="svc__i" aria-hidden="true"><svg viewBox="0 0 32 32"><g class="g"><path d="M5 24V9a2 2 0 0 1 2-2h10l4 4v13"/><path d="M9 12h6M9 16h8M9 20h8"/><path d="M25 14v10"/><path d="M21 24h8"/></g></svg></span><h4>Instalação nova e remodelação</h4><p>Passagem de cabo, tubagem elétrica e instalações de casa completa.</p><svg class="svc__s" aria-hidden="true"><use href="#i-seta"/></svg></a></li>
+          <li><a class="svc" href="#contacto" data-tipo="Corrente (eletricidade)" data-s="Videoporteiro ou campainha"><span class="svc__i" aria-hidden="true"><svg viewBox="0 0 32 32"><g class="g"><rect x="10" y="4" width="12" height="16" rx="2"/><path d="M13 9h6M13 13h6"/><path d="M16 20v4"/><path d="M11 27h10"/></g></svg></span><h4>Videoporteiros e campainhas</h4><p>Instalação e substituição de videoporteiro, intercomunicador e campainha.</p><svg class="svc__s" aria-hidden="true"><use href="#i-seta"/></svg></a></li>
+        </ul>
       </article>
     </div>
-
-    <div class="casa">
-      <div class="casa__art rv draw">
-        <svg viewBox="0 0 520 320" role="img" aria-label="Corte de uma casa com as duas redes desenhadas por dentro: a rede de água a azul e a rede elétrica a âmbar, ambas a partir da mesma entrada.">
-          <path class="fill" d="M42 182 H478 V298 H42Z"/>
-          <g class="wall">
-            <path d="M40 300 V128 L260 34 L480 128 V300"/>
-            <path d="M40 300 H480"/><path d="M40 180 H480"/>
-            <path d="M260 180 V300"/><path d="M150 300 V180"/><path d="M370 300 V180"/>
-          </g>
-          <g class="pipe">
-            <path pathLength="1" d="M20 286 H96 V208 H206"/>
-            <path pathLength="1" d="M206 208 V246 H240"/>
-            <path pathLength="1" d="M96 208 V194"/>
-            <path pathLength="1" d="M300 286 H408 V214 H448"/>
-          </g>
-          <g class="wire">
-            <path pathLength="1" d="M20 254 H70 V150 H236"/>
-            <path pathLength="1" d="M236 150 V128"/>
-            <path pathLength="1" d="M236 150 H330 V236 H364"/>
-            <path pathLength="1" d="M330 150 H430 V210"/>
-          </g>
-          <g class="node" stroke="#2E93A6"><circle cx="96" cy="208" r="5"/><circle cx="206" cy="208" r="5"/><circle cx="408" cy="214" r="5"/></g>
-          <g class="node" stroke="#FFB627"><circle cx="70" cy="150" r="5"/><circle cx="236" cy="150" r="5"/><circle cx="330" cy="150" r="5"/><circle cx="430" cy="210" r="5"/></g>
-          <g class="wall" opacity=".5"><path d="M20 236 V304"/></g>
-        </svg>
-      </div>
-      <div class="casa__copy rv" style="--i:1">
-        <p class="big">Uma fuga estraga uma instalação elétrica. Um quadro em baixo deixa-o sem água quente.</p>
-        <p>
-          Os dois sistemas partilham paredes, tetos falsos e caixas de passagem.
-          Quando quem vem a casa só domina metade do problema, o diagnóstico fica
-          pela metade — e volta a chamar na semana seguinte.
-        </p>
-        <p>
-          Somos uma equipa para as duas redes: vemos onde uma afeta a outra e
-          resolvemos de uma vez, sem passar o trabalho a terceiros.
-        </p>
-      </div>
-    </div>
+    <p class="redes__nota">Não encontra o seu caso? <a href="tel:+351900000000">Ligue</a> e diga o que se passa. Toque num serviço para o levar já preenchido para o pedido de orçamento.</p>
   </div>
 </section>
 
-<!-- ══════════════════════════════ 3 · SERVIÇOS ════════════════ -->
-<section class="band band-abisso" id="servicos" aria-labelledby="t-svc">
+<!-- ══════════════════════════════ 3 · COMO FUNCIONA ═══════════ -->
+<section class="band proc" id="processo" aria-labelledby="t-proc">
   <div class="wrap">
-    <div class="head head--wide rv">
-      <span class="rot">O que fazemos</span>
-      <h2 id="t-svc">Trabalho de casa, feito por quem cá mora.</h2>
-      <p>
-        Reparações urgentes, substituições e obra nova. Se o seu caso não estiver na
-        lista, ligue e diga o que se passa — a maior parte dos trabalhos de água e
-        corrente numa habitação passa por aqui.
-      </p>
+    <div class="head rv">
+      <h2 id="t-proc">Três passos, sem surpresas.</h2>
     </div>
-
-    <div class="manifold">
-      <div class="group group--agua rv">
-        <div class="group__head"><h3>Água</h3><span class="rot">Pichelaria</span></div>
-        <ul class="svcs">
-          <li class="svc">
-            <span class="svc__ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g class="g"><path d="M6 22h10v-8h6"/><path d="M22 11v6"/><circle cx="22" cy="9" r="3"/></g><path class="gf" d="M9 25c0-2 2.5-5 2.5-5S14 23 14 25a2.5 2.5 0 0 1-5 0Z"/></svg></span>
-            <span class="svc__t">Deteção e reparação de fugas</span>
-            <span class="svc__d">Localização do ponto de fuga com o mínimo de quebra e reparação da tubagem.</span>
-          </li>
-          <li class="svc">
-            <span class="svc__ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g class="g"><path d="M8 8h16"/><path d="M11 8v6a5 5 0 0 0 10 0V8"/><path d="M16 19v5"/><path d="M12 26h8"/></g></svg></span>
-            <span class="svc__t">Desentupimentos</span>
-            <span class="svc__d">Lavatórios, sanitas, ralos, tubos de queda e caixas de esgoto.</span>
-          </li>
-          <li class="svc">
-            <span class="svc__ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g class="g"><path d="M5 12h9v8h9"/><path d="M14 12v8"/><path d="M23 8v16"/><path d="M27 10v12"/></g></svg></span>
-            <span class="svc__t">Redes de água e esgotos</span>
-            <span class="svc__d">Instalação e substituição de tubagem, colunas e ramais.</span>
-          </li>
-          <li class="svc">
-            <span class="svc__ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g class="g"><rect x="9" y="5" width="14" height="16" rx="2"/><path d="M13 21v4M19 21v4"/><path d="M13 10c0 2 6 2 6 4"/></g><circle class="gf" cx="16" cy="26" r="2"/></svg></span>
-            <span class="svc__t">Esquentadores e termoacumuladores</span>
-            <span class="svc__d">Instalação, substituição e reparação de água quente sanitária.</span>
-          </li>
-          <li class="svc">
-            <span class="svc__ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g class="g"><path d="M6 26V13a3 3 0 0 1 3-3h6"/><path d="M15 6h4v8h-4z"/><path d="M6 20h9"/><path d="M22 26V10h5v16"/></g></svg></span>
-            <span class="svc__t">Casas de banho e cozinhas</span>
-            <span class="svc__d">Remodelação completa: louças, torneiras, bases de duche e ligações.</span>
-          </li>
-          <li class="svc">
-            <span class="svc__ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g class="g"><circle cx="16" cy="16" r="8"/><path d="M16 8V4M16 28v-4M8 16H4M28 16h-4"/><path d="M16 16l4-4"/></g></svg></span>
-            <span class="svc__t">Bombas e pressurização</span>
-            <span class="svc__d">Falta de pressão, grupos hidropressores, poços e depósitos.</span>
-          </li>
+    <ol class="pilha">
+      <li class="pp" style="--n:0">
+        <div>
+          <span class="pp__n" aria-hidden="true">1</span>
+          <h3>Diga-nos o que se passa</h3>
+          <p>Uma chamada, um WhatsApp ou o formulário. Uma fotografia do problema poupa metade da conversa.</p>
+        </div>
+        <div aria-hidden="true">
+          <div class="chat">
+            <p class="bolha bolha--eu rv">Boa tarde. Tenho esta mancha no teto da cozinha.</p>
+            <div class="bolha bolha--foto rv" style="--i:2"><svg viewBox="0 0 160 100"><rect width="160" height="100" fill="#E4E7EA"/><path d="M40 28c20-16 56-14 70 2 14 15 6 40-18 44-26 4-62-6-62-24 0-9 3-16 10-22Z" fill="#B7A68F" opacity=".75"/><path d="M58 38c12-8 32-8 40 2 7 9 3 22-11 25-15 3-36-3-36-14 0-5 2-9 7-13Z" fill="#8E7B63" opacity=".6"/></svg></div>
+            <p class="bolha bolha--nos rv" style="--i:4">Recebido. Vamos ligar-lhe.</p>
+          </div>
+          <p class="pp__ex">Conversa de exemplo.</p>
+        </div>
+      </li>
+      <li class="pp pp--2" style="--n:1">
+        <div>
+          <span class="pp__n" aria-hidden="true">2</span>
+          <h3>Vemos e orçamentamos</h3>
+          <p>Casos simples resolvem-se ao telefone. Nos restantes, vamos ver e dizemos o que custa antes de começar. <span class="tbc">custo da visita a confirmar</span></p>
+        </div>
+        <div class="notinha rv" aria-hidden="true">
+          <h4>O seu orçamento</h4>
+          <ul>
+            <li><span>O que vamos fazer</span><span>explicado antes</span></li>
+            <li><span>Quanto custa</span><span>antes de começar</span></li>
+            <li><span>Se algo mudar a meio</span><span>paramos e falamos</span></li>
+          </ul>
+        </div>
+      </li>
+      <li class="pp pp--3 sobre-escuro" style="--n:2">
+        <div>
+          <span class="pp__n" aria-hidden="true">3</span>
+          <h3>Fazemos e deixamos limpo</h3>
+          <p>Trabalho executado, testado à sua frente e o espaço entregue arrumado.</p>
+        </div>
+        <ul class="lista-ok rv">
+          <li><span class="ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" style="--i:0"/></svg></span>Testado à sua frente</li>
+          <li><span class="ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" style="--i:1"/></svg></span>Espaço arrumado</li>
+          <li><span class="ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" style="--i:2"/></svg></span>Fatura em todos os trabalhos</li>
         </ul>
-      </div>
-
-      <div class="group group--luz rv" style="--i:1">
-        <div class="group__head"><h3>Corrente</h3><span class="rot">Eletricidade</span></div>
-        <ul class="svcs">
-          <li class="svc">
-            <span class="svc__ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g class="g"><rect x="6" y="6" width="20" height="20" rx="2"/><path d="M6 13h20"/><path d="M11 17v5M16 17v5M21 17v5"/></g></svg></span>
-            <span class="svc__t">Quadros elétricos e disjuntores</span>
-            <span class="svc__d">Substituição de quadros antigos, diferenciais e proteção de circuitos.</span>
-          </li>
-          <li class="svc">
-            <span class="svc__ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g class="g"><path d="M17 4l-8 13h6l-1 11 8-13h-6z"/><path d="M26 8l2-2M26 24l2 2"/></g></svg></span>
-            <span class="svc__t">Deteção de avarias</span>
-            <span class="svc__d">Curto-circuitos, quedas de disjuntor, circuitos sem tensão.</span>
-          </li>
-          <li class="svc">
-            <span class="svc__ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g class="g"><rect x="7" y="7" width="18" height="18" rx="9"/><path d="M13 14v-2M19 14v-2"/><path d="M12 20h8"/></g></svg></span>
-            <span class="svc__t">Tomadas e interruptores</span>
-            <span class="svc__d">Novos pontos, substituição, tomadas exteriores e de cozinha.</span>
-          </li>
-          <li class="svc">
-            <span class="svc__ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g class="g"><path d="M16 5a7 7 0 0 0-4 12.8V21h8v-3.2A7 7 0 0 0 16 5Z"/><path d="M13 24h6M14 27h4"/></g></svg></span>
-            <span class="svc__t">Iluminação interior e exterior</span>
-            <span class="svc__d">Focos, armaduras LED, iluminação de jardim e sensores.</span>
-          </li>
-          <li class="svc">
-            <span class="svc__ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g class="g"><path d="M5 24V9a2 2 0 0 1 2-2h10l4 4v13"/><path d="M9 12h6M9 16h8M9 20h8"/><path d="M25 14v10"/><path d="M21 24h8"/></g></svg></span>
-            <span class="svc__t">Instalação nova e remodelação</span>
-            <span class="svc__d">Passagem de cabo, tubagem elétrica e instalações de casa completa.</span>
-          </li>
-          <li class="svc">
-            <span class="svc__ico" aria-hidden="true"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g class="g"><rect x="10" y="4" width="12" height="16" rx="2"/><path d="M13 9h6M13 13h6"/><path d="M16 20v4"/><path d="M11 27h10"/></g></svg></span>
-            <span class="svc__t">Videoporteiros e campainhas</span>
-            <span class="svc__d">Instalação e substituição de videoporteiro, intercomunicador e campainha.</span>
-          </li>
-        </ul>
-      </div>
-    </div>
+      </li>
+    </ol>
   </div>
 </section>
 
-<!-- ══════════════════════════════ 4 · URGÊNCIAS ═══════════════ -->
-<section class="band band-corrente" id="emergencia" aria-labelledby="t-urg">
-  <div class="wrap urg">
-    <div class="rv">
-      <span class="rot">Quando não pode esperar</span>
-      <h2 id="t-urg">Está a perder água. Ou ficou sem luz.</h2>
-      <p class="urg__lead">
-        Nestes casos não se escreve, liga-se. <b>Feche a torneira de segurança ou
-        desligue o disjuntor geral</b> e ligue-nos a seguir — dizemos-lhe ao telefone
-        o que fazer até chegarmos.
-      </p>
-      <div class="acts urg__acts">
-        <a class="btn" href="tel:+351900000000">
-          <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 3h3l1.5 4.2-2.1 1.5a12 12 0 0 0 6.7 6.7l1.5-2.1L21 14.8v3a2.2 2.2 0 0 1-2.4 2.2A17.6 17.6 0 0 1 4 9.4 2.2 2.2 0 0 1 6.2 3Z"/></svg>
-          +351 900 000 000
-        </a>
-        <a class="btn btn--ghost" href="https://wa.me/351900000000" rel="noopener">WhatsApp</a>
-      </div>
-      <p class="rot" style="margin-top:1.1rem">Disponibilidade fora de horas <span class="tbc">a confirmar</span></p>
-    </div>
-    <ul class="urg__list rv" style="--i:1">
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><g class="g"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11Z"/></g></svg><span>Fuga, rotura ou inundação</span></li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><g class="g"><path d="M4 20h16M6 20V8m12 12V8"/><path d="M9 12h6"/></g></svg><span>Esgoto entupido a transbordar</span></li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><g class="g"><path d="M13 2 6 13h5l-1 9 7-11h-5z"/></g></svg><span>Quadro que dispara sem parar</span></li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><g class="g"><path d="M3 12h4l3-7 4 14 3-7h4"/></g></svg><span>Cheiro a queimado ou tomada quente</span></li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><g class="g"><circle cx="12" cy="12" r="9"/><path d="M12 7v5m0 4v1"/></g></svg><span>Casa ou zona da casa sem corrente</span></li>
+<!-- ══════════════════════════════ 4 · QUEM SOMOS ══════════════ -->
+<section class="band" id="porque" aria-labelledby="t-porque">
+  <div class="wrap">
+    <!-- Quando houver fotografias reais (equipa, carrinha, trabalhos), entram
+         aqui, por baixo desta frase. Ver PLACEHOLDERS.md, ponto 9. -->
+    <h2 class="manif" id="t-porque"><b>Tecno</b>logias <b>Mi</b>nho <b>Cer</b>vães. O nome diz de onde somos, e é de propósito: o trabalho é local e quem atende o telefone é de cá.</h2>
+    <ul class="prom">
+      <li class="rv"><h3>Perto, por isso rápidos</h3><p>Chegamos depressa, conhecemos as casas da zona e não se paga meia manhã de estrada.</p></li>
+      <li class="rv"><h3>O preço antes de começar</h3><p>Se durante o trabalho aparecer algo que muda o valor, paramos e falamos consigo primeiro.</p></li>
+      <li class="rv"><h3>Dizemos quando conseguimos ir</h3><p>Ao telefone dizemos-lhe uma janela realista. Se não for a tempo, dizemos logo em vez de o deixar à espera.</p></li>
     </ul>
   </div>
 </section>
 
 <!-- ══════════════════════════════ 5 · ZONA ════════════════════ -->
-<section class="band band-luz" id="zona" aria-labelledby="t-zona">
-  <div class="wrap zona">
-    <div class="rede rv draw">
-      <svg viewBox="0 0 520 430" role="img" aria-label="Rede de ligações a partir de Cervães para Vila Verde, Braga, Amares, Barcelos, Ponte de Lima, Ponte da Barca e Terras de Bouro.">
-        <g class="link link--live">
-          <path pathLength="1" d="M258 218 L156 132"/>
-          <path pathLength="1" d="M258 218 L262 100"/>
-          <path pathLength="1" d="M258 218 L388 136"/>
-        </g>
-        <g class="link">
-          <path pathLength="1" d="M258 218 L100 240"/>
-          <path pathLength="1" d="M258 218 L150 334"/>
-          <path pathLength="1" d="M258 218 L288 348"/>
-          <path pathLength="1" d="M258 218 L424 266"/>
-        </g>
-        <g>
-          <circle class="pin" cx="156" cy="132" r="7"/><circle class="pin" cx="262" cy="100" r="7"/>
-          <circle class="pin" cx="388" cy="136" r="7"/><circle class="pin" cx="100" cy="240" r="7"/>
-          <circle class="pin" cx="150" cy="334" r="7"/><circle class="pin" cx="288" cy="348" r="7"/>
-          <circle class="pin" cx="424" cy="266" r="7"/>
-        </g>
-        <circle class="pin--hub" cx="258" cy="218" r="13"/>
-        <g>
-          <text x="156" y="112" text-anchor="middle">Ponte de Lima</text>
-          <text x="262" y="80" text-anchor="middle">Ponte da Barca</text>
-          <text x="388" y="116" text-anchor="middle">Terras de Bouro</text>
-          <text x="84" y="245" text-anchor="end">Barcelos</text>
-          <text x="150" y="358" text-anchor="middle">Vila Verde</text>
-          <text x="288" y="372" text-anchor="middle">Braga</text>
-          <text x="440" y="271" text-anchor="start">Amares</text>
-          <text class="lbl--hub" x="258" y="196" text-anchor="middle">CERVÃES</text>
-        </g>
-      </svg>
-    </div>
-
-    <div class="rv" style="--i:1">
-      <span class="rot">Onde trabalhamos</span>
-      <h2 id="t-zona">Base em Cervães. Trabalho em todo o concelho e à volta dele.</h2>
-      <p>
-        Ser de cá é a diferença prática: chegamos depressa, conhecemos as casas, e
-        não se paga meia manhã de estrada. A base é em Cervães, Vila Verde.
-      </p>
-      <div class="locais">
-        <h3>Concelhos</h3>
-        <ul class="chips chips--hub">
-          <li>Vila Verde</li><li>Braga</li><li>Amares</li><li>Barcelos</li>
-          <li>Ponte de Lima</li><li>Ponte da Barca</li><li>Terras de Bouro</li>
-        </ul>
-        <h3>Algumas freguesias de Vila Verde <span class="tbc">confirmar lista</span></h3>
-        <ul class="chips">
-          <li>Cervães</li><li>Vila Verde</li><li>Vila de Prado</li><li>Prado</li>
-          <li>Soutelo</li><li>Turiz</li><li>Moure</li><li>Freiriz</li>
-          <li>Lage</li><li>Oleiros</li><li>Pico de Regalados</li><li>Sabariz</li>
-        </ul>
+<section id="zona" aria-labelledby="t-zona">
+  <div class="wrap">
+    <div class="zona sobre-escuro">
+      <div>
+        <h2 id="t-zona">De Cervães para todo o concelho e à volta dele.</h2>
+        <p class="zona__p">Se estiver perto do limite, ligue e confirmamos.</p>
+        <div class="locais">
+          <div>
+            <h3>Concelhos</h3>
+            <ul class="chips chips--c" id="concelhos">
+              <li data-c="vv">Vila Verde</li><li data-c="br">Braga</li><li data-c="am">Amares</li><li data-c="ba">Barcelos</li>
+              <li data-c="pl">Ponte de Lima</li><li data-c="pb">Ponte da Barca</li><li data-c="tb">Terras de Bouro</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Algumas freguesias de Vila Verde <span class="tbc">confirmar lista</span></h3>
+            <ul class="chips">
+              <li>Cervães</li><li>Vila Verde</li><li>Vila de Prado</li><li>Prado</li>
+              <li>Soutelo</li><li>Turiz</li><li>Moure</li><li>Freiriz</li>
+              <li>Lage</li><li>Oleiros</li><li>Pico de Regalados</li><li>Sabariz</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="mapa" aria-hidden="true">
+        <svg viewBox="0 0 600 520" focusable="false" id="mapa">
+          <circle class="mapa__onda" cx="285" cy="310" r="270" stroke-width="2"/>
+          <circle class="mapa__onda b" cx="285" cy="310" r="270" stroke-width="2"/>
+          <circle class="mapa__onda c" cx="285" cy="310" r="270" stroke-width="2"/>
+          <g class="mapa__l">
+            <path d="M285 310 300 205"/><path d="M285 310 400 440"/><path d="M285 310 475 305"/><path d="M285 310 85 430"/><path d="M285 310 110 120"/><path d="M285 310 330 70"/><path d="M285 310 490 145"/>
+          </g>
+          <g class="mapa__n" data-c="vv"><circle cx="300" cy="205" r="7"/><text x="314" y="201">Vila Verde</text></g>
+          <g class="mapa__n" data-c="br"><circle cx="400" cy="440" r="7"/><text x="414" y="447">Braga</text></g>
+          <g class="mapa__n" data-c="am"><circle cx="475" cy="305" r="7"/><text x="489" y="312">Amares</text></g>
+          <g class="mapa__n" data-c="ba"><circle cx="85" cy="430" r="7"/><text x="50" y="464">Barcelos</text></g>
+          <g class="mapa__n" data-c="pl"><circle cx="110" cy="120" r="7"/><text x="34" y="100">Ponte de Lima</text></g>
+          <g class="mapa__n" data-c="pb"><circle cx="330" cy="70" r="7"/><text x="264" y="50">Ponte da Barca</text></g>
+          <g class="mapa__n" data-c="tb"><circle cx="490" cy="145" r="7"/><text x="430" y="125">Terras de Bouro</text></g>
+          <circle cx="285" cy="310" r="64" fill="#F8AB60"/>
+          <text class="mapa__c" x="285" y="319" text-anchor="middle">Cervães</text>
+        </svg>
+        <p class="mapa__leg">Esquema de orientação, não é um mapa à escala.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════ 6 · COMO FUNCIONA ═══════════ -->
-<section class="band band--tight" id="processo" aria-labelledby="t-proc">
-  <div class="wrap">
-    <div class="head rv">
-      <span class="rot">Como funciona</span>
-      <h2 id="t-proc">Três passos, sem surpresas.</h2>
-    </div>
-    <div class="penstock">
-      <article class="passo rv">
-        <span class="passo__fio" aria-hidden="true"></span>
-        <span class="passo__n">Passo 01</span>
-        <h3>Diz-nos o que se passa</h3>
-        <p>Uma chamada, um WhatsApp ou o formulário. Uma foto do problema poupa metade da conversa.</p>
-      </article>
-      <article class="passo rv" style="--i:1">
-        <span class="passo__fio" aria-hidden="true"></span>
-        <span class="passo__n">Passo 02</span>
-        <h3>Vemos e orçamentamos</h3>
-        <p>Casos simples resolvem-se ao telefone. Nos restantes, vamos ver e dizemos o que custa antes de começar. <span class="tbc">custo da visita a confirmar</span></p>
-      </article>
-      <article class="passo rv" style="--i:2">
-        <span class="passo__fio" aria-hidden="true"></span>
-        <span class="passo__n">Passo 03</span>
-        <h3>Fazemos e deixamos limpo</h3>
-        <p>Trabalho executado, testado à frente do cliente e o espaço entregue arrumado.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════ 7 · PERGUNTAS ═══════════════ -->
-<section class="band band-abisso" id="perguntas" aria-labelledby="t-faq">
-  <div class="wrap">
-    <div class="head rv">
-      <span class="rot">Perguntas frequentes</span>
+<!-- ══════════════════════════════ 6 · PERGUNTAS ═══════════════ -->
+<section class="band" id="perguntas" aria-labelledby="t-faq">
+  <div class="wrap perg">
+    <div class="perg__h rv">
       <h2 id="t-faq">O que as pessoas perguntam antes de ligar.</h2>
+      <p>Não encontra a sua pergunta? É mais rápido perguntar ao telefone.</p>
+      <div class="acts"><a class="btn btn--esc" href="tel:+351900000000"><svg aria-hidden="true" focusable="false"><use href="#i-tel"/></svg>900 000 000</a></div>
     </div>
-    <div class="faq rv">
+    <div class="faq">
       <details>
-        <summary><span class="mk" aria-hidden="true"></span>Fazem pichelaria e eletricidade, ou só uma coisa?</summary>
+        <summary>Fazem pichelaria e eletricidade, ou só uma coisa?<span class="mk" aria-hidden="true"></span></summary>
         <div class="faq__a"><p>As duas. É esse o motivo de existirmos assim: numa casa, a rede de água e a rede elétrica cruzam-se constantemente, e ter as duas na mesma equipa evita diagnósticos a meio e obras repetidas. Pode pedir só um dos serviços, claro.</p></div>
       </details>
       <details>
-        <summary><span class="mk" aria-hidden="true"></span>Que zonas cobrem?</summary>
+        <summary>Que zonas cobrem?<span class="mk" aria-hidden="true"></span></summary>
         <div class="faq__a"><p>Cervães e todo o concelho de Vila Verde, mais os concelhos vizinhos: Braga, Amares, Barcelos, Ponte de Lima, Ponte da Barca e Terras de Bouro. Se estiver perto do limite, ligue e confirmamos.</p></div>
       </details>
       <details>
-        <summary><span class="mk" aria-hidden="true"></span>Dão orçamento antes de começar o trabalho?</summary>
-        <div class="faq__a"><p>Sim. Excepto nas urgências em que a prioridade é parar o estrago, dizemos o que vai custar antes de avançar. Se durante o trabalho aparecer algo que muda o valor, paramos e falamos consigo primeiro.</p></div>
+        <summary>Dão orçamento antes de começar o trabalho?<span class="mk" aria-hidden="true"></span></summary>
+        <div class="faq__a"><p>Sim. Exceto nas urgências em que a prioridade é parar o estrago, dizemos o que vai custar antes de avançar. Se durante o trabalho aparecer algo que muda o valor, paramos e falamos consigo primeiro.</p></div>
       </details>
       <details>
-        <summary><span class="mk" aria-hidden="true"></span>A visita para orçamento é paga?</summary>
+        <summary>A visita para orçamento é paga?<span class="mk" aria-hidden="true"></span></summary>
         <div class="faq__a"><p><span class="tbc">a confirmar</span> Este valor precisa de ser definido pela empresa antes de o site ir para o ar.</p></div>
       </details>
       <details>
-        <summary><span class="mk" aria-hidden="true"></span>Atendem urgências fora do horário normal?</summary>
+        <summary>Atendem urgências fora do horário normal?<span class="mk" aria-hidden="true"></span></summary>
         <div class="faq__a"><p><span class="tbc">a confirmar</span> A disponibilidade fora de horas e ao fim de semana precisa de ser definida antes de ser anunciada aqui.</p></div>
       </details>
       <details>
-        <summary><span class="mk" aria-hidden="true"></span>Quanto tempo demoram a aparecer?</summary>
-        <div class="faq__a"><p>Depende da distância e do que está em curso no dia. Ao telefone dizemos-lhe uma janela realista — e se não conseguirmos ir a tempo, dizemos logo em vez de o deixar à espera.</p></div>
+        <summary>Quanto tempo demoram a aparecer?<span class="mk" aria-hidden="true"></span></summary>
+        <div class="faq__a"><p>Depende da distância e do que está em curso no dia. Ao telefone dizemos-lhe uma janela realista. Se não conseguirmos ir a tempo, dizemos logo em vez de o deixar à espera.</p></div>
       </details>
       <details>
-        <summary><span class="mk" aria-hidden="true"></span>Emitem fatura?</summary>
+        <summary>Emitem fatura?<span class="mk" aria-hidden="true"></span></summary>
         <div class="faq__a"><p>Sim, com fatura para todos os trabalhos. Os dados de faturação aparecem no fim desta página. <span class="tbc">NIF a confirmar</span></p></div>
       </details>
       <details>
-        <summary><span class="mk" aria-hidden="true"></span>O que significa "Tecnomicer"?</summary>
+        <summary>O que significa "Tecnomicer"?<span class="mk" aria-hidden="true"></span></summary>
         <div class="faq__a"><p><b>Tecno</b>logias <b>Mi</b>nho <b>Cer</b>vães. O nome diz de onde somos, e é de propósito: o trabalho é local e quem responde ao telefone é de cá.</p></div>
       </details>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════ 8 · CONTACTO ════════════════ -->
-<section class="band" id="contacto" aria-labelledby="t-cont">
-  <div class="wrap contacto">
-    <div class="rv">
-      <span class="rot">Contacto</span>
-      <h2 id="t-cont">Ligue. É mais rápido que escrever.</h2>
-      <p class="contacto__lead">
-        Para urgências, use o telefone. Para orçamentos sem pressa, o formulário
-        serve — e uma foto ajuda muito.
-      </p>
-      <div class="vias">
-        <a class="via" href="tel:+351900000000">
-          <svg role="img" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><g class="g"><path d="M6.2 3h3l1.5 4.2-2.1 1.5a12 12 0 0 0 6.7 6.7l1.5-2.1L21 14.8v3a2.2 2.2 0 0 1-2.4 2.2A17.6 17.6 0 0 1 4 9.4 2.2 2.2 0 0 1 6.2 3Z"/></g></svg>
-          <span class="via__t"><span class="rot">Telefone</span><strong>+351 900 000 000</strong></span>
-        </a>
-        <a class="via" href="https://wa.me/351900000000" rel="noopener">
-          <svg role="img" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><g class="g"><path d="M12 21a9 9 0 1 0-7.7-4.4L3 21l4.6-1.2A9 9 0 0 0 12 21Z"/><path d="M8.9 8.4c0 3 2.4 5.4 5.4 5.4.5 0 .9-.4.9-.9v-.6l-1.8-.6-.7.8a4.2 4.2 0 0 1-2-2l.8-.7-.6-1.8h-.6c-.5 0-.9.4-.9.9Z"/></g></svg>
-          <span class="via__t"><span class="rot">WhatsApp</span><strong>Enviar mensagem</strong></span>
-        </a>
-        <a class="via" href="mailto:geral@tecnomicer.pt">
-          <svg role="img" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><g class="g"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></g></svg>
-          <span class="via__t"><span class="rot">Email</span><strong>geral@tecnomicer.pt</strong></span>
-        </a>
+<!-- ══════════════════════════════ 7 · CONTACTO ════════════════ -->
+<section id="contacto" aria-labelledby="t-cont">
+  <div class="wrap">
+    <div class="cont">
+      <div class="cont__e sobre-escuro">
+        <h2 id="t-cont">Ligue.<br>É mais rápido que escrever.</h2>
+        <a class="cont__tel" href="tel:+351900000000">900 000 000</a>
+        <p>Para urgências, use o telefone. Para orçamentos sem pressa, o formulário serve, e uma fotografia ajuda muito. <span class="tbc">contactos a confirmar</span></p>
+        <div class="vias">
+          <a class="via" href="https://wa.me/351900000000" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-wa"/></svg><span>Enviar WhatsApp</span></a>
+          <a class="via" href="mailto:geral@tecnomicer.pt"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg><span>geral@tecnomicer.pt</span></a>
+          <div class="via"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10Z"/><circle cx="12" cy="11" r="2.2"/></svg><span>Cervães, 4730 Vila Verde <span class="tbc">morada a confirmar</span></span></div>
+        </div>
       </div>
-    </div>
-
-    <div class="rv" style="--i:1">
-      <!-- No backend yet. The form's own action is a mailto that works with
-           JavaScript off; with JavaScript on, submit assembles the message and
-           offers WhatsApp or email as explicit links. Nothing opens by itself,
-           so no popup blocker and no timing to get wrong. -->
+      <!-- The form's own action is a mailto that works with JavaScript off;
+           with JavaScript on, submit posts to /api/pedido and, if that fails,
+           offers WhatsApp or email already filled in. -->
       <form id="pedido" novalidate action="mailto:geral@tecnomicer.pt" method="post" enctype="text/plain">
-        <div class="f--2">
-          <div class="f">
+        <div class="fg--2">
+          <div class="fg">
             <label for="nome">Nome <span class="req" aria-hidden="true">*</span></label>
             <input id="nome" name="nome" type="text" autocomplete="name" required aria-describedby="e-nome" placeholder="Como o tratamos">
             <p class="err" id="e-nome"></p>
           </div>
-          <div class="f">
+          <div class="fg">
             <label for="tel">Telefone <span class="req" aria-hidden="true">*</span></label>
             <input id="tel" name="telefone" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="e-tel" placeholder="9xx xxx xxx">
             <p class="err" id="e-tel"></p>
           </div>
         </div>
-        <div class="f--2">
-          <div class="f">
+        <div class="fg--2">
+          <div class="fg">
             <label for="local">Localidade <span class="req" aria-hidden="true">*</span></label>
             <input id="local" name="localidade" type="text" autocomplete="address-level2" required aria-describedby="e-local" placeholder="Freguesia ou concelho">
             <p class="err" id="e-local"></p>
           </div>
-          <div class="f">
+          <div class="fg">
             <label for="tipo">Tipo de trabalho</label>
             <select id="tipo" name="tipo">
-              <option value="Água (pichelaria)">Água — pichelaria</option>
-              <option value="Corrente (eletricidade)">Corrente — eletricidade</option>
+              <option value="Água (pichelaria)">Pichelaria</option>
+              <option value="Corrente (eletricidade)">Eletricidade</option>
               <option value="Os dois">Os dois</option>
-              <option value="Não sei">Não sei / ajudem a identificar</option>
+              <option value="Não sei">Não sei, ajudem a identificar</option>
             </select>
+            <p class="err"></p>
           </div>
         </div>
-        <div class="f">
+        <div class="fg">
           <label for="desc">O que se passa <span class="req" aria-hidden="true">*</span></label>
           <textarea id="desc" name="descricao" required aria-describedby="e-desc" placeholder="Ex.: mancha no teto da cozinha há três dias e o disjuntor da cozinha dispara à noite."></textarea>
           <p class="err" id="e-desc"></p>
         </div>
-        <!-- Campo-armadilha: fora do ecrã e fora da ordem de tabulação, por
-             isso ninguém o vê nem lhe chega; um robô que preenche tudo
-             denuncia-se aqui. -->
+        <!-- Honeypot: off screen and out of the tab order, so nobody sees it
+             or reaches it; a bot that fills everything gives itself away. -->
         <div class="isca" aria-hidden="true">
           <label for="empresa">Empresa</label>
           <input id="empresa" name="empresa" type="text" tabindex="-1" autocomplete="off">
@@ -1515,12 +869,9 @@ input[aria-invalid="true"],textarea[aria-invalid="true"]{ border-color:#FF8A7A; 
         <div class="f__ts" id="ts" aria-live="polite"></div>
         <div class="acts">
           <button class="btn" type="submit" id="enviar">Enviar pedido</button>
-          <a class="btn btn--ghost" href="tel:+351900000000">Prefiro ligar</a>
+          <a class="btn btn--2" href="tel:+351900000000">Prefiro ligar</a>
         </div>
-        <p class="f__hint">
-          Usamos os seus dados só para responder a este pedido — nada de
-          publicidade. <a href="/privacidade/">Política de privacidade</a>.
-        </p>
+        <p class="f__hint">Usamos os seus dados só para responder a este pedido, nada de publicidade. <a href="/privacidade/">Política de privacidade</a>.</p>
         <div class="f__out" id="saida" role="status" aria-live="polite" tabindex="-1"></div>
       </form>
     </div>
@@ -1531,13 +882,10 @@ input[aria-invalid="true"],textarea[aria-invalid="true"]{ border-color:#FF8A7A; 
 
 <footer class="pe">
   <div class="wrap">
-    <div class="pe__grid">
+    <div class="pe__g">
       <div>
         <h2>Tecnomicer</h2>
-        <p class="pe__sig">
-          <b>Tecno</b>logias <b>Mi</b>nho <b>Cer</b>vães. Pichelaria e eletricidade
-          em Cervães, Vila Verde e concelhos vizinhos.
-        </p>
+        <p class="pe__sig"><b>Tecno</b>logias <b>Mi</b>nho <b>Cer</b>vães. Pichelaria e eletricidade em Cervães, Vila Verde e concelhos vizinhos.</p>
       </div>
       <div>
         <h3>Contacto</h3>
@@ -1546,7 +894,7 @@ input[aria-invalid="true"],textarea[aria-invalid="true"]{ border-color:#FF8A7A; 
             <li><a href="tel:+351900000000">+351 900 000 000</a></li>
             <li><a href="https://wa.me/351900000000" rel="noopener">WhatsApp</a></li>
             <li><a href="mailto:geral@tecnomicer.pt">geral@tecnomicer.pt</a></li>
-            <li>Cervães, 4730 Vila Verde <span class="tbc">morada a confirmar</span></li>
+            <li>Cervães, 4730 Vila Verde</li>
           </ul>
         </address>
       </div>
@@ -1564,27 +912,24 @@ input[aria-invalid="true"],textarea[aria-invalid="true"]{ border-color:#FF8A7A; 
     </div>
     <div class="pe__base">
       <span>© <span id="ano">2026</span> Tecnomicer</span>
+      <span>Horário <span class="tbc">a confirmar</span></span>
       <span>NIF <span class="tbc">a confirmar</span></span>
       <span>Alvará / seguro <span class="tbc">a confirmar</span></span>
     </div>
+    <svg class="pe__wm" aria-hidden="true" focusable="false" viewBox="0 0 1450 250"><use href="#wm"/></svg>
   </div>
 </footer>
 
 <div class="chamar" id="chamar">
-  <a class="btn" href="tel:+351900000000">
-    <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 3h3l1.5 4.2-2.1 1.5a12 12 0 0 0 6.7 6.7l1.5-2.1L21 14.8v3a2.2 2.2 0 0 1-2.4 2.2A17.6 17.6 0 0 1 4 9.4 2.2 2.2 0 0 1 6.2 3Z"/></svg>
-    Ligar agora
-  </a>
-  <a class="btn btn--ghost" href="https://wa.me/351900000000" rel="noopener" aria-label="Falar por WhatsApp">
-    <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 0-7.7-4.4L3 21l4.6-1.2A9 9 0 0 0 12 21Z"/><path d="M8.9 8.4c0 3 2.4 5.4 5.4 5.4.5 0 .9-.4.9-.9v-.6l-1.8-.6-.7.8a4.2 4.2 0 0 1-2-2l.8-.7-.6-1.8h-.6c-.5 0-.9.4-.9.9Z"/></svg>
-  </a>
+  <a class="btn" href="tel:+351900000000"><svg aria-hidden="true" focusable="false"><use href="#i-tel"/></svg>Ligar agora</a>
+  <a class="btn btn--2" href="https://wa.me/351900000000" rel="noopener" aria-label="Falar por WhatsApp"><svg aria-hidden="true" focusable="false"><use href="#i-wa"/></svg></a>
 </div>
 
 <!-- ═══════════════════════════ STRUCTURED DATA ══════════════════
      Plumber + Electrician: both are schema.org LocalBusiness subtypes, which
      is the machine-readable form of this firm's whole thesis. Every value
      marked "a confirmar" on the page is a placeholder here too and must be
-     replaced before launch — see PLACEHOLDERS.md.
+     replaced before launch - see PLACEHOLDERS.md.
      ═══════════════════════════════════════════════════════════════ -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
@@ -1624,7 +969,7 @@ input[aria-invalid="true"],textarea[aria-invalid="true"]{ border-color:#FF8A7A; 
 {"@type":"Offer","itemOffered":{"@type":"Service","name":"Instalação elétrica nova e remodelação","serviceType":"Instalação elétrica"}},
 {"@type":"Offer","itemOffered":{"@type":"Service","name":"Videoporteiros e campainhas","serviceType":"Videoporteiro"}}]}]}},
 {"@type":"WebSite","@id":"https://tecnomicer.pt/#site","url":"https://tecnomicer.pt/","name":"Tecnomicer","inLanguage":"pt-PT","publisher":{"@id":"https://tecnomicer.pt/#empresa"}},
-{"@type":"WebPage","@id":"https://tecnomicer.pt/#pagina","url":"https://tecnomicer.pt/","name":"Tecnomicer — Pichelaria e Eletricidade em Vila Verde","description":"Pichelaria e eletricidade em Cervães, Vila Verde e concelhos vizinhos.","inLanguage":"pt-PT","isPartOf":{"@id":"https://tecnomicer.pt/#site"},"about":{"@id":"https://tecnomicer.pt/#empresa"},"primaryImageOfPage":"https://tecnomicer.pt/og-image.png"},
+{"@type":"WebPage","@id":"https://tecnomicer.pt/#pagina","url":"https://tecnomicer.pt/","name":"Tecnomicer - Pichelaria e Eletricidade em Vila Verde","description":"Pichelaria e eletricidade em Cervães, Vila Verde e concelhos vizinhos.","inLanguage":"pt-PT","isPartOf":{"@id":"https://tecnomicer.pt/#site"},"about":{"@id":"https://tecnomicer.pt/#empresa"},"primaryImageOfPage":"https://tecnomicer.pt/og-image.png"},
 {"@type":"FAQPage","@id":"https://tecnomicer.pt/#faq","isPartOf":{"@id":"https://tecnomicer.pt/#pagina"},"mainEntity":[
 {"@type":"Question","name":"Fazem pichelaria e eletricidade, ou só uma coisa?","acceptedAnswer":{"@type":"Answer","text":"As duas. Numa casa, a rede de água e a rede elétrica cruzam-se constantemente, e ter as duas na mesma equipa evita diagnósticos a meio e obras repetidas. Pode pedir só um dos serviços."}},
 {"@type":"Question","name":"Que zonas cobrem?","acceptedAnswer":{"@type":"Answer","text":"Cervães e todo o concelho de Vila Verde, mais os concelhos vizinhos: Braga, Amares, Barcelos, Ponte de Lima, Ponte da Barca e Terras de Bouro."}},
@@ -1635,158 +980,167 @@ input[aria-invalid="true"],textarea[aria-invalid="true"]{ border-color:#FF8A7A; 
 </script>
 
 <script type="module">
-/* One module, deferred by definition, ~2 KB. No polyfills, no libraries,
-   no framework. Everything below is either an IntersectionObserver (off the
-   main thread) or a one-shot listener. Nothing polls, nothing measures
-   layout, and nothing writes to a shared variable that another handler
-   also writes to. */
-
+/* Everything here is progressive: the page reads, the links call and the form
+   posts to its mailto without a line of this running. */
 const root = document.documentElement;
+const reduzir = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/* ── year ── */
 document.getElementById("ano").textContent = new Date().getFullYear();
 
 /* ── entrances ──
-   An observer alone is not enough. It reports threshold crossings, and a jump
-   crosses nothing: go straight from the top of the page to the contact form
-   and every section in between changes from "below the viewport" to "above the
-   viewport" inside a single frame, with no crossing to report. Those elements
-   would stay invisible until the visitor scrolled back up through them.
-   The sweep closes that hole. */
-if (root.classList.contains("js")) {
-  const targets = [...document.querySelectorAll(".rv, .draw")];
-
-  const pending = new Set(targets);
-
-  const show = (el) => {
-    el.classList.add("on");
-    pending.delete(el);
-    io.unobserve(el);
-  };
-
-  const io = new IntersectionObserver((entries) => {
-    for (const e of entries) if (e.isIntersecting) show(e.target);
-  }, { rootMargin: "0px 0px -12% 0px", threshold: 0.12 });
-
-  for (const el of targets) io.observe(el);
-
-  /* Reveal anything already at or above the fold. The pending set shrinks to
-     empty as the page is read, so this costs progressively nothing, and it
-     never runs per frame — only once a scroll has come to rest, or when the
-     page arrives already scrolled. */
-  const sweep = () => {
-    for (const el of pending) {
-      if (el.getBoundingClientRect().top < innerHeight) show(el);
-    }
-  };
-
-  requestAnimationFrame(sweep);
-  addEventListener("scrollend", sweep, { passive: true });
-  addEventListener("hashchange", () => requestAnimationFrame(sweep));
-  addEventListener("pageshow", () => requestAnimationFrame(sweep));
+   An observer alone is not enough: a jump crosses no threshold, so the sections
+   it skips would stay hidden. The sweep reveals anything already passed. */
+if (root.classList.contains("rvj")) {
+  const pend = new Set(document.querySelectorAll(".rv"));
+  const mostra = (el) => { el.classList.add("on"); pend.delete(el); io.unobserve(el); };
+  const io = new IntersectionObserver((es) => {
+    for (const e of es) if (e.isIntersecting) mostra(e.target);
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+  for (const el of pend) io.observe(el);
+  const varre = () => { for (const el of [...pend]) if (el.getBoundingClientRect().top < innerHeight) mostra(el); };
+  requestAnimationFrame(varre);
+  addEventListener("scrollend", varre, { passive: true });
+  addEventListener("hashchange", () => requestAnimationFrame(varre));
+  addEventListener("pageshow", () => requestAnimationFrame(varre));
 }
 
-/* ── the descent, read on the gauge and the header bar ──
-   Where scroll-driven CSS animations exist, the browser runs this off the
-   main thread and no script is involved at all. Where they do not, one rAF
-   writes a transform to exactly two elements — no layout read, no style
-   recalc beyond those two nodes. */
-const fill = document.getElementById("gaugefill");
-const bar = document.getElementById("topflow");
-
-if (CSS.supports("animation-timeline", "scroll()")) {
-  const css = new CSSStyleSheet();
-  css.replaceSync(`
-    @keyframes tec-descida { from { transform: scaleY(0) } to { transform: scaleY(1) } }
-    @keyframes tec-barra   { from { transform: scaleX(0) } to { transform: scaleX(1) } }
-    .gauge__fill { animation: tec-descida linear both; animation-timeline: scroll(root block); }
-    .top__flow   { animation: tec-barra   linear both; animation-timeline: scroll(root block); }
-    @media (prefers-reduced-motion: reduce) {
-      .gauge__fill, .top__flow { animation: none; }
-    }
-  `);
-  document.adoptedStyleSheets = [...document.adoptedStyleSheets, css];
-} else {
-  let queued = false;
-  const paint = () => {
-    queued = false;
-    const max = root.scrollHeight - innerHeight;
-    const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
-    fill.style.transform = `scaleY(${p})`;
-    bar.style.transform = `scaleX(${p})`;
-  };
-  addEventListener("scroll", () => {
-    if (queued) return;
-    queued = true;
-    requestAnimationFrame(paint);
-  }, { passive: true });
-  paint();
-}
-
-/* ── gauge: which section is being read ── */
-const links = [...document.querySelectorAll(".gauge a")];
-const byId = new Map(
-  links.map((a) => [a.getAttribute("href").slice(1), a])
-);
+/* ── the hero ──
+   The active tab's progress bar is the timer: when its animation ends the next
+   problem rolls in, so pausing the animation pauses the rotation. It turns for
+   as long as the top is on screen. Choosing a problem jumps the reel to it and
+   the turning carries on from there; only the Pause button stops it.
+   Reduced motion never starts it. */
 {
-  /* An observer used to own this and left nothing current at the top of the
-     page: it reports crossings, and at rest on load there is no crossing to
-     report. This resolves the current section from geometry instead, so the
-     answer is right at every scroll position including the very first.
+  const hero = document.getElementById("inicio");
+  const rolo = document.getElementById("rolo");
+  const wa = document.getElementById("hero-wa");
+  const tabs = [...hero.querySelectorAll('[role="tab"]')];
+  const paineis = tabs.map((t) => document.getElementById(t.getAttribute("aria-controls")));
+  const parar = document.getElementById("parar");
+  let atual = 0;
 
-     Section offsets are measured once and re-measured on resize and when the
-     fonts land, so the scroll handler itself is arithmetic — no layout reads
-     per frame. */
-  const gauge = document.querySelector(".gauge");
-  const secs = [...byId.keys()]
-    .map((id) => ({ el: document.getElementById(id), link: byId.get(id) }))
-    .filter((s) => s.el);
+  const fim = () => hero.classList.remove("auto", "auto-tinha", "pausa");
 
-  let tops = [];
-  const medir = () => { tops = secs.map((s) => s.el.getBoundingClientRect().top + scrollY); };
-
-  let atual = -1;
-  const resolver = () => {
-    const linha = scrollY + innerHeight * 0.42;
-    let i = 0;
-    for (let k = 0; k < tops.length; k++) if (tops[k] <= linha) i = k;
-    // at the very bottom the last section is what you are looking at, whatever
-    // the reference line says
-    if (scrollY + innerHeight >= root.scrollHeight - 2) i = secs.length - 1;
-    if (i === atual) return;
+  const trocaFrase = (frase) => {
+    const novo = document.createElement("span");
+    novo.textContent = frase;
+    if (reduzir) { rolo.replaceChildren(novo); return; }
+    novo.className = "vem";
+    // only one phrase may be leaving at a time, however fast someone clicks
+    for (const velho of rolo.children) {
+      if (velho.classList.contains("sai")) { velho.remove(); continue; }
+      velho.classList.add("sai");
+      velho.addEventListener("animationend", () => velho.remove(), { once: true });
+    }
+    rolo.append(novo);
+  };
+  const ativar = (i) => {
+    const anterior = atual;
+    i = (i + tabs.length) % tabs.length;
     atual = i;
-    for (const s of secs) s.link.removeAttribute("aria-current");
-    secs[i].link.setAttribute("aria-current", "true");
-    // three grounds, three rail treatments: dark sections, the whitewash band,
-    // and the orange one — which needs its own, because neither the dark nor
-    // the light marker reads against it
-    const cls = secs[i].el.classList;
-    gauge.dataset.banda = cls.contains("band-luz") ? "luz"
-                        : cls.contains("band-corrente") ? "corrente"
-                        : "escuro";
+    tabs.forEach((t, k) => {
+      const sim = k === atual;
+      t.setAttribute("aria-selected", String(sim));
+      t.tabIndex = sim ? 0 : -1;
+      paineis[k].classList.toggle("on", sim);
+    });
+    if (i !== anterior || !rolo.children.length) trocaFrase(tabs[atual].dataset.frase);
+    wa.href = paineis[atual].dataset.wa;
   };
 
-  let pendente = false;
-  const refazer = () => { medir(); atual = -1; resolver(); };
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => { if (i !== atual) ativar(i); });
+    t.querySelector(".tab__b").addEventListener("animationend", () => ativar(atual + 1));
+    t.addEventListener("keydown", (e) => {
+      const passo = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+      const alvo = passo ? atual + passo : e.key === "Home" ? 0 : e.key === "End" ? tabs.length - 1 : null;
+      if (alvo === null) return;
+      e.preventDefault();
+      ativar(alvo);
+      tabs[atual].focus();
+    });
+  });
 
-  medir();
-  resolver();
-  addEventListener("scroll", () => {
-    if (pendente) return;
-    pendente = true;
-    requestAnimationFrame(() => { pendente = false; resolver(); });
-  }, { passive: true });
-  // covers the end of any scroll the frame loop might have missed, including
-  // the programmatic one an in-page link starts
-  addEventListener("scrollend", resolver, { passive: true });
-  addEventListener("resize", refazer, { passive: true });
-  addEventListener("load", refazer);
-  document.fonts?.ready.then(refazer);
+  if (reduzir) {
+    fim();
+  } else {
+    hero.classList.add("auto-tinha");
+    parar.addEventListener("click", () => {
+      const sim = !hero.classList.contains("pausa");
+      hero.classList.toggle("pausa", sim);
+      parar.setAttribute("aria-pressed", String(sim));
+      document.getElementById("parar-t").textContent = sim ? "Continuar" : "Pausar";
+    });
+    // nobody sees it turn once the top has scrolled away, so it waits there
+    new IntersectionObserver(([e]) => hero.classList.toggle("fora", !e.isIntersecting), { threshold: 0.3 }).observe(hero);
+  }
+}
 
-  /* In-page links are driven here rather than by the browser's own fragment
-     navigation, which was snapping to the top of the document before settling
-     on the target whenever the click came from far down the page. */
-  const TOPO = 78;
+/* ── "who we are": the sentence lights up word by word as it is scrolled to ── */
+if (!reduzir && CSS.supports("animation-timeline", "view()")) {
+  const m = document.querySelector(".manif");
+  const nos = [...m.childNodes];
+  let i = 0;
+  const total = m.textContent.trim().split(/\s+/).length;
+  const emb = (txt, frag) => {
+    for (const parte of txt.split(/(\s+)/)) {
+      if (!parte) continue;
+      if (/^\s+$/.test(parte)) { frag.append(parte); continue; }
+      const s = document.createElement("span");
+      s.className = "w"; s.textContent = parte;
+      s.style.setProperty("--i", (i++ * 36 / total).toFixed(1));
+      frag.append(s);
+    }
+  };
+  // "Tecnologias" arrives as <b>Tecno</b>logias: keep each fragment whole
+  const frag = document.createDocumentFragment();
+  for (const n of nos) {
+    if (n.nodeType === 3) emb(n.textContent, frag);
+    else { n.classList.add("w"); n.style.setProperty("--i", (i * 36 / total).toFixed(1)); frag.append(n); }
+  }
+  m.setAttribute("aria-label", m.textContent);
+  m.replaceChildren(frag);
+}
+
+/* ── area: list and diagram point at each other ── */
+{
+  const lista = document.getElementById("concelhos");
+  const mapa = document.getElementById("mapa");
+  const marca = (c, sim) => {
+    lista.querySelector(`[data-c="${c}"]`)?.classList.toggle("on", sim);
+    mapa.querySelector(`.mapa__n[data-c="${c}"]`)?.classList.toggle("on", sim);
+  };
+  for (const el of [...lista.children, ...mapa.querySelectorAll(".mapa__n")]) {
+    el.addEventListener("pointerenter", () => marca(el.dataset.c, true));
+    el.addEventListener("pointerleave", () => marca(el.dataset.c, false));
+  }
+}
+
+/* ── in-page links ──
+   Driven here rather than by the browser's own fragment navigation, which was
+   snapping to the top of the document before settling on the target. A service
+   link also carries its trade and name into the quote form. */
+{
+  const TOPO = 88;
+
+  /* The service name goes at the start of the description as "Name: ". Choosing
+     another service swaps that prefix and keeps whatever the visitor typed after
+     it. Text the visitor wrote without a prefix of ours is never touched: the new
+     prefix goes in front of it. */
+  const desc = document.getElementById("desc");
+  const tipo = document.getElementById("tipo");
+  let prefixo = "";
+  const preencher = (t, nome) => {
+    tipo.value = t;
+    if (!nome) return;
+    const novo = `${nome}: `;
+    const resto = prefixo && desc.value.startsWith(prefixo) ? desc.value.slice(prefixo.length) : desc.value;
+    desc.value = novo + resto.replace(/^\s+/, "");
+    prefixo = novo;
+    // an error shown for an empty description no longer applies once it has text
+    desc.dispatchEvent(new Event("input", { bubbles: true }));
+  };
+  desc.form.addEventListener("reset", () => { prefixo = ""; });
   for (const a of document.querySelectorAll('a[href^="#"]')) {
     a.addEventListener("click", (ev) => {
       const id = a.getAttribute("href").slice(1);
@@ -1794,25 +1148,17 @@ const byId = new Map(
       if (!alvo) return;
       ev.preventDefault();
 
+      if (a.dataset.tipo) preencher(a.dataset.tipo, a.dataset.s);
+
       const ir = () => {
-        // Everything that can cancel a scroll happens first. Moving focus
-        // after starting the smooth scroll aborted it and left the page
-        // exactly where it was.
         history.replaceState(null, "", `#${id}`);
         alvo.setAttribute("tabindex", "-1");
         alvo.focus({ preventScroll: true });
-
         const destino = Math.max(0, alvo.getBoundingClientRect().top + scrollY - TOPO);
         const partida = scrollY;
-        const suave = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const suave = !reduzir;
         scrollTo({ top: destino, behavior: suave ? "smooth" : "instant" });
-
-        // Some browsers ship with smooth scrolling switched off, and there the
-        // request above is silently inert — the visitor clicks and nothing
-        // moves. Check that it started, and jump if it did not.
-        // "instant" and not "auto": auto defers to the stylesheet, which says
-        // smooth here, so the fallback would be just as inert as the thing it
-        // is meant to rescue.
+        // some browsers ship with smooth scrolling off, where the request is inert
         if (suave && Math.abs(destino - partida) > 8) {
           setTimeout(() => {
             if (Math.abs(scrollY - partida) < 4) scrollTo({ top: destino, behavior: "instant" });
@@ -1820,54 +1166,34 @@ const byId = new Map(
         }
       };
 
-      // a modal panel locks scrolling, so it has to be gone before we move
       const painel = a.closest("dialog[open]");
       if (painel) { painel.close(); requestAnimationFrame(ir); } else ir();
     });
   }
 }
 
-/* ── the hero's water: paused the moment it leaves the viewport, so the
-      rest of the page scrolls against an idle compositor ── */
-const hero = document.getElementById("albufeira");
-new IntersectionObserver(([e]) => {
-  hero.classList.toggle("hero--idle", !e.isIntersecting);
-}, { threshold: 0 }).observe(hero);
-
-/* ── sticky call bar: in once the hero's own buttons are gone ── */
-const bar2 = document.getElementById("chamar");
-new IntersectionObserver(([e]) => {
-  bar2.classList.toggle("on", !e.isIntersecting);
-}, { threshold: 0, rootMargin: "-70% 0px 0px 0px" }).observe(hero);
+/* ── call bar: in once the hero's own buttons have scrolled past ── */
+{
+  const barra = document.getElementById("chamar");
+  new IntersectionObserver(([e]) => {
+    barra.classList.toggle("on", !e.isIntersecting && e.boundingClientRect.top < 0);
+  }, { threshold: 0 }).observe(document.getElementById("hero-acts"));
+}
 
 /* ── off-canvas menu ──
-   showModal() brings the focus trap, Escape and the inert background with it.
-   All this adds is opening, the backdrop click, and closing on navigation. */
+   showModal() brings the focus trap, Escape and the inert background with it. */
 {
   const menu = document.getElementById("menu");
   const abrir = document.getElementById("abrir");
-  const fechar = document.getElementById("fechar");
-
-  abrir.addEventListener("click", () => {
-    menu.showModal();
-    abrir.setAttribute("aria-expanded", "true");
-  });
+  abrir.addEventListener("click", () => { menu.showModal(); abrir.setAttribute("aria-expanded", "true"); });
   menu.addEventListener("close", () => abrir.setAttribute("aria-expanded", "false"));
-  fechar.addEventListener("click", () => menu.close());
-
+  document.getElementById("fechar").addEventListener("click", () => menu.close());
   menu.addEventListener("click", (e) => {
     if (e.target.closest("a")) { menu.close(); return; }
-    // the backdrop reports the dialog as its target, so compare geometry
     const r = menu.getBoundingClientRect();
-    const inside = e.clientX >= r.left && e.clientX <= r.right
-                && e.clientY >= r.top && e.clientY <= r.bottom;
-    if (!inside) menu.close();
+    if (!(e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom)) menu.close();
   });
-
-  // a panel left open behind a desktop layout would trap the page
-  matchMedia("(min-width: 64rem)").addEventListener("change", (e) => {
-    if (e.matches && menu.open) menu.close();
-  });
+  matchMedia("(min-width: 64rem)").addEventListener("change", (e) => { if (e.matches && menu.open) menu.close(); });
 }
 
 /* ── quote form ── */
@@ -1877,10 +1203,10 @@ const WA = "351900000000";
 const MAIL = "geral@tecnomicer.pt";
 
 const checks = [
-  { id: "nome",  msg: "e-nome",  bad: "Falta o nome — escreva como o devemos tratar.",              ok: (v) => v.trim().length >= 2 },
-  { id: "tel",   msg: "e-tel",   bad: "Precisamos de um número com 9 dígitos para lhe responder.",  ok: (v) => v.replace(/\D/g, "").length >= 9 },
-  { id: "local", msg: "e-local", bad: "Diga-nos a localidade para sabermos se conseguimos chegar.", ok: (v) => v.trim().length >= 2 },
-  { id: "desc",  msg: "e-desc",  bad: "Descreva o problema em duas linhas — ajuda a levar o material certo.", ok: (v) => v.trim().length >= 10 }
+  { id: "nome",  msg: "e-nome",  bad: "Falta o nome. Escreva como o devemos tratar.",                 ok: (v) => v.trim().length >= 2 },
+  { id: "tel",   msg: "e-tel",   bad: "Precisamos de um número com 9 dígitos para lhe responder.",     ok: (v) => v.replace(/\D/g, "").length >= 9 },
+  { id: "local", msg: "e-local", bad: "Diga-nos a localidade para sabermos se conseguimos chegar.",    ok: (v) => v.trim().length >= 2 },
+  { id: "desc",  msg: "e-desc",  bad: "Descreva o problema em duas linhas. Ajuda a levar o material certo.", ok: (v) => v.trim().length >= 10 }
 ].map((c) => ({ ...c, el: document.getElementById(c.id), out: document.getElementById(c.msg) }));
 
 const verify = (c) => {
@@ -1896,9 +1222,8 @@ for (const c of checks) {
 }
 
 /* ── Turnstile ──
-   O único terceiro que esta página carrega, e só quando alguém toca no
-   formulário. Quem lê a página e liga em vez de escrever nunca o descarrega,
-   por isso o primeiro carregamento continua a ser o documento e duas fontes. */
+   The only third party this page loads, and only once someone touches the
+   form. Whoever reads the page and calls instead never downloads it. */
 const CHAVE_TURNSTILE = "0x4AAAAAAA_CHAVE_DO_SITE"; // ver PLACEHOLDERS.md
 const caixaTs = document.getElementById("ts");
 let tsWidget = null;
@@ -1907,16 +1232,32 @@ let tsPedido = null;
 function carregarTurnstile() {
   if (tsPedido) return tsPedido;
   tsPedido = new Promise((resolve, reject) => {
+    // a check that never answers must not hold the send button forever
+    const desiste = setTimeout(() => reject(new Error("turnstile")), 10000);
     window.aoCarregarTurnstile = () => {
-      tsWidget = turnstile.render(caixaTs, { sitekey: CHAVE_TURNSTILE, theme: "dark" });
-      resolve();
+      try {
+        tsWidget = turnstile.render(caixaTs, {
+          sitekey: CHAVE_TURNSTILE,
+          theme: "light",
+          // handled here instead of thrown: a bad key or a blocked check ends in
+          // the WhatsApp and email way out, like any other failed send
+          "error-callback": () => true
+        });
+        clearTimeout(desiste);
+        resolve();
+      } catch (e) {
+        clearTimeout(desiste);
+        reject(new Error("turnstile"));
+      }
     };
     const s = document.createElement("script");
     s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=aoCarregarTurnstile";
     s.async = true;
-    s.onerror = () => reject(new Error("turnstile"));
+    s.onerror = () => { clearTimeout(desiste); reject(new Error("turnstile")); };
     document.head.append(s);
   });
+  // a failed load may be retried on the next send
+  tsPedido.catch(() => { tsPedido = null; });
   return tsPedido;
 }
 form.addEventListener("focusin", carregarTurnstile, { once: true });
@@ -1927,7 +1268,7 @@ const botao = document.getElementById("enviar");
 
 const alternativas = () => {
   const corpo = [
-    "Pedido de orçamento — Tecnomicer",
+    "Pedido de orçamento - Tecnomicer",
     `Nome: ${form.nome.value.trim()}`,
     `Telefone: ${form.telefone.value.trim()}`,
     `Localidade: ${form.localidade.value.trim()}`,
@@ -1937,10 +1278,10 @@ const alternativas = () => {
   ].join("\n");
   const wa = `https://wa.me/${WA}?text=${encodeURIComponent(corpo)}`;
   const mail = `mailto:${MAIL}?subject=${encodeURIComponent(
-    `Pedido de orçamento — ${form.nome.value.trim()}`
+    `Pedido de orçamento - ${form.nome.value.trim()}`
   )}&body=${encodeURIComponent(corpo)}`;
   return `<div class="acts"><a class="btn btn--sm" href="${wa}" rel="noopener">Enviar por WhatsApp</a>`
-       + `<a class="btn btn--sm btn--ghost" href="${mail}">Enviar por email</a></div>`;
+       + `<a class="btn btn--sm btn--2" href="${mail}">Enviar por email</a></div>`;
 };
 
 const mostrar = (html, estado) => {
@@ -1985,19 +1326,19 @@ form.addEventListener("submit", async (ev) => {
 
     if (!r.ok) {
       const d = await r.json().catch(() => ({}));
-      throw new Error(d.erro || "Não foi possível enviar.");
+      throw new Error(d.erro || "O pedido não chegou até nós.");
     }
 
     mostrar(
       "<strong>Pedido enviado.</strong> Respondemos assim que possível. " +
-      "Se for urgente, ligue — é sempre mais rápido.",
+      "Se for urgente, ligue: é sempre mais rápido.",
       "ok"
     );
     form.reset();
     if (tsWidget) turnstile.reset(tsWidget);
   } catch (e) {
-    // Nunca deixar alguém sem caminho: o pedido continua a poder seguir por
-    // WhatsApp ou email, já preenchido.
+    // Never leave anyone without a path: the request can still go by
+    // WhatsApp or email, already filled in.
     mostrar(
       `<strong>Não conseguimos enviar.</strong> ${
         e.message === "turnstile"

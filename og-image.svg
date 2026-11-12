@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Tecnomicer — pichelaria e eletricidade em Cervães, Vila Verde.">
-  <title>Tecnomicer — Pichelaria e Eletricidade em Vila Verde</title>
-  <defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#FFFFFF"/>
+  <rect y="470" width="1200" height="160" fill="#EE7E13"/>
+  <svg x="80" y="72" width="120" height="109" viewBox="14 66.3 499.6 452.9"><defs>
     <linearGradient id="tmO" x1="0" y1="0" x2=".62" y2="1">
       <stop offset="0" stop-color="#F8AB60"/>
       <stop offset=".43" stop-color="#F39038"/>
@@ -25,60 +26,9 @@
       <stop offset=".47" stop-color="#4F5256"/>
       <stop offset="1" stop-color="#2E3134"/>
     </linearGradient>
-    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#041216"/>
-      <stop offset=".46" stop-color="#08222A"/>
-      <stop offset=".86" stop-color="#0C3B47"/>
-      <stop offset="1" stop-color="#125767"/>
-    </linearGradient>
-    <linearGradient id="surface" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#6FCBD9" stop-opacity="0"/>
-      <stop offset=".55" stop-color="#6FCBD9" stop-opacity=".3"/>
-      <stop offset="1" stop-color="#6FCBD9" stop-opacity="0"/>
-    </linearGradient>
-  </defs>
-
-  <rect width="1200" height="630" fill="url(#ground)"/>
-
-  <path d="M0 300 L160 244 L300 286 L470 220 L620 266 L790 208 L950 266 L1090 228 L1200 280 L1200 372 L0 372Z" fill="#041216" opacity=".55"/>
-  <path d="M0 350 L180 308 L360 344 L570 298 L790 342 L1000 306 L1200 346 L1200 430 L0 430Z" fill="#041216" opacity=".82"/>
-
-  <g stroke="#9DACAF" stroke-width="1.4" fill="none" opacity=".55">
-    <path d="M150 292 L150 240 M132 252 h36 M137 266 h26"/>
-    <path d="M420 276 L420 224 M402 236 h36 M407 250 h26"/>
-    <path d="M720 262 L720 210 M702 222 h36 M707 236 h26"/>
-    <path d="M1020 268 L1020 216 M1002 228 h36 M1007 242 h26"/>
-    <path d="M150 250 Q285 272 420 234 Q570 268 720 220 Q870 262 1020 226 Q1120 250 1200 236"/>
-  </g>
-  <g fill="#EE7E13"><circle cx="420" cy="234" r="3.4"/><circle cx="720" cy="220" r="3.4"/><circle cx="1020" cy="226" r="3.4"/></g>
-
-  <rect x="0" y="360" width="1200" height="86" fill="url(#surface)"/>
-  <g stroke="#6FCBD9" fill="none" stroke-linecap="round" opacity=".4">
-    <path d="M-20 386 q80 -7 160 0 t160 0 t160 0 t160 0 t160 0 t160 0 t160 0" stroke-width="1.4"/>
-    <path d="M-20 412 q110 8 220 0 t220 0 t220 0 t220 0 t220 0" stroke-width="1.1" opacity=".7"/>
-  </g>
-
-  <path d="M0 446 L1200 446 L1200 630 L0 630Z" fill="#041216" opacity=".68"/>
-  <g stroke="#9DACAF" stroke-width="1" opacity=".18">
-    <path d="M0 458 H1200"/>
-    <path d="M0 512 q300 22 600 0 t600 0"/>
-    <path d="M0 566 q300 24 600 0 t600 0"/>
-  </g>
-
-  <g transform="translate(79.4 70.1) scale(0.3312)">
-    <path fill="url(#tmC)" d="M267.8 83.8Q264.5 72.3 276 75.6L477.9 133.5Q489.4 136.8 492.7 148.3L504.3 188.7Q507.6 200.2 496.1 196.9L294.2 139Q282.7 135.7 279.3 124.2Z"/>
-    <path fill="url(#tmB)" d="M190.3 133Q186.4 119.6 199.9 123.4L407.5 183Q420.9 186.8 424.8 200.3L439.1 250.3Q443 263.7 429.5 259.9L221.9 200.3Q208.5 196.5 204.6 183Z"/>
-    <path fill="url(#tmA)" d="M109.5 193.6Q105.1 178.3 120.5 182.7L331.9 243.3Q347.3 247.7 351.7 263.1L369.4 324.6Q373.8 340 358.4 335.6L146.9 274.9Q131.5 270.5 127.1 255.2Z"/>
-    <path fill="url(#tmO)" d="M27.2 275Q20 250 45 257.2L192.1 299.3Q217.1 306.5 224.2 331.5L269.2 488.2Q276.3 513.2 251.3 506L104.3 463.8Q79.3 456.7 72.1 431.7Z"/>
-  </g>
-
-  <g font-family="Archivo, 'Segoe UI', Helvetica, Arial, sans-serif">
-    <text x="84" y="316" font-size="52" font-weight="600" letter-spacing="-2.2">
-      <tspan fill="#EE7E13">tecno</tspan><tspan fill="#FAFDFC">micer</tspan>
-    </text>
-    <text x="84" y="410" fill="#FAFDFC" font-size="72" font-weight="800" letter-spacing="-3">Pichelaria</text>
-    <text x="84" y="486" fill="#EE7E13" font-size="72" font-weight="800" letter-spacing="-3">e eletricidade</text>
-    <text x="88" y="540" fill="#9DACAF" font-size="26" font-weight="600" letter-spacing="-.4">Cervães · Vila Verde · e concelhos vizinhos</text>
-    <text x="88" y="586" fill="#E9F5F3" font-size="23" font-weight="500" letter-spacing="-.3" opacity=".85">No Minho é a água que faz a luz. Tratamos das duas.</text>
-  </g>
+  </defs><path fill="url(#tmC)" d="M267.8 83.8Q264.5 72.3 276 75.6L477.9 133.5Q489.4 136.8 492.7 148.3L504.3 188.7Q507.6 200.2 496.1 196.9L294.2 139Q282.7 135.7 279.3 124.2Z"/><path fill="url(#tmB)" d="M190.3 133Q186.4 119.6 199.9 123.4L407.5 183Q420.9 186.8 424.8 200.3L439.1 250.3Q443 263.7 429.5 259.9L221.9 200.3Q208.5 196.5 204.6 183Z"/><path fill="url(#tmA)" d="M109.5 193.6Q105.1 178.3 120.5 182.7L331.9 243.3Q347.3 247.7 351.7 263.1L369.4 324.6Q373.8 340 358.4 335.6L146.9 274.9Q131.5 270.5 127.1 255.2Z"/><path fill="url(#tmO)" d="M27.2 275Q20 250 45 257.2L192.1 299.3Q217.1 306.5 224.2 331.5L269.2 488.2Q276.3 513.2 251.3 506L104.3 463.8Q79.3 456.7 72.1 431.7Z"/></svg>
+  <svg x="218" y="92" width="400" height="69" viewBox="30 24 1450 250"><path fill="#EE7E13" fill-rule="evenodd" d="M38 38H68V85H117V105H68V233Q68 247 82 247H107V267H72Q38 267 38 233ZM258 267H169Q135 267 135 233V119Q135 85 169 85H238Q272 85 272 119V164Q272 190 246 190H190V170H232Q242 170 242 160V119Q242 105 228 105H179Q165 105 165 119V233Q165 247 179 247H258ZM405 85H329Q295 85 295 119V233Q295 267 329 267H405V247H339Q325 247 325 233V119Q325 105 339 105H405ZM432 267V85H538Q572 85 572 119V267H542V119Q542 105 528 105H462V267ZM634 85H711Q745 85 745 119V233Q745 267 711 267H634Q600 267 600 233V119Q600 85 634 85ZM644 105Q630 105 630 119V233Q630 247 644 247H701Q715 247 715 233V119Q715 105 701 105Z"/><path fill="#3F4145" fill-rule="evenodd" d="M772 267V85H963Q997 85 997 119V267H967V119Q967 105 953 105H898V267H868V105H802V267ZM1028 85H1060V267H1028ZM1028 30H1060V60H1028ZM1205 85H1126Q1092 85 1092 119V233Q1092 267 1126 267H1205V247H1136Q1122 247 1122 233V119Q1122 105 1136 105H1205ZM1352 267H1264Q1230 267 1230 233V119Q1230 85 1264 85H1333Q1367 85 1367 119V164Q1367 190 1341 190H1285V170H1327Q1337 170 1337 160V119Q1337 105 1323 105H1274Q1260 105 1260 119V233Q1260 247 1274 247H1352ZM1392 267V119Q1392 85 1426 85H1472V105H1436Q1422 105 1422 119V267Z"/></svg>
+  <text x="80" y="300" font-family="Segoe UI, Arial, sans-serif" font-weight="800" font-size="84" letter-spacing="-2.5" fill="#1C1E21">Pichelaria e eletricidade</text>
+  <text x="80" y="395" font-family="Segoe UI, Arial, sans-serif" font-weight="800" font-size="84" letter-spacing="-2.5" fill="#1C1E21">em Vila Verde.</text>
+  <text x="80" y="565" font-family="Segoe UI, Arial, sans-serif" font-weight="700" font-size="44" fill="#FFFFFF">Um número para a água e para a luz.</text>
 </svg>

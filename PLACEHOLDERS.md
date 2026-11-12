@@ -12,7 +12,7 @@ se inventam. Quando as tiveres, dizem-se.
 
 ## 1. Contactos — bloqueante
 
-O número `+351 900 000 000` e o email `geral@tecnomicer.pt` estão em **17 sítios**.
+O número `+351 900 000 000` e o email `geral@tecnomicer.pt` estão em **dezenas de sítios**.
 Substituição em bloco (do diretório do repo):
 
 ```bash
@@ -31,8 +31,8 @@ procura `wa.me/` e o `const WA = "351900000000"` no script no fim do `index.html
 
 | Campo | Onde | Estado |
 |---|---|---|
-| Telefone principal | `href="tel:"` × 7, texto visível × 2, JSON-LD `telephone` | falta |
-| WhatsApp | `wa.me/...` × 5, `const WA` no script | falta |
+| Telefone principal | `href="tel:"` × 13, texto visível × 5, JSON-LD `telephone` | falta |
+| WhatsApp | `wa.me/...` × 9 (cinco com mensagem já escrita), `const WA` no script | falta |
 | Email | `mailto:` × 3, JSON-LD `email` | falta |
 
 ## 2. Morada e localização
@@ -52,8 +52,8 @@ As coordenadas contam para pesquisas "perto de mim". Tira-as do Google Maps
 | Campo | Onde | Estado |
 |---|---|---|
 | Horário semanal | JSON-LD `openingHoursSpecification` (2ª–6ª 09:00–19:00, sáb 09:00–13:00) | **inventado como exemplo** — corrigir |
-| Badge "Horário a confirmar" | hero | remover depois de definido, e escrever o horário real |
-| Urgências fora de horas | secção Urgências + FAQ | decidir se existe. Se não existir, **apagar as duas menções** em vez de deixar vago |
+| Etiqueta "Horário a confirmar" | rodapé (`.pe__base`) | substituir pelo horário real; vale a pena pô-lo também no topo (`.hero__pe`) |
+| Urgências fora de horas | topo (`.hero__pe`) + FAQ | decidir se existe. Se não existir, **apagar as duas menções** em vez de deixar vago |
 
 ## 4. Preços e condições
 
@@ -91,24 +91,19 @@ Barca, Terras de Bouro) estão certos: são os que fazem fronteira com Vila Verd
 
 ## 8. Imagem de partilha (WhatsApp, Facebook)
 
-`og-image.svg` está feito. Falta a versão PNG, porque o WhatsApp e o Facebook
-não leem SVG:
+`og-image.png` está gerada a partir de `og-image.svg`, com o logótipo real. Se
+mudares o texto do SVG, volta a convertê-la:
 
 ```bash
 npx --yes sharp-cli -i og-image.svg -o og-image.png resize 1200 630
 ```
 
-Sem esse ficheiro, partilhar o link não mostra imagem. O `index.html` já aponta
-para `/og-image.png`.
-
-> Nota: o `og-image.svg` usa uma pilha de fontes de sistema em vez da Archivo,
-> para poder ser convertido em qualquer máquina. Se quiseres a tipografia exata,
-> abre o SVG no browser e faz captura a 1200×630.
-
 ## 9. Fotografias reais — o maior salto de qualidade que falta
 
-O site não tem fotografias porque não existem. As ilustrações são desenhos
-(SVG), não fotos disfarçadas de trabalho vosso — isso era desonesto.
+O site não tem fotografias porque não existem, e não tem caixas vazias à
+espera delas. O sítio reservado é a secção **Quem somos** (`#porque`): há um
+comentário no HTML a marcar onde entram. O painel de Serviços e o topo
+não dependem delas.
 
 Quando tiverem, o que vale mais:
 1. **Antes/depois** de dois ou três trabalhos (uma casa de banho, um quadro elétrico).
@@ -134,6 +129,24 @@ passo em [DEPLOY.md](DEPLOY.md).
 Enquanto o Turnstile e o Resend não estiverem configurados, o formulário
 valida, tenta enviar, falha e oferece WhatsApp e email já preenchidos. Ninguém
 fica sem caminho, mas nada chega à caixa de correio sozinho.
+
+## 11. Textos de segurança e frases a validar
+
+O topo do site diz às pessoas o que fazer num momento de aflição. Estes textos foram
+escritos por quem fez o site, a partir do conhecimento comum, e **têm de ser lidos
+pela empresa**, em `#emergencia`:
+
+| Problema | O que diz |
+|---|---|
+| Fuga | Fechar a torneira de segurança, normalmente junto ao contador. Se a água chegou a tomadas ou ao quadro, desligar o disjuntor geral |
+| Sem luz | Desligar o disjuntor geral. Com cheiro a queimado ou tomada quente, não voltar a ligar |
+| Entupimento | Deixar de usar esse ponto de água e as descargas |
+| Sem água quente | Com cheiro a gás: fechar a válvula, abrir janelas, não mexer em interruptores, ligar 112 |
+
+Também a confirmar: se trabalham com gás (o texto fala em esquentadores) e se
+as frases "Chegamos depressa" e "Respondemos assim que possível" são verdade.
+
+Fontes novas (Bricolage Grotesque, Figtree) são de licença aberta (OFL). Nada a pagar.
 
 ## Depois de preencher
 

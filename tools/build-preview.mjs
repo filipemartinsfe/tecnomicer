@@ -48,8 +48,8 @@ const body = grab(html, /<body[^>]*>([\s\S]*?)<\/body>/i, "the <body> contents")
 
 // Inline the fonts. Same files the site serves, just carried in the document.
 const fonts = [
-  ["/assets/fonts/archivo-wght.woff2", "assets/fonts/archivo-wght.woff2"],
-  ["/assets/fonts/martianmono-wght.woff2", "assets/fonts/martianmono-wght.woff2"]
+  ["/assets/fonts/bricolage-wght.woff2", "assets/fonts/bricolage-wght.woff2"],
+  ["/assets/fonts/figtree-wght.woff2", "assets/fonts/figtree-wght.woff2"]
 ];
 
 for (const [href, path] of fonts) {

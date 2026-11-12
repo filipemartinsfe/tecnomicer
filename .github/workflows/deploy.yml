@@ -1,0 +1,80 @@
+# A cada push para "main": verifica o site e publica-o em https://tecnomicer.levelit.pt (estático, sem indexação).
+#
+# O servidor só aceita os ficheiros deste site: a chave (segredo DEPLOY_SSH_KEY) corre apenas o receber-deploy, que
+# substitui /var/www/tecnomicer pelo pacote. Chave nova ou servidor novo: no levelit,
+#   bash servidor/chave-deploy.sh tecnomicer filipemartinsfe/tecnomicer
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  verificar:
+    name: Verificar e juntar
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: JavaScript e JSON
+        run: |
+          find functions tools -name '*.js' -o -name '*.mjs' | while read -r f; do node --check "$f"; done
+          node -e 'JSON.parse(require("fs").readFileSync("manifest.webmanifest", "utf8"))'
+          # O JSON-LD da página também tem de ser JSON válido.
+          node -e '
+            const h = require("fs").readFileSync("index.html", "utf8");
+            const m = [...h.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+            if (!m.length) { console.error("Sem JSON-LD"); process.exit(1); }
+            m.forEach((x) => JSON.parse(x[1]));'
+
+      - name: Juntar
+        run: bash tools/pacote.sh
+
+      - uses: actions/upload-artifact@v5
+        with:
+          name: pacote
+          path: pacote.tgz
+          retention-days: 7
+
+  deploy:
+    name: Publicar
+    needs: verificar
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: pacote
+
+      - name: Enviar para o servidor
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          if [ -z "$DEPLOY_SSH_KEY" ] || [ -z "$DEPLOY_KNOWN_HOSTS" ]; then
+            echo "::error::Faltam os segredos DEPLOY_SSH_KEY e DEPLOY_KNOWN_HOSTS (ver o topo deste ficheiro)."
+            exit 1
+          fi
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy && chmod 600 ~/.ssh/deploy
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          ssh -i ~/.ssh/deploy -o StrictHostKeyChecking=yes -o BatchMode=yes ubuntu@79.72.54.72 "$GITHUB_SHA" < pacote.tgz
+
+      - name: Confirmar que o site responde
+        run: |
+          for p in / /privacidade/ /assets/fonts/figtree-wght.woff2; do
+            codigo=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "https://tecnomicer.levelit.pt$p")
+            echo "$p HTTP $codigo"
+            [ "$codigo" = 200 ]
+          done

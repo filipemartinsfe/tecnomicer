@@ -56,12 +56,12 @@ Constraints:
 - Years in business, team size, number of jobs completed.
 - Business hours, and whether a genuine out-of-hours emergency service exists.
 - Prices, call-out fees, and whether quotes are free.
-- Existing logo, brand colours, or typefaces.
 
 ## Brand Commitments
 
 - Name: **Tecnomicer**. Expansion: Tecnologias Minho Cervães. The expansion is real and usable as supporting copy.
-- No existing logo, palette, or typography was supplied; none is binding.
+- Logo supplied (`_ref/logo.png`, rebuilt as `assets/logo-icon.svg`): four slats in perspective, the front one in orange `#EE7E13`, graphite `#3F4145`, lowercase wordmark. Its orange and graphite are the site palette; the logo is drawn for a white ground.
+- **Visual direction (decided by the person commissioning the site, 2026-11-01): the triage page.** The site answers "what do I do now?" before talking about the firm: the problem rolls in giant type with the phone number under it, the advice for that problem follows, and an orange row at the foot of the first screen lets the visitor pick their problem (hero chosen 2026-11-04 from three working options). White ground, must have motion and one clear focal line. Rejected: the dark "hydroelectric dam" concept, and a static white split hero with a dark contact card. Black text on orange buttons was also rejected.
 - Voice: plain, competent, local. Not corporate, not jokey.
 
 ## Evidence on Hand
