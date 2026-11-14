@@ -15,3 +15,5 @@ node_modules/
 npm-debug.log*
 pacote/
 pacote.tgz
+# Pastas do Claude Code (worktrees dos agentes, definições locais): nunca vão para o git
+.claude/
