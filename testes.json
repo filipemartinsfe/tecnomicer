@@ -1,0 +1,7 @@
+{
+  "_leia": "Os testes que a manutenção do levelit corre no main de 24 em 24 h (levelit/automatico/testes-main.mjs), numa cópia temporária do origin/main. Só os que correm sozinhos, depressa e sem o site no Local, sem rede, sem segredos e sem placa gráfica. dev/sintaxe.mjs verifica a sintaxe do PHP (php -l), do JavaScript (node --check), do JSON e dos <script> nas páginas HTML de tudo o que está no git (sem vendor nem node_modules). tools/pacote.sh junta o que o site publica (falha se faltar algum ficheiro), como o GitHub Actions antes de publicar.",
+  "comandos": [
+    "node dev/sintaxe.mjs .",
+    "bash tools/pacote.sh"
+  ]
+}
