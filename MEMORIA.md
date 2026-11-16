@@ -26,6 +26,7 @@ https://tickets.levelit.pt/?p=tecnomicer.
 
 ## Testes e armadilhas
 
-- **Não há testes automáticos neste repositório** (o deploy só verifica a sintaxe de JS e JSON). Depois de mudar,
+- **Testes automáticos** (`testes.json`, a manutenção do levelit corre-os no main todos os dias): `node dev/sintaxe.mjs .`
+  (sintaxe de tudo o que está no git) e `bash tools/pacote.sh` (o pacote que o site publica). Depois de mudar, também
   abrir `index.html` e `privacidade.html` no browser, a página inteira, a 360/390, 768, 1024, 1280 e 1920px.
 - As etiquetas "a confirmar" são de propósito: não se tiram sem o valor verdadeiro.
